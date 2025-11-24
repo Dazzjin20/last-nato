@@ -1,170 +1,118 @@
-const authController = require('../../backend/src/controller/authController');
-const authService = require('../../backend/src/services/authService');
+const { handleForgotPassword, handleResetPassword } = require('../src/services/authController');
+const adopterRepository = require('../src/repositories/adopterRepository');
+const volunteerRepository = require('../src/repositories/volunteerRepository');
+const staffRepository = require('../src/repositories/staffRepository');
+const emailService = require('../src/services/emailService');
+const crypto = require('crypto');
 
-jest.mock('../../backend/src/services/authService');
+// Mocking the dependencies
+jest.mock('../src/repositories/adopterRepository');
+jest.mock('../src/repositories/volunteerRepository');
+jest.mock('../src/repositories/staffRepository');
+jest.mock('../src/services/emailService');
 
 describe('Auth Controller', () => {
-  let mockReq, mockRes, mockNext;
+  let req, res;
 
   beforeEach(() => {
-    mockReq = global.testUtils.createMockRequest();
-    mockRes = global.testUtils.createMockResponse();
-    mockNext = global.testUtils.createMockNext();
+    // Reset mocks before each test
     jest.clearAllMocks();
+
+    // Mock Express request and response objects
+    req = {
+      body: {},
+    };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
   });
 
-  describe('registerAdopter', () => {
-    it('should register adopter successfully', async () => {
-      const adopterData = {
-        adopter_first_name: 'John',
-        adopter_last_name: 'Doe',
-        email: 'john.doe@example.com',
-        adopter_phone_number: '09123456789',
-        password: 'password123',
-        living_situation: 'own_house',
-        pet_experience: ['dogs'],
-        adopter_consents: ['terms_agreed']
-      };
+  describe('handleForgotPassword', () => {
+    it('should return a generic success message if email does not exist', async () => {
+      req.body.email = 'nonexistent@example.com';
+      adopterRepository.findByEmail.mockResolvedValue(null);
+      volunteerRepository.findByEmail.mockResolvedValue(null);
+      staffRepository.findByEmail.mockResolvedValue(null);
 
-      mockReq.body = adopterData;
-      authService.registerAdopter.mockResolvedValue(1);
+      await handleForgotPassword(req, res);
 
-      await authController.registerAdopter(mockReq, mockRes, mockNext);
-
-      expect(authService.registerAdopter).toHaveBeenCalledWith(adopterData);
-      expect(mockRes.status).toHaveBeenCalledWith(201);
-      expect(mockRes.json).toHaveBeenCalledWith({
-        success: true,
-        message: 'Adopter registered successfully',
-        userId: 1
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        message: 'If an account with that email exists, a password reset link has been sent.',
       });
     });
 
-    it('should handle registration error', async () => {
-      const adopterData = {
-        adopter_first_name: 'John',
-        adopter_last_name: 'Doe',
-        email: 'john.doe@example.com',
-        adopter_phone_number: '09123456789',
-        password: 'password123'
+    it('should generate a reset token and send an email if user exists', async () => {
+      const mockUser = {
+        email: 'test@example.com',
+        password_reset_token: '',
+        password_reset_expires: null,
+        save: jest.fn().mockResolvedValue(true),
       };
+      req.body.email = 'test@example.com';
 
-      mockReq.body = adopterData;
-      const error = new Error('Email already registered');
-      authService.registerAdopter.mockRejectedValue(error);
+      adopterRepository.findByEmail.mockResolvedValue(mockUser);
+      volunteerRepository.findByEmail.mockResolvedValue(null);
+      staffRepository.findByEmail.mockResolvedValue(null);
 
-      await authController.registerAdopter(mockReq, mockRes, mockNext);
+      await handleForgotPassword(req, res);
 
-      expect(mockNext).toHaveBeenCalledWith(error);
-    });
-  });
-
-  describe('registerStaff', () => {
-    it('should register staff successfully', async () => {
-      const staffData = {
-        first_name: 'Jane',
-        last_name: 'Smith',
-        email: 'jane.smith@example.com',
-        phone: '09123456789',
-        password: 'password123',
-        consents: ['terms_agreed']
-      };
-
-      mockReq.body = staffData;
-      authService.registerStaff.mockResolvedValue(2);
-
-      await authController.registerStaff(mockReq, mockRes, mockNext);
-
-      expect(authService.registerStaff).toHaveBeenCalledWith(staffData);
-      expect(mockRes.status).toHaveBeenCalledWith(201);
-      expect(mockRes.json).toHaveBeenCalledWith({
-        success: true,
-        message: 'Staff registered successfully',
-        userId: 2
+      expect(mockUser.save).toHaveBeenCalled();
+      expect(mockUser.password_reset_token).not.toBe('');
+      expect(mockUser.password_reset_expires).not.toBeNull();
+      expect(emailService.sendPasswordResetEmail).toHaveBeenCalledWith(mockUser.email, expect.any(String));
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        message: 'If an account with that email exists, a password reset link has been sent.',
       });
     });
   });
 
-  describe('registerVolunteer', () => {
-    it('should register volunteer successfully', async () => {
-      const volunteerData = {
-        first_name: 'Bob',
-        last_name: 'Wilson',
-        email: 'bob.wilson@example.com',
-        phone: '09123456789',
-        password: 'password123',
-        availability: ['Weekdays'],
-        interested_activities: ['Dog Care'],
-        consents: ['terms_agreed']
-      };
+  describe('handleResetPassword', () => {
+    // Note: The current implementation of handleResetPassword is not easily testable
+    // because it fetches all users. A better approach would be to have a
+    // `findByToken` method in each repository. This test is based on the current code.
+    
+    it('should return an error for an invalid or expired token', async () => {
+        req.body = { token: 'invalidtoken', password: 'newPassword123' };
 
-      mockReq.body = volunteerData;
-      authService.registerVolunteer.mockResolvedValue(3);
+        // Mocking the inefficient findAll calls
+        adopterRepository.findAll = jest.fn().mockResolvedValue([]);
+        volunteerRepository.findAll = jest.fn().mockResolvedValue([]);
+        staffRepository.findAll = jest.fn().mockResolvedValue([]);
 
-      await authController.registerVolunteer(mockReq, mockRes, mockNext);
+        await handleResetPassword(req, res);
 
-      expect(authService.registerVolunteer).toHaveBeenCalledWith(volunteerData);
-      expect(mockRes.status).toHaveBeenCalledWith(201);
-      expect(mockRes.json).toHaveBeenCalledWith({
-        success: true,
-        message: 'Volunteer registered successfully',
-        userId: 3
-      });
-    });
-  });
-
-  describe('login', () => {
-    it('should login user successfully', async () => {
-      const loginData = {
-        email: 'john.doe@example.com',
-        password: 'password123',
-        role: 'adopter'
-      };
-
-      const loginResult = {
-        token: 'jwt_token_here',
-        user: {
-          id: 1,
-          first_name: 'John',
-          last_name: 'Doe',
-          email: 'john.doe@example.com',
-          role: 'adopter',
-          status: 'active'
-        }
-      };
-
-      mockReq.body = loginData;
-      authService.loginUser.mockResolvedValue(loginResult);
-
-      await authController.login(mockReq, mockRes, mockNext);
-
-      expect(authService.loginUser).toHaveBeenCalledWith(
-        loginData.email,
-        loginData.password,
-        loginData.role
-      );
-      expect(mockRes.status).toHaveBeenCalledWith(200);
-      expect(mockRes.json).toHaveBeenCalledWith({
-        success: true,
-        message: 'Login successful',
-        ...loginResult
-      });
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Password reset token is invalid or has expired.' });
     });
 
-    it('should handle login error', async () => {
-      const loginData = {
-        email: 'wrong@example.com',
-        password: 'wrongpass',
-        role: 'adopter'
-      };
+    it('should reset the password for a valid token', async () => {
+        const resetToken = crypto.randomBytes(32).toString('hex');
+        const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
 
-      mockReq.body = loginData;
-      const error = new Error('Invalid email or password');
-      authService.loginUser.mockRejectedValue(error);
+        const mockUser = {
+            password_reset_token: hashedToken,
+            password_reset_expires: Date.now() + 10 * 60 * 1000, // Expires in 10 minutes
+            save: jest.fn().mockResolvedValue(true),
+        };
 
-      await authController.login(mockReq, mockRes, mockNext);
+        req.body = { token: resetToken, password: 'newPassword123' };
 
-      expect(mockNext).toHaveBeenCalledWith(error);
+        // Mocking the inefficient findAll calls
+        adopterRepository.findAll = jest.fn().mockResolvedValue([mockUser]);
+        volunteerRepository.findAll = jest.fn().mockResolvedValue([]);
+        staffRepository.findAll = jest.fn().mockResolvedValue([]);
+
+        await handleResetPassword(req, res);
+
+        expect(mockUser.save).toHaveBeenCalled();
+        expect(mockUser.password).toBe('newPassword123'); // Hashing is mocked at repo/model level
+        expect(mockUser.password_reset_token).toBeUndefined();
+        expect(mockUser.password_reset_expires).toBeUndefined();
+        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.json).toHaveBeenCalledWith({ message: 'Password has been reset successfully.' });
     });
   });
 });

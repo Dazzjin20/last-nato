@@ -1,8 +1,9 @@
 import { SignupForm } from "./registerStaff";
 
 class staffDashboard{
-    constructor(login){
-        
+    constructor(){
+      this.currentSection = 'staff';
+      this.user = [];
     }
     staffDashboard(){
 
