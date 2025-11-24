@@ -1,11 +1,14 @@
 const { Staff } = require('../models');
+const bcrypt = require('bcryptjs');
 
 class StaffRepository {
     async create(staffData) {
         try {
+            const hashedPassword = await bcrypt.hash(staffData.password, 10);
+
             const staff = new Staff({
                 email: staffData.email,
-                password: staffData.password,
+                password: hashedPassword,
                 first_name: staffData.first_name,
                 last_name: staffData.last_name,
                 phone: staffData.phone,

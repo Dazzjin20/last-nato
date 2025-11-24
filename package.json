@@ -2,10 +2,10 @@
   "name": "pet-adoption-platform",
   "version": "1.0.0",
   "description": "A comprehensive pet adoption platform with role-based access",
-  "main": "backend/server.js",
+  "main": "backend/src/server.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js",
+    "start": "node backend/src/server.js",
+    "dev": "nodemon backend/src/server.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

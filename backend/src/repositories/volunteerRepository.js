@@ -1,11 +1,14 @@
 const { Volunteer } = require('../models');
+const bcrypt = require('bcryptjs');
 
 class VolunteerRepository {
     async create(volunteerData) {
         try {
+            const hashedPassword = await bcrypt.hash(volunteerData.password, 10);
+
             const volunteer = new Volunteer({
                 email: volunteerData.email,
-                password: volunteerData.password,
+                password: hashedPassword,
                 first_name: volunteerData.first_name,
                 last_name: volunteerData.last_name,
                 phone: volunteerData.phone,

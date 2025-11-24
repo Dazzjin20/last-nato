@@ -1,11 +1,15 @@
 const { Adopter } = require('../models');
+const bcrypt = require('bcryptjs');
+
 
 class AdopterRepository {
     async create(adopterData) {
         try {
+            const hashedPassword = await bcrypt.hash(adopterData.password, 10);
+
             const adopter = new Adopter({
                 email: adopterData.email,
-                password: adopterData.password,
+                password: hashedPassword,
                 first_name: adopterData.first_name,
                 last_name: adopterData.last_name,
                 phone: adopterData.phone,

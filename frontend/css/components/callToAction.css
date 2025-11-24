@@ -1,19 +1,11 @@
-#endbtn {
-    height: 70px;
-    width: 300px;
-    background-color: white;
-    color: black;
-    font-weight: medium;
-    font-size: 20px;
-    border-radius: 100px;
+.cta-btn {
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.login-petadoption,.login-gmail{
-  width: 600px;
-  height: 40px;
-}
-
-.select-petadoption,.select-volunteer,.select-staff{
-  height: 50px;
-  width: 140px;
+.cta-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }

@@ -204,14 +204,13 @@ class App {
   }
 }
 
-toggleButton(); 
-const LoginToggler = new ToggleLogin();
-LoginToggler.ToggleLoginButton()
-
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new App();
+  toggleButton(); 
+  const LoginToggler = new ToggleLogin();
+  LoginToggler.ToggleLoginButton();
 });
 
 // Export for testing

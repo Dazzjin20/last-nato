@@ -17,6 +17,21 @@ export class ToggleLogin {
       loginFormAdopters: document.getElementById('loginFormAdopters'),
       loginFormStaff: document.getElementById('loginFormStaff'),
     };
+
+    this.checkUrlParams();
+  }
+
+  checkUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const formToShow = params.get('form');
+
+    if (formToShow === 'volunteer') {
+      this.showForm('loginFormVolunteer');
+    } else if (formToShow === 'staff') {
+      this.showForm('loginFormStaff');
+    } else {
+      this.showForm('loginFormAdopters'); // Default to adopters
+    }
   }
 
   ToggleLoginButton() {
@@ -24,11 +39,15 @@ export class ToggleLogin {
       const button = document.getElementById(btnId);
       if (button) {
         button.addEventListener('click', () => {
-          Object.entries(this.FormLogin).forEach(([formId, formEl]) => {
-            formEl.classList.toggle('d-none', formId !== targetFormId);
-          });
+          this.showForm(targetFormId);
         });
       }
+    });
+  }
+
+  showForm(targetFormId) {
+    Object.entries(this.FormLogin).forEach(([formId, formEl]) => {
+      formEl.classList.toggle('d-none', formId !== targetFormId);
     });
   }
 }
