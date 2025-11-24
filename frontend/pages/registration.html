@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Pet Adoption Platform</title>
+    <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/css/base/general.css">
+</head>
+<body>
+
+<!-- Adopter Registration Form -->
+<section id="registerFormAdopters" class="">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <div class="col-md-6 d-flex">
+            <img src="../assets/image/photo/adopt-me.jpg" alt="Pet Adoption" class="img-fluid border rounded-5">
+        </div>
+
+        <div class="col-md-6 p-3">
+            <div class="header-text">
+                <center>
+                    <h2>Welcome</h2>
+                    <p>Sign up to help connects pets with families</p>
+                    <div class="select-button p-3 justify-content-between gap-3 mb-2">
+                        <button class="btn btn-dark select-petadoption" id="registerBtnAdopters">Adopters</button>
+                         <button class="btn btn-outline-dark select-volunteer" id="registerBtnVolunteer">Volunteer</button>
+                        <button class="btn btn-outline-dark select-staff" id="registerBtnStaff">Staff</button>
+                    </div>
+                </center>
+                <form action="" id="signupForm">
+                    <div class="name d-flex gap-3">
+                        <div class="input-text mb-2">
+                            <p class="lead txtusername fw-medium fs-6 p-0 mb-1">First Name:</p>
+                            <input type="text" name="adopter_first_name" class="form-control form-control-lg bg-light fs-5" style="width: 295px;" placeholder="" required>
+                        </div>
+                        <div class="input-text mb-2">
+                            <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Last Name:</p>
+                            <input type="text" name="adopter_last_name" class="form-control form-control-lg bg-light fs-5" style="width: 295px;" placeholder="" required>
+                        </div>
+                    </div>
+
+                    <div class="input-text mb-2">
+                        <p class="lead txtusername fw-medium fs-6 p-0 mb-2">Email:</p>
+                        <input type="email" name="adopter_email" class="form-control form-control-lg bg-light fs-5 mb-2" placeholder="" required>
+                         <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Phone number:</p>
+                        <input type="tel" name="adopter_phone_number" class="form-control form-control-lg bg-light fs-5" placeholder="09123456789" pattern="09[0-9]{9}" required>
+                    </div>
+                    
+                    <div class="input-text mb-2">
+                        <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Password:</p>
+                        <input type="password" name="adopter_password" class="form-control form-control-lg bg-light fs-5" placeholder="At least 6 characters" minlength="6" required>
+                    </div>
+                    
+                    <div class="input-text mb-4">
+                     <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Select House Type:</p>
+                    <select class="select-status form-select form-select-lg fs-5 fw-light" name="living_situation" required>
+                        <option value="">Please select</option>
+                        <option value="own_house">Own House</option>
+                        <option value="rent_house">Rent House</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="condominium">Condominium</option>
+                    </select>
+                </div>
+
+                <div class="experiences">
+                    <p class="fw-medium">Pet Experience</p>
+                <div class="pet-experience d-flex gap-5" >
+                   <div class="input-checkbox mb-2 d-flex gap-2">
+                        <input type="checkbox" name="pet_experience" value="dogs" class="form-check-input" style="width: 20px;">
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">Dogs</p>
+                    </div>
+                    <div class="input-checkbox mb-2 d-flex gap-2">
+                        <input type="checkbox" name="pet_experience" value="cats" class="form-check-input" style="width: 20px;">
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">Cats</p>
+                    </div>
+                     <div class="input-checkbox mb-2 d-flex gap-2">
+                        <input type="checkbox" name="pet_experience" value="first_time_owner" class="form-check-input" style="width: 20px;">
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">First time owner</p>
+                    </div>
+                </div>
+                </div>
+
+                <p class="text-center my-4">----------------------------------------------------------------------------------------------</p>
+
+                    <div class="input-checkbox mb-2 d-flex gap-2">
+                        <input type="checkbox" name="adopter_consents" value="terms_agreed" class="form-check-input" style="width: 20px;" required>
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">I agree to the Terms of Service and Privacy Policy</p>
+                    </div>
+
+                    <div class="input-checkbox mb-2 d-flex gap-2">
+                        <input type="checkbox" name="adopter_consents" value="background_check" class="form-check-input" style="width: 20px;">
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">I consent to a background check</p>
+                    </div>
+
+                     <div class="input-checkbox mb-4 d-flex gap-2">
+                        <input type="checkbox" name="adopter_consents" value="receive_updates" class="form-check-input" style="width: 20px;">
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">I would like to receive updates about available pets and events</p>
+                    </div>
+
+                    <div class="login-button text-center">
+                       <button type="submit" class="btn btn-dark login-petadoption mb-1 p-2 w-100">Register as Pet Adopter</button>
+                    </div>
+                </form>
+                <div id="signupMessage"></div>
+                <p class="mt-3 text-center"><a href="login-form.html" class="btn p-0">Already have an account? <b>Sign in here</b></a></p>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- Volunteer Registration Form -->
+<section id="registerFormVolunteer" class="d-none">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <div class="col-md-6 d-flex">
+            <img src="../assets/image/photo/adopt-me.jpg" alt="Volunteer registration" class="img-fluid border rounded-5">
+        </div>
+        
+        <div class="col-md-6 p-3">
+            <div class="header-text">
+                <center>
+                    <h2>Welcome</h2>
+                    <p>Sign up to help connects pets with families</p>
+                    <div class="select-button p-3 justify-content-between gap-3 mb-4">
+                        <button class="btn btn-outline-dark select-petadoption" id="registerBtnAdopters2">Adopters</button>
+                        <button class="btn btn-dark select-volunteer" id="registerBtnVolunteer2">Volunteer</button>
+                        <button class="btn btn-outline-dark select-staff" id="registerBtnStaff2">Staff</button>
+                    </div>
+                </center>
+              <form action="" class="js-volunteer-signup">
+                <div class="name d-flex gap-3">
+                    <div class="input-text mb-2">
+                        <p class="lead txtusername fw-medium fs-6 p-0 mb-1">First Name:</p>
+                        <input type="text" class="form-control form-control-lg bg-light fs-5" style="width: 295px;" placeholder="" name="volunteer_first_name" required>
+                    </div>
+                    <div class="input-text mb-2">
+                        <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Last Name:</p>
+                        <input type="text" class="form-control form-control-lg bg-light fs-5" style="width: 295px;" placeholder="" name="volunteer_last_name" required>
+                    </div>
+                </div>
+
+                <div class="input-text mb-2">
+                    <p class="lead txtusername fw-medium fs-6 p-0 mb-2">Email:</p>
+                    <input type="email" class="form-control form-control-lg bg-light fs-5 mb-2" placeholder="" name="volunteer_email" required>
+                     <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Phone number:</p>
+                    <input type="tel" class="form-control form-control-lg bg-light fs-5" placeholder="09123456789" name="volunteer_phone" pattern="09[0-9]{9}" required>
+                </div>
+                
+                <div class="input-text mb-2">
+                    <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Password:</p>
+                    <input type="password" class="form-control form-control-lg bg-light fs-5" placeholder="At least 6 characters" name="volunteer_password" minlength="6" required>
+                </div>
+
+                <div class="availability m-0">
+                    <p class="fw-medium">Availability</p>
+                   <div class="input-checkbox mb-4 d-flex gap-4 flex-wrap">
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="form-check-input" id="weekdays" name="availability" value="Weekdays">
+                        <label for="weekdays" class="lead txtusername fs-6 p-0 mb-1 form-check-label">Weekdays</label>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="form-check-input" id="weekend" name="availability" value="Weekend">
+                        <label for="weekend" class="lead txtusername fs-6 p-0 mb-1 form-check-label">Weekend</label>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="form-check-input" id="morning" name="availability" value="Morning">
+                        <label for="morning" class="lead txtusername fs-6 p-0 mb-1 form-check-label">Morning</label>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="form-check-input" id="night" name="availability" value="Night">
+                        <label for="night" class="lead txtusername fs-6 p-0 mb-1 form-check-label">Night</label>
+                    </div>
+                </div>
+                </div>
+
+                <div class="activities m-0">
+                    <p class="fw-medium">Interested Activities</p>
+                <div class="input-checkbox mb-4 d-flex gap-4 flex-wrap">
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="form-check-input" id="dogCare" name="interested_activities" value="dog_care">
+                        <label for="dogCare" class="lead txtusername fs-6 p-0 mb-1 form-check-label">Dog Care</label>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="form-check-input" id="catCare" name="interested_activities" value="cat_care">
+                        <label for="catCare" class="lead txtusername fs-6 p-0 mb-1 form-check-label">Cat Care</label>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="form-check-input" id="administrative" name="interested_activities" value="administrative">
+                        <label for="administrative" class="lead txtusername fs-6 p-0 mb-1 form-check-label">Administrative</label>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="checkbox" class="form-check-input" id="management" name="interested_activities" value="event_management">
+                        <label for="management" class="lead txtusername fs-6 p-0 mb-1 form-check-label">Event Management</label>
+                    </div>
+                </div>
+                </div>
+
+                <p class="text-center my-4">--------------------------------------------------------------------------------------------</p>
+                    
+                <div class="input-checkbox mb-2 d-flex gap-2">
+                    <input type="checkbox" class="form-check-input" id="terms" name="volunteer_consents" value="agreed_terms" required>
+                    <label for="terms" class="lead txtusername fs-6 p-0 mb-1 form-check-label">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <div class="input-checkbox mb-2 d-flex gap-2">
+                    <input type="checkbox" class="form-check-input" id="backgroundCheck" name="volunteer_consents" value="consent_background_check" required>
+                    <label for="backgroundCheck" class="lead txtusername fs-6 p-0 mb-1 form-check-label">I consent to a background check (required for volunteers and staff)</label>
+                </div>
+
+                 <div class="input-checkbox mb-4 d-flex gap-2">
+                    <input type="checkbox" class="form-check-input" id="updates" name="volunteer_consents" value="wants_updates">
+                    <label for="updates" class="lead txtusername fs-6 p-0 mb-1 form-check-label">I would like to receive updates about available pets and events</label>
+                </div>
+
+                <div class="login-button text-center">
+                   <button type="submit" class="btn btn-dark login-petadoption mb-1 p-2 w-100">Register as Volunteer</button>
+                </div>
+              </form>
+              <div id="volunteerSignupMessage"></div>
+              <p class="mt-3 text-center"><a href="login-form.html" class="btn p-0">Already have an account? <b>Sign in here</b></a></p>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- Staff Registration Form -->
+<section id="registerFormStaff" class="d-none">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <div class="col-md-6 d-flex">
+            <img src="../assets/image/photo/adopt-me.jpg" alt="Staff registration" class="img-fluid border rounded-5">
+        </div>
+
+        <div class="col-md-6 p-3">
+            <div class="header-text">
+                <center>
+                    <h2>Welcome</h2>
+                    <p>Sign up to help connects pets with families</p>
+                    <div class="select-button p-3 justify-content-between gap-3 mb-4">
+                        <button class="btn btn-outline-dark select-petadoption" id="registerBtnAdopters3">Adopters</button>
+                        <button class="btn btn-outline-dark select-volunteer" id="registerBtnVolunteer3">Volunteer</button>
+                        <button class="btn btn-dark select-staff" id="registerBtnStaff3">Staff</button>
+                    </div>
+                </center>
+                <form id="js-staff-signup">
+                    <div class="name d-flex gap-3">
+                        <div class="input-text mb-2">
+                            <p class="lead txtusername fw-medium fs-6 p-0 mb-1">First Name:</p>
+                            <input type="text" name="staff_first_name" class="form-control form-control-lg bg-light fs-5" style="width: 295px;" placeholder="" required>
+                        </div>
+                        <div class="input-text mb-2">
+                            <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Last Name:</p>
+                            <input type="text" name="staff_last_name" class="form-control form-control-lg bg-light fs-5" style="width: 295px;" placeholder="" required>
+                        </div>
+                    </div>
+
+                    <div class="input-text mb-2">
+                        <p class="lead txtusername fw-medium fs-6 p-0 mb-2">Email:</p>
+                        <input type="email" name="staff_email" class="form-control form-control-lg bg-light fs-5 mb-2" placeholder="" required>
+                         <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Phone number:</p>
+                        <input type="tel" name="staff_phone" class="form-control form-control-lg bg-light fs-5" placeholder="09123456789" pattern="09[0-9]{9}" required>
+                    </div>
+                    
+                    <div class="input-text mb-2">
+                        <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Password:</p>
+                        <input type="password" name="staff_password" class="form-control form-control-lg bg-light fs-5" placeholder="At least 6 characters" minlength="6" required>
+                    </div>
+
+                    <p class="text-center my-4">----------------------------------------------------------------------------------------------</p>
+
+                    <div class="input-checkbox mb-2 d-flex gap-2">
+                        <input type="checkbox" name="staff_consents" value="agreed_terms" class="form-check-input" style="width: 20px;" required>
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">I agree to the Terms of Service and Privacy Policy</p>
+                    </div>
+
+                    <div class="input-checkbox mb-2 d-flex gap-2">
+                        <input type="checkbox" name="staff_consents" value="consents_background_check" class="form-check-input" style="width: 20px;" required>
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">I consent to a background check (required for volunteers and staff)</p>
+                    </div>
+
+                     <div class="input-checkbox mb-4 d-flex gap-2">
+                        <input type="checkbox" name="staff_consents" value="wants_updates" class="form-check-input" style="width: 20px;">
+                        <p class="lead txtusername fs-6 p-0 mb-1 form-check-label">I would like to receive updates about available pets and events</p>
+                    </div>
+
+                    <div class="login-button text-center">
+                       <button type="submit" class="btn btn-dark login-petadoption mb-1 p-2 w-100">Register as Staff</button>
+                    </div>
+                </form>
+                <div id="staffSignupMessage"></div>
+                <p class="mt-3 text-center"><a href="login-form.html" class="btn p-0">Already have an account? <b>Sign in here</b></a></p>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="../scripts/app.js"></script>
+
+</body>
+</html>
