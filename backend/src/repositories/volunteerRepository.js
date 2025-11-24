@@ -1,0 +1,54 @@
+const { Volunteer } = require('../models');
+
+class VolunteerRepository {
+    async create(volunteerData) {
+        try {
+            const volunteer = new Volunteer({
+                email: volunteerData.email,
+                password: volunteerData.password,
+                first_name: volunteerData.first_name,
+                last_name: volunteerData.last_name,
+                phone: volunteerData.phone,
+                availability: volunteerData.availability || [],
+                activities: volunteerData.interested_activities || [],
+                consents: this.buildConsents(volunteerData.consents || [])
+            });
+
+            return await volunteer.save();
+        } catch (error) {
+            throw new Error(`Failed to create volunteer: ${error.message}`);
+        }
+    }
+
+    async findByEmail(email) {
+        try {
+            return await Volunteer.findOne({ email: email.toLowerCase() });
+        } catch (error) {
+            throw new Error(`Failed to find volunteer by email: ${error.message}`);
+        }
+    }
+
+    async findById(id) {
+        try {
+            return await Volunteer.findById(id);
+        } catch (error) {
+            throw new Error(`Failed to find volunteer by ID: ${error.message}`);
+        }
+    }
+
+    buildConsents(consentTypes) {
+        const consentMap = {
+            agreed_terms: 'Terms of Service and Privacy Policy',
+            consent_background_check: 'Background Check',
+            wants_updates: 'Receive Updates'
+        };
+
+        return consentTypes.map(consentType => ({
+            consent_type: consentMap[consentType] || consentType,
+            consented: true,
+            consented_at: new Date()
+        }));
+    }
+}
+
+module.exports = new VolunteerRepository();
