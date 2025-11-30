@@ -20,17 +20,17 @@
             <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link active" href="#">Messages</a></li>
             <li class="nav-item"><a class="nav-link" href="staff-pets.html">Pets</a></li>
-                          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Management
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="staff-pet-assignment.html">Pet Assignment</a></li>
-              <li><a class="dropdown-item" href="#">Task Assignment</a></li>
-              <li><a class="dropdown-item" href="#">Care Tracking</a></li>
-              <li><a class="dropdown-item" href="#">Volunteers</a></li>
-            </ul>
-          </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Management
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="staff-pet-assignment.html">Pet Assignment</a></li>
+                <li><a class="dropdown-item" href="#">Task Assignment</a></li>
+                <li><a class="dropdown-item" href="#">Care Tracking</a></li>
+                <li><a class="dropdown-item" href="#">Volunteers</a></li>
+              </ul>
+            </li>
 
             <li class="nav-item me-lg-3">
               <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
@@ -38,14 +38,13 @@
 
             <li class="nav-item d-flex align-items-center">
               <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
-              <div class="text-white small lh-1">
-                <div>Dasha Taran</div>
-                <div>Staff Member</div>
+               <div class="text-white small lh-1">
+                <div id="name-user"></div>
+                <div id="user-role"></div>
               </div>
             </li>
           </ul>
         </div>
-
       </div>
     </nav>
   </header>
@@ -56,10 +55,24 @@
     <!-- Page Header -->
     <section class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="fw-bold">Messages</h2>
+    </section>
 
-      <div>
-        <button class="btn staff-view-dashboard-btn me-3">+ New Message</button>
+    <!-- Search + buttons -->
+    <section class="row g-3 mb-4 align-items-center">
 
+      <div class="col-12 d-flex align-items-center">
+        <!-- Search -->
+        <div class="input-group me-3 flex-grow-1">
+          <span class="input-group-text bg-white">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+          <input class="form-control" placeholder="Search conversation" aria-label="Search conversation" />
+        </div>
+
+        <!-- New Message Button -->
+        <button class="btn staff-view-dashboard-btn me-2">+ New Message</button>
+
+        <!-- All Message Filter -->
         <div class="btn-group">
           <button class="btn btn-outline-secondary">All Message</button>
           <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,54 +86,49 @@
             <li><a class="dropdown-item" href="#">Volunteer</a></li>
           </ul>
         </div>
-
-      </div>
-    </section>
-
-    <!-- Search + categories -->
-    <section class="row g-3 mb-4 align-items-center">
-
-      <!-- Search -->
-      <div class="col-md-8">
-        <div class="input-group">
-          <span class="input-group-text bg-white">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </span>
-          <input class="form-control" placeholder="Search conversation" aria-label="Search conversation" />
-        </div>
       </div>
 
-      <!-- Category Cards -->
-      <aside class="col-md-4 text-end">
-        <div class="d-flex justify-content-end gap-2 flex-wrap">
-
-          <article class="msg-category card p-3 text-center">
-            <div class="icon-box bg-light-purple mb-2"><i class="fa-regular fa-comment fa-lg"></i></div>
-            <div class="small text-muted">Total</div>
-            <div class="fw-bold">3</div>
-          </article>
-
-          <article class="msg-category card p-3 text-center">
-            <div class="icon-box bg-light-pink mb-2"><i class="fa-regular fa-heart fa-lg"></i></div>
-            <div class="small text-muted">Adoption</div>
-            <div class="fw-bold">2</div>
-          </article>
-
-          <article class="msg-category card p-3 text-center">
-            <div class="icon-box bg-light-green mb-2"><i class="fa-regular fa-user fa-lg"></i></div>
-            <div class="small text-muted">Volunteer</div>
-            <div class="fw-bold">1</div>
-          </article>
-
-          <article class="msg-category card p-3 text-center">
-            <div class="icon-box bg-light-purple-2 mb-2"><i class="fa-regular fa-clock fa-lg"></i></div>
-            <div class="small text-muted">Unread</div>
-            <div class="fw-bold">2</div>
-          </article>
-
-        </div>
-      </aside>
     </section>
+
+   <!-- Category Boxes -->
+<section class="row g-3 mb-4">
+  <div class="col-12 d-flex justify-content-between flex-wrap">
+
+    <div class="msg-category-box d-flex align-items-center p-3">
+      <div class="icon bg-purple text-white me-3"><i class="fa-regular fa-comment fa-lg"></i></div>
+      <div>
+        <div class="small text-muted">Total</div>
+        <div class="fw-bold">3</div>
+      </div>
+    </div>
+
+    <div class="msg-category-box d-flex align-items-center p-3">
+      <div class="icon bg-pink text-white me-3"><i class="fa-regular fa-heart fa-lg"></i></div>
+      <div>
+        <div class="small text-muted">Adoption</div>
+        <div class="fw-bold">2</div>
+      </div>
+    </div>
+
+    <div class="msg-category-box d-flex align-items-center p-3">
+      <div class="icon bg-green text-white me-3"><i class="fa-regular fa-user fa-lg"></i></div>
+      <div>
+        <div class="small text-muted">Volunteer</div>
+        <div class="fw-bold">1</div>
+      </div>
+    </div>
+
+    <div class="msg-category-box d-flex align-items-center p-3">
+      <div class="icon bg-purple-light text-white me-3"><i class="fa-regular fa-clock fa-lg"></i></div>
+      <div>
+        <div class="small text-muted">Unread</div>
+        <div class="fw-bold">2</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
     <!-- Messages List -->
     <section class="card messages-list p-3">
@@ -197,6 +205,6 @@
   </main>
 
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="../../scripts/app.js"></script>
+  <script type="module" src="../../scripts/utils/staffDashboardInit.js"></script>
 </body>
 </html>

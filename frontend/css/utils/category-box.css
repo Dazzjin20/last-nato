@@ -1,0 +1,23 @@
+.msg-category-box {
+  flex: 1 1 22%; /* Four boxes in a row with equal width */
+  min-width: 150px;
+  background: #fff;
+  border: 1px solid #d3d3f5;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.msg-category-box .icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.bg-purple { background-color: #b0a6f0; }
+.bg-pink { background-color: #f7b6c2; }
+.bg-green { background-color: #a3eac0; }
+.bg-purple-light { background-color: #d3d3f5; }

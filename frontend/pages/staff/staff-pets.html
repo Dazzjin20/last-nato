@@ -10,18 +10,20 @@
 
 <body class="bg-light">
 
-  <!-- Header / Navigation -->
+ <!-- Header with navigation -->
   <header>
     <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
       <div class="container">
         <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
-
         <div class="collapse navbar-collapse" id="staffNavbarNav">
           <ul class="navbar-nav ms-auto align-items-lg-center">
             <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link active" href="#">Messages</a></li>
             <li class="nav-item"><a class="nav-link" href="staff-pets.html">Pets</a></li>
-                          <li class="nav-item dropdown">
+            <li class="nav-item me-lg-3">
+              <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
+            </li>
+                  <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Management
             </a>
@@ -32,17 +34,14 @@
               <li><a class="dropdown-item" href="#">Volunteers</a></li>
             </ul>
           </li>
-            <li class="nav-item me-lg-3">
-              <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
-            </li>
 
             <li class="nav-item d-flex align-items-center">
+              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
               <div class="text-white small lh-1">
-                <div>Dasha Taran</div>
-                <div>Staff Member</div>
+                <div id="name-user"></div>
+                <div id="user-role"></div>
               </div>
             </li>
-
           </ul>
         </div>
       </div>
@@ -165,7 +164,7 @@
             <div class="staff-pet-card position-relative">
 
               <figure class="position-relative">
-                <img src="/image/photo/pet1.jpg" alt="Sadness" class="staff-pet-card-img">
+                <img src="/frontend/assets/image/photo/pet1.jpg" alt="Sadness" class="staff-pet-card-img">
                 <span class="pet-badge vaccinated">Vaccinated</span>
               </figure>
 
@@ -185,7 +184,7 @@
             <div class="staff-pet-card position-relative">
 
               <figure class="position-relative">
-                <img src="/image/photo/pet2.jpg" alt="Anger" class="staff-pet-card-img">
+                <img src="/frontend/assets/image/photo/pet2.jpg" alt="Anger" class="staff-pet-card-img">
                 <span class="pet-badge vaccinated">Vaccinated</span>
               </figure>
 
@@ -205,7 +204,7 @@
             <div class="staff-pet-card position-relative">
 
               <figure class="position-relative">
-                <img src="/image/photo/pet3.jpg" alt="Space" class="staff-pet-card-img">
+                <img src="/frontend/assets/image/photo/pet3.jpg" alt="Space" class="staff-pet-card-img">
                 <span class="pet-badge vaccinated">Vaccinated</span>
                 <span class="pet-badge pending" style="right:10px; top:40px;">Pending</span>
               </figure>
@@ -355,8 +354,7 @@
   </section>
 
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../scripts/utils/staffDashboardManager.js"></script>
-  <script type="module" src="../../scripts/app.js"></script>
+  <script type="module" src="../../scripts/utils/staffDashboardInit.js"></script>
 
 </body>
 </html>

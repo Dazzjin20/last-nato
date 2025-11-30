@@ -35,7 +35,7 @@ export function initializePage(pageSpecificSetup) {
 export function updateCommonUI(user) {
     const fullName = `${user.first_name} ${user.last_name}`;
     const userRole = getUserRoleDisplay(user.role || user.user_type);
-    const profilePicture = user.profile_image || '/frontend/assets/image/photo/BoyIcon.jpg'; // Default image
+    const profilePicture = user.profile_image || '/frontend/assets/image/photo/BoyIcon.jpg'; 
 
     // Update navbar (check elements exist)
     const navbarUserNameEl = document.getElementById('navbarUserName');
@@ -71,6 +71,13 @@ export function setupCommonEventListeners() {
 }
 
 export function getUserRoleDisplay(role) {
-    const roles = { 'adopter': 'Pet Adopter', 'volunteer': 'Volunteer', 'staff': 'Staff Member', 'coordinator': 'Coordinator' };
-    return roles[role] || 'User';
+    const roleMap = {
+        'adopter': 'Pet Adopter',
+        'volunteer': 'Volunteer',
+        'staff': 'Staff Member',
+        'coordinator': 'Staff Member', 
+        'manager': 'Staff Member',   
+        'admin': 'Staff Member'        
+    };
+    return roleMap[role] || 'User';
 }

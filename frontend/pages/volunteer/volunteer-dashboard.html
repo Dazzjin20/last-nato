@@ -31,10 +31,10 @@
             <i class="fa-regular fa-bell text-white" style="font-size: 1.5rem; cursor: pointer;"></i>
           </li>
           <li class="nav-item d-flex align-items-center">
-            <img src="/image/photo/adopt-me.jpg" alt="profile" class="volunteer-profile-img me-2" />
+            <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="volunteer-profile-img me-2" />
             <div class="text-white small lh-1">
-              <div>Dazzjin Lee</div>
-              <div>Volunteer</div>
+              <div id="name-user"></div>
+              <div id="user-role"></div>
             </div>
           </li>
         </ul>
@@ -45,8 +45,8 @@
 
   <div class="container my-4">
     <div class="volunteer-welcome-box p-4 mb-4">
-      <h4 class="fw-bold mb-1">Thank you for your Service</h4>
-      <p class="mb-0">You’ve made a difference in 47 pets’ lives this month</p>
+      <h4 class="fw-bold mb-1 volunteer-welcome-heading">Thank you for your Service</h4>
+      <p class="mb-0">You've made a difference in the lives of our pets</p>
     </div>
 
    
@@ -116,5 +116,6 @@
   </div>
 
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../../scripts/utils/staffDashboardInit.js"></script>
 </body>
 </html>

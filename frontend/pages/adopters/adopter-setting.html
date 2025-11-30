@@ -37,16 +37,18 @@
           <!-- Profile Dropdown  -->
           <li class="nav-item dropdown">
             <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/image/photo/adopt-me.jpg" alt="profile" class="rounded-circle me-2" width="35" height="35">
-              <div class="lh-1">
-                <div class="fw-bold text-white">Dazzjin Lee</div>
-                <div class="text-light small">Pet Adopter</div>
+              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2" width="35" height="35">
+            <div class="text-white small lh-1">
+                <div id="name-user"></div>
+                <div id="user-role"></div>
               </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="profileDropdown">
               <li class="dropdown-header">
-                <strong>Dazzjin Lee</strong><br>
-                <small class="text-muted">Pet Adopter</small>
+             <div class="text-white small lh-1">
+                <div id="name-user"></div>
+                <div id="user-role"></div>
+              </div>
               </li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="adopter-profile.html">Profile</a></li>
@@ -218,6 +220,6 @@
 
   <!-- Load Bootstrap JavaScript only once -->
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <script type="module" src="../../scripts/app.js"></script>
+   <script type="module" src="../../scripts/utils/adopterDashboard.js"></script>
 </body>
 </html>

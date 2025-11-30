@@ -8,8 +8,8 @@ initializePage(user => {
 
 function updateStaffDashboard(user) {
     // Update navbar profile with user data
-    const navNameEl = document.getElementById('staffNavName');
-    const navRoleEl = document.getElementById('staffNavRole');
+    const navNameEl = document.getElementById('name-user');
+    const navRoleEl = document.getElementById('user-role');
     
     if (navNameEl) {
         navNameEl.textContent = `${user.first_name} ${user.last_name}`;
@@ -19,9 +19,9 @@ function updateStaffDashboard(user) {
     }
 
     // Update welcome message
-    const welcomeHeading = document.querySelector('.staff-overview-box h4');
+    const welcomeHeading = document.querySelector('.staff-overview-box h1');
     if (welcomeHeading) {
-        welcomeHeading.textContent = `Welcome, ${user.first_name}`;
+        welcomeHeading.textContent = `Welcome, ${user.first_name}!`;
     }
 
     // Update profile image
