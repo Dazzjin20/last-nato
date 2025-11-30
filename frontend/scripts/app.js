@@ -2,7 +2,7 @@ import { SignupForm } from './modules/registerAdopter.js';
 import { RegisterStaff } from './modules/registerStaff.js';
 import { VolunteerSignUp } from './modules/registerVolunteer.js';
 import {ToggleLogin} from './utils/toggleLoginForm.js';
-import {toggleButton} from './utils/toggleRegistration.js';
+import './components/login.js';  // Import login handler
 
 class App {
   constructor() {
@@ -204,15 +204,38 @@ class App {
   }
 }
 
-toggleButton(); 
-const LoginToggler = new ToggleLogin();
-LoginToggler.ToggleLoginButton()
-
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new App();
+  // I-initialize lang ang LoginToggler kung may login forms sa page
+  if (document.getElementById('loginFormAdopters')) {
+    const LoginToggler = new ToggleLogin();
+    LoginToggler.ToggleLoginButton();
+  }
+  // Initialize management dropdown (if present)
+  initManagementDropdown();
 });
+
+// --- Dropdown helper (clean, modular) ---
+function initManagementDropdown({ btnId = 'managementBtn', menuId = 'managementMenu' } = {}) {
+  const btn = document.getElementById(btnId);
+  const menu = document.getElementById(menuId);
+  if (!btn || !menu) return;
+
+  // toggle on button click
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('show');
+  });
+
+  // close on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest(`#${btnId}`) && !e.target.closest(`#${menuId}`)) {
+      menu.classList.remove('show');
+    }
+  });
+}
 
 // Export for testing
 export default App;

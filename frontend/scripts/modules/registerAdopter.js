@@ -1,6 +1,8 @@
+import { Validate } from "../helper/validateHelper.js";
 export class SignupForm {
   constructor() {
     this.msgEl = null;
+    this.validator = new Validate();
   }
 
   signupButton() {
@@ -40,43 +42,11 @@ export class SignupForm {
       consents: formData.getAll('adopter_consents')
     };
 
-    if (!this.validatePayload(payload)) {
+    if (!this.validator.validatePayload(payload, this.msgEl)) {
       return;
     }
 
     await this.submitToBackend(payload, form);
-  }
-
-  validatePayload(payload) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^09\d{9}$/;
-
-    if (!payload.first_name?.trim() || !payload.last_name?.trim()) {
-      this.showMessage('Please enter your full name.', 'danger');
-      return false;
-    }
-
-    if (!emailRegex.test(payload.email)) {
-      this.showMessage('Please enter a valid email address.', 'danger');
-      return false;
-    }
-
-    if (!payload.password || payload.password.length < 6) {
-      this.showMessage('Password must be at least 6 characters.', 'danger');
-      return false;
-    }
-
-    if (!phoneRegex.test(payload.phone)) {
-      this.showMessage('Phone number must start with 09 and have exactly 11 digits.', 'danger');
-      return false;
-    }
-
-    if (!payload.living_situation) {
-      this.showMessage('Please select your living situation.', 'danger');
-      return false;
-    }
-
-    return true;
   }
 
   async submitToBackend(payload, form) {
@@ -92,35 +62,19 @@ export class SignupForm {
       const result = await response.json();
 
       if (response.ok) {
-        this.showMessage(result.message || 'Registration successful!', 'success');
+        this.validator.showMessage(this.msgEl, result.message || 'Registration successful!', 'success');
         form.reset();
         
-        // Redirect to login after successful registration
+        // Redirect to login page after successful registration
         setTimeout(() => {
           window.location.href = 'login-form.html';
         }, 2000);
       } else {
-        this.showMessage(result.message || result.error || 'Registration failed.', 'danger');
+        this.validator.showMessage(this.msgEl, result.message || result.error || 'Registration failed.', 'danger');
       }
     } catch (error) {
       console.error('Registration error:', error);
-      this.showMessage('Unable to connect to server. Please try again later.', 'danger');
-    }
-  }
-
-  showMessage(text, type) {
-    if (!this.msgEl) return;
-
-    this.msgEl.textContent = text;
-    this.msgEl.className = `alert alert-${type} mt-3`;
-    this.msgEl.setAttribute('role', 'alert');
-
-    // Auto-hide success messages after 5 seconds
-    if (type === 'success') {
-      setTimeout(() => {
-        this.msgEl.textContent = '';
-        this.msgEl.className = '';
-      }, 5000);
+      this.validator.showMessage(this.msgEl, 'Unable to connect to server. Please try again later.', 'danger');
     }
   }
 }

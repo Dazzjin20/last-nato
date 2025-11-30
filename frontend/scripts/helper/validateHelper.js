@@ -1,8 +1,8 @@
-class Validate{
-     constructor() {
-    this.msgEl = null;
-    }
-    validatePayload(payload) {
+export class Validate{
+  validatePayload(payload, msgEl) {
+    // Store the message element so showMessage can use it
+    this.msgEl = msgEl || this.msgEl;
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^09\d{9}$/;
 
@@ -26,20 +26,19 @@ class Validate{
       return false;
     }
 
-    // Check required consents
-    const requiredConsents = ['agreed_terms', 'consents_background_check'];
-    const missingConsents = requiredConsents.filter(consent => 
-      !payload.consents.includes(consent)
-    );
+    // Require agreement to Terms (accept multiple possible form values)
+    const consents = Array.isArray(payload.consents) ? payload.consents : [];
+    const hasTerms = consents.some(c => /term|agree|terms/i.test(c));
 
-    if (missingConsents.length > 0) {
-      this.showMessage('Please agree to the Terms of Service and Background Check consent.', 'danger');
+    if (!hasTerms) {
+      this.showMessage('Please agree to the Terms of Service.', 'danger');
       return false;
     }
 
     return true;
   }
-    showMessage(text, type) {
+
+  showMessage(text, type) {
     if (!this.msgEl) return;
 
     this.msgEl.textContent = text;

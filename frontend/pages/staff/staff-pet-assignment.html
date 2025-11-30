@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Assignments - Staff Dashboard</title>
+  <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/frontend/css/base/general.css">
+</head>
+<body class="bg-light">
+  <!-- Navigation Bar -->
+   <header>
+    <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
+      <div class="container">
+        <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
+
+        <div class="collapse navbar-collapse" id="staffNavbarNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link active" href="#">Messages</a></li>
+            <li class="nav-item"><a class="nav-link" href="staff-pets.html">Pets</a></li>
+                          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Management
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Pet Assignment</a></li>
+              <li><a class="dropdown-item" href="#">Task Assignment</a></li>
+              <li><a class="dropdown-item" href="#">Care Tracking</a></li>
+              <li><a class="dropdown-item" href="#">Volunteers</a></li>
+            </ul>
+          </li>
+            <li class="nav-item me-lg-3">
+              <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
+            </li>
+
+                 <li class="nav-item d-flex align-items-center">
+              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
+              <div class="text-white small lh-1">
+                <div>Dasha Taran</div>
+                <div>Staff Member</div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container my-5">
+    <!-- Page Header -->
+    <header class="staff-overview-box text-white p-4 mb-4">
+      <h1 class="fw-bold mb-1">Pet Assignments</h1>
+      <p class="mb-0">Manage volunteer assignments for pets in the shelter</p>
+    </header>
+
+    <!-- Volunteer Capacity Section -->
+    <section class="">
+<div class="col-md-6 col-sm-12 mb-3 staff-card-container p-0 d-flex" id="variation-button-js" style="height: 60px;">
+    <button class="btn staff-view-dashboard-btn text-white flex-fill d-flex align-items-center justify-content-center" id="pet-assignments-button">
+        Pet Assignments
+    </button>
+    <button class="btn staff-quick-btn text-primary flex-fill d-flex align-items-center justify-content-center" id="volunteer-capacity-button">
+        Volunteer Capacity
+    </button>
+</div>
+
+
+
+
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-3">
+          <article class="staff-stat-card bg-white text-center p-4">
+            <h3 class="fw-bold mb-2">1</h3>
+            <p class="text-muted mb-0">Assigned Pets</p>
+          </article>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <article class="staff-stat-card bg-white text-center p-4">
+            <h3 class="fw-bold mb-2">2</h3>
+            <p class="text-muted mb-0">Available Pets</p>
+          </article>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <article class="staff-stat-card bg-white text-center p-4">
+            <h3 class="fw-bold mb-2">1</h3>
+            <p class="text-muted mb-0">Active Volunteer</p>
+          </article>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <article class="staff-stat-card bg-white text-center p-4">
+            <h3 class="fw-bold mb-2">3</h3>
+            <p class="text-muted mb-0">Open Slots</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pet Assignments Section -->
+    <section>
+      <h2 class="fw-bold mb-4">Pet Assignment</h2>
+      
+      <!-- Pet 1: Sadness -->
+      <article class="staff-card-container mb-4">
+        <div class="row">
+          <div class="col-md-8">
+            <h3 class="fw-bold">Sadness</h3>
+            <p class="mb-2">Approx. 3 years old • Female (High Energy)</p>
+            <span class="staff-alert-label staff-alert-medical">Socialization Training</span>
+          </div>
+          <div class="col-md-4">
+            <aside class="mt-3 mt-md-0">
+              <h4 class="fw-bold">Kenji Webbo</h4>
+              <p class="mb-1">Since 11/15/2025</p>
+              <p class="mb-0">Thursday</p>
+            </aside>
+          </div>
+        </div>
+      </article>
+
+      <hr class="my-4">
+
+      <!-- Pet 2: Anger -->
+      <article class="staff-card-container mb-4">
+        <div class="row">
+          <div class="col-md-8">
+            <h3 class="fw-bold">Anger</h3>
+            <p class="mb-2">Approx. 3 years old • Female (Physical Therapy)</p>
+            <span class="staff-alert-label staff-alert-urgent">Senior Care</span>
+          </div>
+          <div class="col-md-4">
+            <aside class="mt-3 mt-md-0">
+              <h4 class="fw-bold">Kenji Webbo</h4>
+              <p class="mb-1">Since 11/15/2025</p>
+              <p class="mb-0">Thursday</p>
+            </aside>
+          </div>
+        </div>
+      </article>
+
+      <hr class="my-4">
+
+      <!-- Pet 3: Space -->
+      <article class="staff-card-container mb-4">
+        <div class="row">
+          <div class="col-md-8">
+            <h3 class="fw-bold">Space</h3>
+            <p class="mb-2">Approx. 3 years old • Female (High Energy)</p>
+            <span class="staff-alert-label staff-alert-update">Socialization Training</span>
+          </div>
+          <div class="col-md-4">
+            <aside class="mt-3 mt-md-0">
+              <p class="text-muted mb-2">No volunteer assigned</p>
+              <button class="btn staff-view-dashboard-btn text-white">Assign Volunteer</button>
+            </aside>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

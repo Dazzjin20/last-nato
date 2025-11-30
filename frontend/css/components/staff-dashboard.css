@@ -1,0 +1,273 @@
+/* Professional Staff Dashboard Styling */
+
+/* Navbar Gradient */
+.staff-navbar-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.staff-navbar-gradient .navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    color: white !important;
+}
+
+.staff-navbar-gradient .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+}
+
+.staff-navbar-gradient .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white !important;
+}
+
+/* Profile Image */
+.staff-profile-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.staff-profile-img:hover {
+    transform: scale(1.05);
+}
+
+/* Overview Box */
+.staff-overview-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+    margin-bottom: 2rem;
+}
+
+.staff-overview-box h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.staff-overview-box p {
+    font-size: 1rem;
+    opacity: 0.95;
+}
+
+/* Stat Cards */
+.staff-stat-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.staff-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.staff-stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+}
+
+.staff-stat-card:hover::before {
+    left: 100%;
+}
+
+.staff-stat-card h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.staff-stat-card .fs-1 {
+    font-size: 3rem !important;
+}
+
+/* Alert Labels */
+.staff-alert-label {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+}
+
+.staff-alert-urgent {
+    background-color: #fee;
+    color: #c33;
+}
+
+.staff-alert-medical {
+    background-color: #fef3cd;
+    color: #856404;
+}
+
+.staff-alert-update {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Alert/Alerts Container */
+.staff-alerts-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.staff-alerts-container > div {
+    transition: all 0.2s ease;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.staff-alerts-container > div:hover {
+    background-color: #f8f9fa;
+    border-color: #667eea;
+}
+
+/* Buttons */
+.staff-view-dashboard-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.staff-view-dashboard-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    color: white;
+}
+
+.staff-quick-btn {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    color: #333;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.staff-quick-btn:hover {
+    background-color: #fff;
+    border-color: #667eea;
+    color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transform: translateX(4px);
+}
+
+.staff-quick-btn:active {
+    transform: translateX(2px);
+}
+
+/* Cards Container */
+.staff-card-container {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.staff-card-container h5 {
+    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.staff-card-container h5::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 3px;
+}
+
+/* Scrollbar Styling */
+.staff-alerts-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.staff-alerts-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.staff-alerts-container::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+.staff-alerts-container::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .staff-navbar-gradient .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .staff-stat-card {
+        margin-bottom: 1rem;
+    }
+
+    .staff-stat-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .staff-card-container {
+        padding: 1rem;
+    }
+}
+
+/* Animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.staff-stat-card {
+    animation: slideIn 0.5s ease-out;
+}
+
+.staff-card-container {
+    animation: slideIn 0.5s ease-out;
+    animation-delay: 0.1s;
+}

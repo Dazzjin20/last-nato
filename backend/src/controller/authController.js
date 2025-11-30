@@ -159,16 +159,16 @@ class AuthController {
 
     async login(req, res) {
         try {
-            const { email, password, user_type } = req.body;
+            const { email, password, userType } = req.body;
 
-            if (!email || !password || !user_type) {
+            if (!email || !password || !userType) {
                 return res.status(400).json({
                     error: 'Missing required fields',
-                    required: ['email', 'password', 'user_type']
+                    required: ['email', 'password', 'userType']
                 });
             }
 
-            const user = await authService.validateUserCredentials(email, password, user_type);
+            const user = await authService.validateUserCredentials(email, password, userType);
             
             if (!user) {
                 return res.status(401).json({

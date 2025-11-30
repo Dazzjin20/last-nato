@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adopter Dashboard</title>
-  <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/frontend/css/base/general.css">
+  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../css/base/general.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -30,22 +31,22 @@
 
         <!-- Notification -->
         <li class="nav-item mx-3 position-relative">
-          <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+          <i class="fa-regular fa-bell text-white" style="font-size: 1.5rem; cursor: pointer;"></i>
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
         </li>
 
         <!-- Profile Dropdown (Clean version, no arrow) -->
         <li class="nav-item dropdown">
           <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="/image/photo/adopt-me.jpg" alt="profile" class="rounded-circle me-2" width="35" height="35">
+            <img src="/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2" width="35" height="35">
             <div class="lh-1">
-              <div class="fw-bold text-white">Dazzjin Lee</div>
+              <div class="fw-bold text-white" id="name-user-js"></div>
               <div class="text-light small">Pet Adopter</div>
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="profileDropdown">
             <li class="dropdown-header">
-              <strong>Dazzjin Lee</strong><br>
+              <strong> Lee</strong><br>
               <small class="text-muted">Pet Adopter</small>
             </li>
             <li><hr class="dropdown-divider"></li>
@@ -137,5 +138,7 @@
   </div>
 
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../../scripts/app.js"></script>
+  <script type="module" src="../../scripts/utils/adopterDashboard.js"></script>
 </body>
 </html>
