@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Profile</title>
+    <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/frontend/css/base/general.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body data-required-role="adopter">
+
+<nav class="navbar navbar-expand-lg adopter-navbar" style="background-color: #F39C12;">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" href="#">🐾 Dashboard</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adopterNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="adopterNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link text-white" href="adopter-dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="adopter-pet.html">Browse Pets</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Messages</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">My Applications</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="/frontend/pages/adopters/adopter-favorite.html">Favorites</a></li>
+
+        <li class="nav-item mx-3 position-relative">
+          <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2 profile-image" width="35" height="35">
+            <div class="lh-1">
+              <div class="fw-bold text-white" id="navbarUserName"></div>
+              <div class="text-light small" id="navbarUserRole"></div>
+            </div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="profileDropdown">
+            <li class="dropdown-header">
+              <strong id="dropdownUserName"></strong><br>
+              <small class="text-muted" id="dropdownUserRole"></small>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="adopter-profile.html">Profile</a></li>
+            <li><a class="dropdown-item" href="adopter-setting.html">Settings</a></li>
+            <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-4">
+    <!-- PET PROFILE HEADER -->
+    <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <a href="/frontend/pages/adopters/adopter-pet.html" class="text-secondary text-decoration-none mb-2 d-block">
+                    &larr; Back to All Pets
+                </a>
+                <h2 class="fw-bold" id="petNameHeader">Loading...</h2>
+                <p class="text-muted" id="petSubHeader">Loading details...</p>
+                <div class="d-flex gap-2" id="petTagsHeader">
+                    <!-- Tags will be loaded here -->
+                </div>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0 d-flex gap-3 justify-content-md-end align-items-center">
+                <i class="fas fa-heart favorite-btn" id="favoriteBtn" title="Add to Favorites"></i>
+                <button class="btn adopter-pet-btn" id="applyToAdoptBtn">Apply to Adopt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEFORE / AFTER IMAGES -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <span class="before-after-label mb-2">Before</span>
+            <img class="custom-img mt-2" id="beforeImage" src="/frontend/assets/image/photo/placeholder.jpg" alt="Before Image">
+        </div>
+
+        <div class="col-md-6">
+            <span class="before-after-label mb-2">After</span>
+            <img class="custom-img mt-2" id="afterImage" src="/frontend/assets/image/photo/placeholder.jpg" alt="After Image">
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- LEFT INFO BOX -->
+        <div class="col-lg-5">
+            <div class="info-box h-100">
+                <div class="section-title">Basic Information</div>
+
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <small>Age</small><br>
+                        <strong id="petInfoAge"></strong>
+                    </div>
+                    <div class="col-6">
+                        <small>Weight</small><br>
+                        <strong id="petInfoWeight"></strong>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <small>Sex</small><br>
+                        <strong id="petInfoSex"></strong>
+                    </div>
+                    <div class="col-6">
+                        <small>Location</small><br>
+                        <strong id="petInfoLocation"></strong>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-2 mt-3">
+                    <i class="bi bi-calendar"></i>
+                    <small id="petInfoArrival">Arrived on...</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT INFO BOX -->
+        <div class="col-lg-7">
+            <div class="info-box h-100">
+                <div class="section-title">Personality & Traits</div>
+
+                <div class="mb-2" id="petPersonalityTags">
+                    <!-- Personality tags will be loaded here -->
+                </div>
+
+                <div class="section-title mt-4" id="petAboutTitle">About...</div>
+                <p style="text-align: justify;" id="petAbout"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/frontend/js/auth/auth.js"></script>
+<script src="/frontend/scripts/pages/adopterViewPet.js" type="module"></script>
+</body>
+</html>

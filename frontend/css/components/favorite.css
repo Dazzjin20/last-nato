@@ -1,0 +1,10 @@
+.favorite-btn {
+        font-size: 1.5rem;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.2s, transform 0.2s;
+    }
+.favorite-btn.favorited {
+    color: #dc3545;
+    transform: scale(1.2);
+}

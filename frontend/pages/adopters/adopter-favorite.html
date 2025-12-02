@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Favorites</title>
+
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+
+  <!-- GENERAL CSS -->
+  <link rel="stylesheet" href="../../css/base/general.css">
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="bg-light" data-required-role="adopter">
+
+<!-- NAVIGATION -->
+<nav class="navbar navbar-expand-lg adopter-navbar" style="background-color: #F39C12;">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" href="#">🐾 Dashboard</a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adopterNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="adopterNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link text-white" href="adopter-dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="adopter-pet.html">Browse Pets</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Messages</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">My Applications</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="/frontend/pages/adopters/adopter-favorite.html">Favorites</a></li>
+
+        <!-- Notification -->
+        <li class="nav-item mx-3 position-relative">
+          <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+        </li>
+
+        <!-- Profile Dropdown (Clean version, no arrow) -->
+        <li class="nav-item dropdown">
+          <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2 profile-image" width="35" height="35">
+            <div class="lh-1">
+              <div class="fw-bold text-white" id="navbarUserName"></div>
+              <div class="text-light small" id="navbarUserRole"></div>
+            </div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="profileDropdown">
+            <li class="dropdown-header">
+              <strong id="dropdownUserName"></strong><br>
+              <small class="text-muted" id="dropdownUserRole"></small>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="adopter-profile.html">Profile</a></li>
+            <li><a class="dropdown-item" href="adopter-setting.html">Settings</a></li>
+            <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="container mt-4">
+
+  <!-- Page Header -->
+  <header class="mb-4">
+    <h3 class="fw-bold">My Favorites</h3>
+    <p class="text-muted">Keep track of the pets that caught your heart</p>
+  </header>
+
+  <!-- Stats Section -->
+  <section>
+    <div class="row g-4 mb-4">
+
+      <div class="col-md-3">
+        <article class="bg-white border rounded-4 text-center p-4">
+          <div class="fs-1"><i class="fa-regular fa-heart"></i></div>
+          <h4 class="fw-bold mt-2" id="totalFavoritesCount">0</h4>
+          <p class="text-muted mb-0">Total Favorites</p>
+        </article>
+      </div>
+
+      <div class="col-md-3">
+        <article class="bg-white border rounded-4 text-center p-4">
+          <div class="fs-1"><i class="fa-solid fa-dog"></i></div>
+          <h4 class="fw-bold mt-2" id="dogFavoritesCount">0</h4>
+          <p class="text-muted mb-0">Dogs</p>
+        </article>
+      </div>
+
+      <div class="col-md-3">
+        <article class="bg-white border rounded-4 text-center p-4">
+          <div class="fs-1"><i class="fa-solid fa-cat"></i></div>
+          <h4 class="fw-bold mt-2" id="catFavoritesCount">0</h4>
+          <p class="text-muted mb-0">Cats</p>
+        </article>
+      </div>
+
+      <div class="col-md-3">
+        <article class="bg-white border rounded-4 text-center p-4">
+          <div class="fs-1"><i class="fa-solid fa-child"></i></div>
+          <h4 class="fw-bold mt-2" id="availableFavoritesCount">0</h4>
+          <p class="text-muted mb-0">Still Available</p>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Search & Filter -->
+  <section class="bg-white border rounded-4 p-4 mb-4">
+    <h5 class="fw-bold mb-3"><i class="fa-solid fa-filter"></i> Search & Filter</h5>
+
+    <div class="row g-3">
+      <div class="col-md-3">
+        <label class="form-label">Search by Name</label>
+        <input type="text" class="form-control" placeholder="Search pets...">
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Pet Type</label>
+        <select class="form-select">
+          <option>All Types</option>
+          <option>Dog</option>
+          <option>Cat</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Age Group</label>
+        <select class="form-select">
+          <option>All Status</option>
+          <option>Young</option>
+          <option>Adult</option>
+          <option>Senior</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Sort</label>
+        <select class="form-select">
+          <option>Recently Added</option>
+          <option>Oldest</option>
+          <option>Name (A–Z)</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- PET CARDS -->
+  <section>
+    <div class="row g-4" id="favoritesGrid">
+      <!-- Favorite pet cards will be dynamically inserted here -->
+    </div>
+  </section>
+
+</main>
+
+<script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/frontend/js/auth/auth.js"></script>
+<script type="module" src="/frontend/scripts/pages/adopterFavorites.js"></script>
+
+</body>
+</html>

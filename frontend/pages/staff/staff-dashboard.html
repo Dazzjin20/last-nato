@@ -7,22 +7,22 @@
   <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/frontend/css/base/general.css">
 </head>
-<body class="bg-light">
+<body class="bg-light" data-required-role="staff">
 
   <!-- Header with navigation -->
-  <header>
-    <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
-      <div class="container">
-        <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
-        <div class="collapse navbar-collapse" id="staffNavbarNav">
-          <ul class="navbar-nav ms-auto align-items-lg-center">
-            <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="staff-pets.html">Pets</a></li>
-            <li class="nav-item"><a class="nav-link active" href="staff-messages.html">Messages</a></li>
-            <li class="nav-item me-lg-3">
-              <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
-            </li>
-                  <li class="nav-item dropdown">
+  <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#staffNavbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="staffNavbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium" href="staff-pets.html">Pets</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium" href="staff-messages.html">Messages</a></li>
+         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Management
             </a>
@@ -33,19 +33,32 @@
               <li><a class="dropdown-item" href="#">Volunteers</a></li>
             </ul>
           </li>
-
-            <li class="nav-item d-flex align-items-center">
+            <li class="nav-item me-lg-3">
+              <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
+            </li>
+          <li class="nav-item me-lg-3 mt-2 mt-lg-0">
+            <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
               <div class="text-white small lh-1">
                 <div id="staffNavbarName"></div>
                 <div id="staffNavbarRole"></div>
               </div>
-            </li>
-          </ul>
-        </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Reports & Analytics</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
 
   <!-- Main content -->
   <main class="container my-5">
@@ -131,6 +144,7 @@
   </main>
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="../../scripts/app.js"></script>
+  <script src="/frontend/js/auth/auth.js"></script>
   <script type="module" src="../../scripts/utils/staffDashboardInit.js"></script>
 
 </body>

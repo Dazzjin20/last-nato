@@ -1,0 +1,53 @@
+/* Adopter Pet Card Buttons */
+.adopter-pet-btn, .adopter-pet-secondary-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.adopter-pet-btn {
+    background-color: #F39C12; /* Adopter theme color */
+    color: white;
+}
+
+.adopter-pet-secondary-btn {
+    background-color: #f8f9fa;
+    color: #343a40;
+    border: 1px solid #dee2e6;
+}
+
+/* Hover and Active States for Buttons */
+.adopter-pet-btn:hover {
+    background-color: #e67e22;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.adopter-pet-secondary-btn:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.adopter-pet-btn:active, .adopter-pet-secondary-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Favorite Icon Styling and Animation */
+.favorite-icon {
+    font-size: 24px;
+    color: #ced4da; /* Light gray for non-favorited */
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.favorite-icon:hover, .favorite-icon.favorited {
+    color: #dc3545; /* Red for hover and favorited */
+    transform: scale(1.2);
+}

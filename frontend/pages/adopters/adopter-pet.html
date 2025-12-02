@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="bg-light">
+<body class="bg-light" data-required-role="adopter">
 
 <nav class="navbar navbar-expand-lg adopter-navbar" style="background-color: #F39C12;">
   <div class="container">
@@ -27,7 +27,8 @@
         <li class="nav-item"><a class="nav-link text-white" href="adopter-pet.html">Browse Pets</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="#">Messages</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="#">My Applications</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="#">Favorites</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="/frontend/pages/adopters/adopter-favorite.html">Favorites</a></li>
+
 
         <!-- Notification -->
         <li class="nav-item mx-3 position-relative">
@@ -38,21 +39,21 @@
         <!-- Profile Dropdown (Clean version, no arrow) -->
         <li class="nav-item dropdown">
           <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="/image/photo/adopt-me.jpg" alt="profile" class="rounded-circle me-2" width="35" height="35">
+            <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2 profile-image" width="35" height="35">
             <div class="lh-1">
-              <div class="fw-bold text-white">Dazzjin Lee</div>
-              <div class="text-light small">Pet Adopter</div>
+              <div class="fw-bold text-white" id="navbarUserName"></div>
+              <div class="text-light small" id="navbarUserRole"></div>
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="profileDropdown">
             <li class="dropdown-header">
-              <strong>Dazzjin Lee</strong><br>
-              <small class="text-muted">Pet Adopter</small>
+              <strong id="dropdownUserName"></strong><br>
+              <small class="text-muted" id="dropdownUserRole"></small>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="adopter-profile.html">Profile</a></li>
             <li><a class="dropdown-item" href="adopter-setting.html">Settings</a></li>
-            <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
+            <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Log out</a></li>
           </ul>
         </li>
       </ul>
@@ -80,24 +81,24 @@
           <!-- Search -->
           <div class="adopter-pet-form-group">
             <label class="adopter-pet-form-label">Search Pet Name</label>
-            <input type="text" class="form-control adopter-pet-search-input" placeholder="Type name...">
+            <input type="text" class="form-control adopter-pet-search-input" placeholder="Type name..." id="searchPetName">
           </div>
 
           <!-- Type -->
           <div class="adopter-pet-form-group">
             <label class="adopter-pet-form-label">Pet Type</label>
-            <select class="form-select adopter-pet-filter-dropdown">
+            <select class="form-select adopter-pet-filter-dropdown" id="filterPetType">
               <option>All Types</option>
               <option>Dog</option>
               <option>Cat</option>
-              <option>Other</option>
             </select>
           </div>
 
           <!-- Status -->
+          <!-- Note: Adopters should likely only see 'Available' pets. This is for demonstration. -->
           <div class="adopter-pet-form-group">
             <label class="adopter-pet-form-label">Status</label>
-            <select class="form-select adopter-pet-filter-dropdown">
+            <select class="form-select adopter-pet-filter-dropdown" id="filterPetStatus">
               <option>All Status</option>
               <option>Available</option>
               <option>Medical</option>
@@ -113,79 +114,15 @@
             </label>
           </div>
 
-          <button class="btn adopter-pet-btn w-100 mt-3">Apply Filters</button>
+          <button class="btn adopter-pet-btn w-100 mt-3" id="applyFiltersBtn">Apply Filters</button>
 
         </div>
       </div>
 
       <!-- PET CARDS -->
       <div class="col-lg-8">
-        <div class="row g-4">
-
-          <!-- Pet 1 -->
-          <div class="col-md-6">
-            <div class="adopter-pet-card">
-              <img src="/image/photo/pet1.jpg" class="adopter-pet-card-img">
-
-              <div class="adopter-pet-card-body">
-                <div class="adopter-pet-name">Sadness</div>
-
-                <div class="adopter-pet-info">Approx. 3 years – Female</div>
-                <div class="adopter-pet-location">Main Shelter – Deiro</div>
-                <div class="adopter-pet-arrival">Arrived Jan 15, 2024</div>
-
-                <div class="adopter-pet-badges">
-                  <span class="badge bg-success">Available</span>
-                  <span class="badge bg-primary">Vaccinated</span>
-                </div>
-
-                <button class="btn adopter-pet-btn w-100 mt-3">View Details</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pet 2 -->
-          <div class="col-md-6">
-            <div class="adopter-pet-card">
-              <img src="/image/photo/pet2.jpg" class="adopter-pet-card-img">
-
-              <div class="adopter-pet-card-body">
-                <div class="adopter-pet-name">Anger</div>
-
-                <div class="adopter-pet-info">4 years – Male</div>
-                <div class="adopter-pet-location">Main Shelter – Deiro</div>
-                <div class="adopter-pet-arrival">Arrived Jan 15, 2024</div>
-
-                <div class="adopter-pet-badges">
-                  <span class="badge bg-warning text-dark">Pending</span>
-                </div>
-
-                <button class="btn adopter-pet-btn w-100 mt-3">View Details</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pet 3 -->
-          <div class="col-md-6">
-            <div class="adopter-pet-card">
-              <img src="/image/photo/pet3.jpg" class="adopter-pet-card-img">
-
-              <div class="adopter-pet-card-body">
-                <div class="adopter-pet-name">Space</div>
-
-                <div class="adopter-pet-info">Approx. 3 years – Male</div>
-                <div class="adopter-pet-location">Main Shelter – Deiro</div>
-                <div class="adopter-pet-arrival">Arrived Jan 15, 2024</div>
-
-                <div class="adopter-pet-badges">
-                  <span class="badge bg-danger">Medical</span>
-                </div>
-
-                <button class="btn adopter-pet-btn w-100 mt-3">View Details</button>
-              </div>
-            </div>
-          </div>
-
+        <div class="row g-4" id="petsGrid">
+          <!-- Pet cards will be dynamically inserted here -->
         </div>
       </div>
 
@@ -194,7 +131,8 @@
 
   <!-- SCRIPTS -->
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <script type="module" src="../../scripts/app.js"></script>
+   <script src="/frontend/js/auth/auth.js"></script>
+   <script type="module" src="/frontend/scripts/pages/adopterPets.js"></script>
 
 </body>
 </html>
