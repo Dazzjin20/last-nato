@@ -233,3 +233,39 @@ img.custom-img {
     object-fit: cover;
     border-radius: 10px;
 }
+
+/*staffCapacity styel*/
+.volunteer-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #0d6efd;
+}
+
+.volunteer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.assignment-card {
+    border-left: 4px solid #198754;
+}
+
+.availability-badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.training-badge {
+    background-color: #cff4fc;
+    color: #055160;
+}
+
+.section-divider {
+    height: 2px;
+    background: linear-gradient(to right, #0d6efd, transparent);
+}
+
+@media (max-width: 768px) {
+    .volunteer-card, .assignment-card {
+        margin-bottom: 1.5rem;
+    }
+}
