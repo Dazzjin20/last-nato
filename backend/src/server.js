@@ -5,6 +5,7 @@ const db = require('./config/database'); // Import the database connection handl
 const adopterRepository = require('./repositories/adopterRepository');
 const volunteerRepository = require('./repositories/volunteerRepository');
 const staffRepository = require('./repositories/staffRepository');
+const petRoutes = require('./routes/petRoutes');
 
 const app = express();
 app.use(cors());
@@ -47,6 +48,9 @@ app.post('/api/auth/register/volunteer', (req, res) => {
 app.post('/api/auth/register/staff', (req, res) => {
   handleRegistration(req, res, staffRepository);
 });
+
+// Mount pet routes
+app.use('/api/pets', petRoutes);
 
 const PORT = process.env.PORT || 3000;
 
