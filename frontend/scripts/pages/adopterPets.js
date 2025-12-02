@@ -24,7 +24,13 @@ function createPetCard(pet) {
                     ${statusBadge}
                     ${vaccinatedBadge}
                 </div>
-                <button class="btn adopter-pet-btn w-100 mt-3" onclick="viewPetDetails('${pet._id}')">View Details</button>
+                <div class="d-flex align-items-center gap-2 mt-3">
+                    <button class="btn adopter-pet-btn flex-grow-1" onclick="viewPetDetails('${pet._id}')">View Details</button>
+                    <button class="btn adopter-pet-secondary-btn flex-grow-1">Apply to Adopt</button>
+                    <i class="fa-regular fa-heart favorite-icon" title="Add to Favorites"></i>
+                </div>
+            </div>
+
             </div>
         </div>
     `;
