@@ -8,13 +8,18 @@ import { getPets } from '../utils/staffPetsApi.js';
 function createPetCard(pet) {
     const col = document.createElement('div');
     col.className = 'col-md-6';
-
+    
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const isFavorited = favorites.includes(pet._id);
+    const favoritedClass = isFavorited ? 'favorited' : '';
+    const heartIconClass = isFavorited ? 'fa-solid' : 'fa-regular';
+    
     const statusBadge = getStatusBadge(pet.status);
     const vaccinatedBadge = pet.vaccinated ? '<span class="badge bg-primary">Vaccinated</span>' : '';
 
     col.innerHTML = `
         <div class="adopter-pet-card">
-            <img src="${pet.before_image || '/frontend/assets/image/photo/placeholder.jpg'}" class="adopter-pet-card-img" alt="${pet.pet_name}">
+            <img src="${pet.before_image || '/frontend/assets/image/photo/placeholder.jpg'}" class="adopter-pet-card-img" alt="${pet.pet_name}" onclick="viewPetDetails('${pet._id}')" style="cursor: pointer;">
             <div class="adopter-pet-card-body">
                 <div class="adopter-pet-name">${pet.pet_name}</div>
                 <div class="adopter-pet-info">${pet.age || 'N/A'} – ${pet.sex || 'N/A'}</div>
@@ -26,8 +31,8 @@ function createPetCard(pet) {
                 </div>
                 <div class="d-flex align-items-center gap-2 mt-3">
                     <button class="btn adopter-pet-btn flex-grow-1" onclick="viewPetDetails('${pet._id}')">View Details</button>
-                    <button class="btn adopter-pet-secondary-btn flex-grow-1">Apply to Adopt</button>
-                    <i class="fa-regular fa-heart favorite-icon" title="Add to Favorites"></i>
+                    <button class="btn adopter-pet-secondary-btn flex-grow-1" onclick="applyToAdopt('${pet._id}', '${pet.pet_name}')">Apply to Adopt</button>
+                    <i class="${heartIconClass} fa-heart favorite-icon ${favoritedClass}" title="Add to Favorites" data-pet-id="${pet._id}"></i>
                 </div>
             </div>
 
@@ -86,6 +91,7 @@ async function applyFiltersAndLoadPets() {
             grid.innerHTML = '<div class="col-12 text-center"><p class="text-muted">No pets found matching your criteria.</p></div>';
         } else {
             pets.forEach(pet => grid.appendChild(createPetCard(pet)));
+            setupFavoriteIcons(); // Attach listeners to the new cards
         }
     } catch (err) {
         console.error('Failed to load pets with filters:', err);
@@ -93,6 +99,33 @@ async function applyFiltersAndLoadPets() {
     }
 }
 
+/**
+ * Attaches click event listeners to all favorite icons on the page.
+ */
+function setupFavoriteIcons() {
+    document.querySelectorAll('.favorite-icon').forEach(icon => {
+        // Remove existing listener to prevent duplicates on re-render
+        const newIcon = icon.cloneNode(true);
+        icon.parentNode.replaceChild(newIcon, icon);
+
+        newIcon.addEventListener('click', (e) => {
+            const petId = e.target.dataset.petId;
+            if (!petId) return;
+
+            e.target.classList.toggle('favorited');
+            e.target.classList.toggle('fa-regular');
+            e.target.classList.toggle('fa-solid');
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            if (e.target.classList.contains('favorited')) {
+                if (!favorites.includes(petId)) favorites.push(petId);
+            } else {
+                favorites = favorites.filter(id => id !== petId);
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        });
+    });
+}
 /**
  * Sets up event listeners for the filter controls.
  */
@@ -117,6 +150,12 @@ function setupFilterListeners() {
 window.viewPetDetails = (petId) => {
     // Redirect to the new adopter-specific pet view page.
     window.location.href = `/frontend/pages/adopters/adopter-view-pet.html?id=${petId}`;
+};
+
+// Make applyToAdopt globally accessible
+window.applyToAdopt = (petId, petName) => {
+    alert(`Applying to adopt ${petName} (ID: ${petId}). This feature is under development.`);
+    // Future implementation: window.location.href = `/apply.html?petId=${petId}`;
 };
 
 // Initial load when the DOM is ready
