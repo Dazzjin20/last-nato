@@ -2,3 +2,227 @@
     height: 40px;
     width: 40px;
 }
+
+.staff-navbar-gradient {
+      background: linear-gradient(90deg, #7a5cfb, #b46cfb);
+}
+
+.staff-overview-box {
+      background: linear-gradient(90deg, #2e19e6, #7a5cfb);
+      border-radius: 0.75rem;
+}
+
+.staff-stat-card:hover {
+      transform: scale(1.03);
+      transition: 0.3s;
+}
+
+.adopter-welcome-box {
+    background-color: #f07c00;
+    border-radius: 10px;
+}
+
+.adopter-stat-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    background: #fff;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.adopter-stat-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.adopter-activity-label {
+    font-size: 0.75rem;
+    border-radius: 12px;
+    padding: 0.2rem 0.5rem;
+    background: #f1f1f1;
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
+
+.adopter-recommend-card {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 1rem;
+}
+
+.adopter-recommend-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.volunteer-welcome-box {
+    background: linear-gradient(90deg, #41b883, #0b3954);
+    border-radius: 0.75rem;
+    color: white;
+}
+
+
+.volunteer-stat-card {
+    background: #fff;
+    border: 1px solid #41b883;
+    border-radius: 0.75rem;
+    text-align: center;
+    transition: 0.3s;
+}
+.volunteer-stat-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+
+.staff-overview-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+}
+
+.staff-stat-card {
+    transition: transform 0.2s;
+}
+
+.staff-stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.staff-messages-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.staff-messages-sidebar {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.staff-messages-chat {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+}
+
+.staff-messages-stats-card {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+}
+
+
+.staff-pet-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.staff-pet-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.staff-pet-stats-card {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+.staff-pet-card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.staff-pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.staff-pet-card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.staff-pet-card-body {
+    padding: 1rem;
+}
+
+.staff-pet-card-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.staff-pet-card-details {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.staff-pet-card-location {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.staff-pet-form-group {
+    margin-bottom: 1rem;
+}
+
+.staff-pet-form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.staff-pet-upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.staff-pet-upload-area:hover {
+    border-color: #667eea;
+}
+
+.staff-pet-tag {
+    display: inline-block;
+    background-color: #e9ecef;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.staff-pet-tag.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}

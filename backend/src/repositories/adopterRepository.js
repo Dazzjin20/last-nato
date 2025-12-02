@@ -1,15 +1,11 @@
 const { Adopter } = require('../models');
-const bcrypt = require('bcryptjs');
-
 
 class AdopterRepository {
     async create(adopterData) {
         try {
-            const hashedPassword = await bcrypt.hash(adopterData.password, 10);
-
             const adopter = new Adopter({
                 email: adopterData.email,
-                password: hashedPassword,
+                password: adopterData.password,
                 first_name: adopterData.first_name,
                 last_name: adopterData.last_name,
                 phone: adopterData.phone,
@@ -20,11 +16,6 @@ class AdopterRepository {
 
             return await adopter.save();
         } catch (error) {
-            // Handle MongoDB duplicate key error
-            if (error.code === 11000) {
-                const field = Object.keys(error.keyPattern)[0];
-                throw new Error(`${field.charAt(0).toUpperCase() + field.slice(1)} already exists`);
-            }
             throw new Error(`Failed to create adopter: ${error.message}`);
         }
     }
@@ -42,14 +33,6 @@ class AdopterRepository {
             return await Adopter.findById(id);
         } catch (error) {
             throw new Error(`Failed to find adopter by ID: ${error.message}`);
-        }
-    }
-
-    async findAll(filter = {}) {
-        try {
-            return await Adopter.find(filter);
-        } catch (error) {
-            throw new Error(`Failed to find adopters: ${error.message}`);
         }
     }
 

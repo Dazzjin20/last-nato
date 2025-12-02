@@ -3,7 +3,7 @@ import AuthService from './authService.js';
 function handleLoginForm(formId, userType, dashboardUrl) {
     const form = document.getElementById(formId);
     if (!form) {
-        console.debug(`Form ${formId} not found (this page may not have login forms)`);
+        console.warn(`Form ${formId} not found`);
         return;
     }
 
@@ -47,27 +47,20 @@ function handleLoginForm(formId, userType, dashboardUrl) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Only setup login forms if they exist on this page
-    const hasLoginForms = document.getElementById('loginFormAdopter') || 
-                         document.getElementById('loginFormVolunteer') || 
-                         document.getElementById('loginFormStaff');
-    
-    if (hasLoginForms) {
-        // I-setup ang bawat login form
-        handleLoginForm(
-            'loginFormAdopter', 
-            'adopter', 
-            '/frontend/pages/adopters/adopter-dashboard.html'
-        );
-        handleLoginForm(
-            'loginFormVolunteer', 
-            'volunteer', 
-            '/frontend/pages/volunteer/volunteer-dashboard.html'
-        );
-        handleLoginForm(
-            'loginFormStaff', 
-            'staff', 
-            '/frontend/pages/staff/staff-dashboard.html'
-        );
-    }
+    // I-setup ang bawat login form
+    handleLoginForm(
+        'loginFormAdopter', 
+        'adopter', 
+        '/frontend/pages/adopters/adopter-dashboard.html'
+    );
+    handleLoginForm(
+        'loginFormVolunteer', 
+        'volunteer', 
+        '/frontend/pages/volunteer/volunteer-dashboard.html'
+    );
+    handleLoginForm(
+        'loginFormStaff', 
+        'staff', 
+        '/frontend/pages/staff/staff-dashboard.html'
+    );
 });

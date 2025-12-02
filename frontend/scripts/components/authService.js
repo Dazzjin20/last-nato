@@ -53,7 +53,7 @@ class AuthService {
 
         return response.json();
     }
-
+    
     /**
      * Login method: calls backend, stores token and currentUser in localStorage
      * @param {string} email

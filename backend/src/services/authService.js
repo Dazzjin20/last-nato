@@ -8,7 +8,6 @@ class AuthService {
         this.saltRounds = 12;
     }
 
-
     async hashPassword(password) {
         return await bcrypt.hash(password, this.saltRounds);
     }

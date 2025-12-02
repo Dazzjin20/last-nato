@@ -6,7 +6,6 @@
     <title>Login - Pet Adoption Platform</title>
     <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/frontend/css/base/general.css">
-  
 </head>
 <body>
 
@@ -35,14 +34,14 @@
                 <form id="loginFormAdopter">
                     <div class="input-text mb-4">
                         <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Email:</p>
-                        <input type="email" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your email" name="email" required>
+                        <input type="email" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your email" name="email" id="adopterEmail" required>
                     </div>
                     <div class="input-text mb-3">
                         <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Password:</p>
-                        <input type="password" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your password" name="password" required>
+                        <input type="password" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your password" name="password" id="adopterPassword" required>
                     </div>
                     <div class="forgot-password mb-4">
-                        <p><a href="forgot-password.html" class="btn p-0 text-primary">Forgot Password?</a></p>
+                        <p><a href="" class="btn p-0 text-primary">Forgot Password?</a></p>
                     </div>
                     <div class="login-button text-center">
                        <button type="submit" class="btn btn-dark login-petadoption mb-3 p-2 w-100">Login as Adopter</button>
@@ -84,14 +83,14 @@
                 <form id="loginFormVolunteer">
                     <div class="input-text mb-4">
                         <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Email:</p>
-                        <input type="email" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your email" name="email" required>
+                        <input type="email" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your email" name="email" id="volunteerEmail" required>
                     </div>
                     <div class="input-text mb-3">
                         <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Password:</p>
-                        <input type="password" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your password" name="password" required>
+                        <input type="password" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your password" name="password" id="volunteerPassword" required>
                     </div>
                     <div class="forgot-password mb-4">
-                        <p><a href="forgot-password.html" class="btn p-0 text-primary">Forgot Password?</a></p>
+                        <p><a href="" class="btn p-0 text-primary">Forgot Password?</a></p>
                     </div>
                     <div class="login-button text-center">
                        <button type="submit" class="btn btn-dark login-petadoption mb-3 p-2 w-100">Login as Volunteer</button>
@@ -132,19 +131,19 @@
                 <form id="loginFormStaff">
                     <div class="input-text mb-4">
                         <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Email:</p>
-                        <input type="email" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your email" name="email" required>
+                        <input type="email" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your email" name="email" id="staffEmail" required>
                     </div>
                     <div class="input-text mb-3">
                         <p class="lead txtusername fw-medium fs-6 p-0 mb-1">Password:</p>
-                        <input type="password" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your password" name="password" required>
+                        <input type="password" class="form-control form-control-lg bg-light fs-5" placeholder="Enter your password" name="password" id="staffPassword" required>
                     </div>
                     <div class="forgot-password mb-4">
-                        <p><a href="forgot-password.html" class="btn p-0 text-primary">Forgot Password?</a></p>
+                        <p><a href="" class="btn p-0 text-primary">Forgot Password?</a></p>
                     </div>
                     <div class="login-button text-center">
                        <button type="submit" class="btn btn-dark login-petadoption mb-3 p-2 w-100">Login as Staff</button>
                        <p class="my-3">---------------------------- OR CONTINUE WITH ---------------------------</p>
-                       <button id="login-staff-button-js" type="button" class="btn btn-outline-dark login-gmail p-2 w-100 mb-3">
+                       <button type="button" class="btn btn-outline-dark login-gmail p-2 w-100 mb-3">
                            <i class="fab fa-google me-2"></i>Sign in with Google
                        </button>
                        <p class="mt-3"><a href="registration.html" class="btn p-0">Don't have an account? <b>Sign up for free</b></a></p>
@@ -158,8 +157,10 @@
 </section>
 
 <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="../scripts/app.js"></script>
-<!-- Font Awesome loaded from CDN above; no kit required -->
+<!-- Add Font Awesome for Google icon -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<script src="/frontend/js/auth/login/login.js"></script>
 
 </body>
 </html>

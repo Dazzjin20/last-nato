@@ -4,63 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adopter Settings</title>
-  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../css/base/general.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/frontend/css/base/general.css">
 
 </head>
 
 <body class="bg-light">
   <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg adopter-navbar" style="background-color: #F39C12;">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-white" href="#">🐾 Dashboard</a>
+ <nav class="navbar navbar-expand-lg adopter-navbar" style="background-color: #F39C12;">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" href="#">🐾 Dashboard</a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adopterNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adopterNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="adopterNav">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link text-white" href="adopter-dashboard.html">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#">Browse Pets</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#">Messages</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#">My Applications</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#">Favorites</a></li>
+    <div class="collapse navbar-collapse" id="adopterNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link text-white" href="adopter-dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="adopter-pet.html">Browse Pets</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Messages</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">My Applications</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Favorites</a></li>
 
-          <!-- Notification -->
-          <li class="nav-item mx-3 position-relative">
-            <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
-          </li>
+        <!-- Notification -->
+        <li class="nav-item mx-3 position-relative">
+          <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+        </li>
 
-          <!-- Profile Dropdown  -->
-          <li class="nav-item dropdown">
-            <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2" width="35" height="35">
-            <div class="text-white small lh-1">
-                <div id="name-user"></div>
-                <div id="user-role"></div>
-              </div>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="profileDropdown">
-              <li class="dropdown-header">
-             <div class="text-white small lh-1">
-                <div id="name-user"></div>
-                <div id="user-role"></div>
-              </div>
-              </li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="adopter-profile.html">Profile</a></li>
-              <li><a class="dropdown-item" href="adopter-setting.html">Settings</a></li>
-              <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+        <!-- Profile Dropdown (Clean version, no arrow) -->
+        <li class="nav-item dropdown">
+          <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2" width="35" height="35">
+            <div class="lh-1">
+              <div class="fw-bold text-white" id="navbarUserName">Dazzjin Lee</div>
+              <div class="text-light small" id="navbarUserRole">Pet Adopter</div>
+            </div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="profileDropdown">
+            <li class="dropdown-header">
+              <strong id="dropdownUserName">Dazzjin Lee</strong><br>
+              <small class="text-muted" id="dropdownUserRole">Pet Adopter</small>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="adopter-profile.html">Profile</a></li>
+            <li><a class="dropdown-item" href="adopter-setting.html">Settings</a></li>
+            <li><a class="dropdown-item text-danger" href="login-form.html" id="logoutBtn">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </nav>
-
+  </div>
+</nav>
   <!-- Settings Content -->
   <div class="container my-4 adopter-settings-container">
     <!-- Settings Header -->
@@ -70,7 +65,7 @@
           <h1 class="fw-bold mb-1">Settings</h1>
           <p class="text-muted mb-0">Manage your preferences and account settings</p>
         </div>
-        <button class="btn adopter-settings-btn">Save Changes</button>
+        <button class="btn adopter-settings-btn" id="saveSettingsBtn">Save Changes</button>
       </div>
     </div>
 
@@ -184,14 +179,14 @@
       <h3 class="adopter-settings-section-title">Data Management</h3>
       
       <div class="adopter-settings-item">
-        <button class="btn adopter-settings-btn">
+        <button class="btn adopter-settings-btn" id="exportDataBtn">
           Export Data
         </button>
         <small class="text-muted ms-2">Download a copy of your data</small>
       </div>
       
       <div class="adopter-settings-item">
-        <button class="btn adopter-settings-btn adopter-settings-danger-btn" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+        <button class="btn adopter-settings-btn adopter-settings-danger-btn" data-bs-toggle="modal" data-bs-target="#deleteAccountModal" id="deleteAccountBtn">
           Delete Account
         </button>
         <small class="text-muted ms-2">Permanently delete your account and all data</small>
@@ -212,7 +207,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger">Delete Account</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteAccountBtn">Delete Account</button>
         </div>
       </div>
     </div>
@@ -220,6 +215,10 @@
 
   <!-- Load Bootstrap JavaScript only once -->
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <script type="module" src="../../scripts/utils/adopterDashboard.js"></script>
+
+  <!-- JavaScript for user settings -->
+  <script src="/frontend/js/adopter/user-info/adopter-dashboard.js">
+
+  </script>
 </body>
 </html>

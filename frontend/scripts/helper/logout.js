@@ -1,7 +1,9 @@
-import {StaffRepository} = "/backend/src/"
+import {StaffRepository} = "/backend/src/repositories/staffRepository"
 
 class logout{
     renderLogOutHTML(){
+    //Logout form 
+    const staffData = staffRepository()
 
     }
 }

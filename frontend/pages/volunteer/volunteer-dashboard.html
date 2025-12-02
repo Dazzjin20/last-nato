@@ -28,13 +28,13 @@
           <li class="nav-item"><a class="nav-link" href="#">My Schedule</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Tasks</a></li>
           <li class="nav-item mx-3">
-            <i class="fa-regular fa-bell text-white" style="font-size: 1.5rem; cursor: pointer;"></i>
+            <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
           </li>
           <li class="nav-item d-flex align-items-center">
             <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="volunteer-profile-img me-2" />
             <div class="text-white small lh-1">
-              <div id="name-user"></div>
-              <div id="user-role"></div>
+              <div id="volunteerNavbarName">Dazzjin Lee</div>
+              <div id="volunteerNavbarRole">Volunteer</div>
             </div>
           </li>
         </ul>
@@ -45,8 +45,8 @@
 
   <div class="container my-4">
     <div class="volunteer-welcome-box p-4 mb-4">
-      <h4 class="fw-bold mb-1 volunteer-welcome-heading">Thank you for your Service</h4>
-      <p class="mb-0">You've made a difference in the lives of our pets</p>
+      <h4 class="fw-bold mb-1" id="volunteerWelcomeMessage">Thank you for your Service</h4>
+      <p class="mb-0" id="volunteerSubtitle">You've made a difference in 47 pets' lives this month</p>
     </div>
 
    
@@ -54,28 +54,28 @@
       <div class="col-md-3 col-sm-6">
         <div class="volunteer-stat-card p-4">
           <div class="fs-1 mb-2">⏰</div>
-          <h3 class="fw-bold mb-1">124</h3>
+          <h3 class="fw-bold mb-1" id="hoursThisMonth">124</h3>
           <p class="text-muted mb-0">Hours This Month</p>
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
         <div class="volunteer-stat-card p-4">
           <div class="fs-1 mb-2">👥</div>
-          <h3 class="fw-bold mb-1">47</h3>
+          <h3 class="fw-bold mb-1" id="petsHelped">47</h3>
           <p class="text-muted mb-0">Pets Helped</p>
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
         <div class="volunteer-stat-card p-4">
           <div class="fs-1 mb-2">🏅</div>
-          <h3 class="fw-bold mb-1">15</h3>
+          <h3 class="fw-bold mb-1" id="tasksCompleted">15</h3>
           <p class="text-muted mb-0">Tasks Completed</p>
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
         <div class="volunteer-stat-card p-4">
           <div class="fs-1 mb-2">📄</div>
-          <h3 class="fw-bold mb-1">8</h3>
+          <h3 class="fw-bold mb-1" id="successfulAdoptions">8</h3>
           <p class="text-muted mb-0">Successful Adoptions</p>
         </div>
       </div>
@@ -87,16 +87,16 @@
         <div class="bg-white border rounded-4 p-4">
           <h5 class="fw-bold mb-3">Today's Schedule</h5>
 
-          <div class="volunteer-schedule-item">
+          <div class="volunteer-schedule-item" id="scheduleItem1">
             <div class="fw-semibold">Dog Walking - Morning Shift</div>
             <div class="volunteer-schedule-time">9:00 AM - 11:00 AM</div>
           </div>
-          <div class="volunteer-schedule-item">
+          <div class="volunteer-schedule-item" id="scheduleItem2">
             <div class="fw-semibold">Cat Socialization</div>
             <div class="volunteer-schedule-time">2:00 PM - 4:00 PM</div>
           </div>
 
-          <button class="volunteer-view-btn mt-3">View Full Schedule</button>
+          <button class="volunteer-view-btn mt-3" id="viewFullScheduleBtn">View Full Schedule</button>
         </div>
       </div>
 
@@ -105,7 +105,7 @@
           <h5 class="fw-bold mb-3">Performance Summary</h5>
           <p class="text-muted small mb-3">Your recent volunteer activity overview</p>
 
-          <ul class="list-unstyled mb-3">
+          <ul class="list-unstyled mb-3" id="performanceList">
             <li class="mb-2">✔ Completed 3 dog walks this week</li>
             <li class="mb-2">✔ Assisted 2 adoptions successfully</li>
             <li>✔ Helped with 1 vaccination clinic</li>
@@ -116,6 +116,10 @@
   </div>
 
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="../../scripts/utils/staffDashboardInit.js"></script>
+
+
+  <script>
+ 
+  </script>
 </body>
 </html>

@@ -2,3 +2,30 @@
     height: 300px;
     width: 400px;
 }
+
+.staff-profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+}
+
+.adopter-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.staff-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.adopter-profile-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    

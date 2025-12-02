@@ -10,21 +10,24 @@
 <body class="bg-light">
   <!-- Navigation Bar -->
    <header>
-    <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
-      <div class="container">
-        <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
+  <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#staffNavbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse" id="staffNavbarNav">
-          <ul class="navbar-nav ms-auto align-items-lg-center">
-            <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link active" href="#">Messages</a></li>
-            <li class="nav-item"><a class="nav-link" href="staff-pets.html">Pets</a></li>
-                          <li class="nav-item dropdown">
+      <div class="collapse navbar-collapse" id="staffNavbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium" href="staff-pets.html">Pets</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium" href="staff-messages.html">Messages</a></li>
+         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Management
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Pet Assignment</a></li>
+              <li><a class="dropdown-item" href="staff-pet-assignment.html">Pet Assignment</a></li>
               <li><a class="dropdown-item" href="#">Task Assignment</a></li>
               <li><a class="dropdown-item" href="#">Care Tracking</a></li>
               <li><a class="dropdown-item" href="#">Volunteers</a></li>
@@ -33,19 +36,20 @@
             <li class="nav-item me-lg-3">
               <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
             </li>
-
-                 <li class="nav-item d-flex align-items-center">
-              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
-               <div class="text-white small lh-1">
-                <div id="name-user"></div>
-                <div id="user-role"></div>
-              </div>
-            </li>
-
-          </ul>
-        </div>
+          <li class="nav-item me-lg-3 mt-2 mt-lg-0">
+            <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+          </li>
+          <li class="nav-item d-flex align-items-center mt-2 mt-lg-0">
+            <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
+            <div class="text-white small lh-1">
+              <div id="staffNavbarName">Dazzjin Lee</div>
+              <div id="staffNavbarRole">Staff Member</div>
+            </div>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
   </header>
 
   <!-- Main Content -->

@@ -1,0 +1,98 @@
+@media (max-width: 768px) {
+  .adopter-pet-card-img {
+    height: 180px;
+  }
+  
+  .adopter-pet-header-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Volunteer Pet Page Specific Styles */
+.volunteer-pet-header-box {
+    background-color: #52B788;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.volunteer-pet-filter-box {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid #dee2e6;
+}
+
+.volunteer-pet-form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.volunteer-pet-search-input,
+.volunteer-pet-filter-dropdown {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+}
+
+.volunteer-pet-search-input:focus,
+.volunteer-pet-filter-dropdown:focus {
+    border-color: #52B788;
+    box-shadow: 0 0 0 0.2rem rgba(82, 183, 136, 0.25);
+}
+
+.volunteer-pet-btn {
+    background-color: #52B788;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.volunteer-pet-btn:hover {
+    background-color: #429972;
+    transform: translateY(-2px);
+}
+
+.volunteer-vaccinated-section {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+    border-left: 4px solid #52B788;
+}
+
+.volunteer-vaccinated-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.volunteer-vaccinated-item:last-child {
+    border-bottom: none;
+}
+
+.volunteer-form-check-input:checked {
+    background-color: #52B788;
+    border-color: #52B788;
+}
+
+/* Status badges with green theme */
+.volunteer-pet-badge-available {
+    background-color: #52B788 !important;
+}
+
+.volunteer-pet-badge-pending {
+    background-color: #FFD166 !important;
+    color: #333 !important;
+}
+
+.volunteer-pet-badge-medical {
+    background-color: #EF476F !important;
+}
+
+.volunteer-pet-badge-vaccinated {
+    background-color: #118AB2 !important;
+}
