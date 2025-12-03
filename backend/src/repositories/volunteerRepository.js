@@ -15,7 +15,7 @@ class VolunteerRepository {
             });
 
             return await volunteer.save();
-        } catch (error) {
+        } catch (error) {   
             throw new Error(`Failed to create volunteer: ${error.message}`);
         }
     }

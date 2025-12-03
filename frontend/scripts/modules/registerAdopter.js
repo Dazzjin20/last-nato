@@ -23,6 +23,7 @@ export class SignupForm {
       msgEl.className = 'mt-3';
       form.parentNode.insertBefore(msgEl, form.nextSibling);
     }
+    
     this.msgEl = msgEl;
   }
 

@@ -1,4 +1,4 @@
-class Validate{
+export class Validate{
      constructor() {
     this.msgEl = null;
     }
