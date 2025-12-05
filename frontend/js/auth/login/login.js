@@ -99,16 +99,15 @@ async function handleLogin(userType, emailFieldId, passwordFieldId, messageDivId
         // Show loading state
         showMessage(messageDiv, 'Logging in...', 'loading');
         
-        // Call your backend login API
-        const response = await fetch('/api/auth/login', {
+        // Construct the correct API endpoint and call the backend
+        const response = await fetch(`http://localhost:3000/api/auth/login/${userType}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                email: email,
-                password: password,
-                user_type: userType
+                email, // ES6 shorthand for email: email
+                password // ES6 shorthand for password: password
             })
         });
         

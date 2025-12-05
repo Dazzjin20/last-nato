@@ -1,212 +1,109 @@
-const authService = require('../services/authService');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const adopterRepository = require('../repositories/adopterRepository');
+const volunteerRepository = require('../repositories/volunteerRepository');
+const staffRepository = require('../repositories/staffRepository');
 
-class AuthController {
-    async registerAdopter(req, res) {
-        try {
-            const {
-                first_name,
-                last_name,
-                email,
-                phone,
-                password,
-                living_situation,
-                pet_experience,
-                consents
-            } = req.body;
+const SALT_ROUNDS = 10;
 
-            // Validate required fields
-            if (!first_name || !last_name || !email || !phone || !password || !living_situation) {
-                return res.status(400).json({
-                    error: 'Missing required fields',
-                    required: ['first_name', 'last_name', 'email', 'phone', 'password', 'living_situation']
-                });
-            }
+async function handleRegistration(req, res, repository) {
+  try {
+    const { email, password } = req.body;
 
-            const result = await authService.registerAdopter({
-                first_name,
-                last_name,
-                email,
-                phone,
-                password,
-                living_situation,
-                pet_experience: pet_experience || [],
-                consents: consents || []
-            });
-
-            res.status(201).json({
-                message: 'Adopter registered successfully',
-                user: result
-            });
-        } catch (error) {
-            console.error('Adopter registration error:', error);
-            res.status(400).json({
-                error: error.message
-            });
-        }
+    // Check if user already exists
+    const existingUser = await repository.findByEmail(email);
+    if (existingUser) {
+      return res.status(409).json({ message: 'Email is already registered.' });
     }
 
-    async registerVolunteer(req, res) {
-        try {
-            const {
-                first_name,
-                last_name,
-                email,
-                phone,
-                password,
-                availability,
-                interested_activities,
-                consents
-            } = req.body;
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
-            // Validate required fields
-            if (!first_name || !last_name || !email || !phone || !password) {
-                return res.status(400).json({
-                    error: 'Missing required fields',
-                    required: ['first_name', 'last_name', 'email', 'phone', 'password']
-                });
-            }
+    const user = await repository.create({ ...req.body, password: hashedPassword });
 
-            // Validate consents
-            const requiredConsents = ['agreed_terms', 'consent_background_check'];
-            const missingConsents = requiredConsents.filter(consent => 
-                !consents?.includes(consent)
-            );
+    // IMPORTANT: Do not send the password back to the client
+    user.password = undefined;
 
-            if (missingConsents.length > 0) {
-                return res.status(400).json({
-                    error: 'Missing required consents',
-                    missing: missingConsents
-                });
-            }
-
-            const result = await authService.registerVolunteer({
-                first_name,
-                last_name,
-                email,
-                phone,
-                password,
-                availability: availability || [],
-                interested_activities: interested_activities || [],
-                consents: consents || []
-            });
-
-            res.status(201).json({
-                message: 'Volunteer registered successfully',
-                user: result
-            });
-        } catch (error) {
-            console.error('Volunteer registration error:', error);
-            res.status(400).json({
-                error: error.message
-            });
-        }
-    }
-
-    async registerStaff(req, res) {
-        try {
-            const {
-                first_name,
-                last_name,
-                email,
-                phone,
-                password,
-                consents
-            } = req.body;
-
-            // Validate required fields
-            if (!first_name || !last_name || !email || !phone || !password) {
-                return res.status(400).json({
-                    error: 'Missing required fields',
-                    required: ['first_name', 'last_name', 'email', 'phone', 'password']
-                });
-            }
-
-            // Validate consents
-            const requiredConsents = ['agreed_terms', 'consents_background_check'];
-            const missingConsents = requiredConsents.filter(consent => 
-                !consents?.includes(consent)
-            );
-
-            if (missingConsents.length > 0) {
-                return res.status(400).json({
-                    error: 'Missing required consents',
-                    missing: missingConsents
-                });
-            }
-
-            const result = await authService.registerStaff({
-                first_name,
-                last_name,
-                email,
-                phone,
-                password,
-                consents: consents || [],
-                role: 'coordinator', // Default role for new staff
-                department: 'administration' // Default department
-            });
-
-            res.status(201).json({
-                message: 'Staff registered successfully',
-                user: result
-            });
-        } catch (error) {
-            console.error('Staff registration error:', error);
-            res.status(400).json({
-                error: error.message
-            });
-        }
-    }
-
-    async login(req, res) {
-        try {
-            const { email, password, user_type } = req.body;
-
-            if (!email || !password || !user_type) {
-                return res.status(400).json({
-                    error: 'Missing required fields',
-                    required: ['email', 'password', 'user_type']
-                });
-            }
-
-            const user = await authService.validateUserCredentials(email, password, user_type);
-            
-            if (!user) {
-                return res.status(401).json({
-                    error: 'Invalid email or password'
-                });
-            }
-
-            // Return user data (without password)
-            const { password: _, ...userData } = user.toObject();
-            
-            res.json({
-                message: 'Login successful',
-                user: userData
-            });
-        } catch (error) {
-            console.error('Login error:', error);
-            res.status(400).json({
-                error: error.message
-            });
-        }
-    }
-
-    async getProfile(req, res) {
-        try {
-            const { userId, userType } = req.params;
-
-            const profile = await authService.getUserProfile(userId, userType);
-            
-            res.json({
-                user: profile
-            });
-        } catch (error) {
-            console.error('Get profile error:', error);
-            res.status(400).json({
-                error: error.message
-            });
-        }
-    }
+    return res.status(201).json({ message: 'Registration successful!', user });
+  } catch (err) {
+    console.error('Registration error:', err);
+    return res.status(500).json({ message: 'An error occurred during registration.', error: err.message });
+  }
 }
 
-module.exports = new AuthController();
+
+async function handleLogin(req, res, repository, role) {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required.' });
+    }
+
+    const user = await repository.findByEmail(email);
+
+    // Securely compare the provided password with the stored hash
+    // First, check if a user was found, then securely compare the password.
+    const isMatch = user && await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: `Invalid credentials or you do not have a ${role} account.` });
+      // Use a generic error message for security to avoid revealing which part (email/password) was wrong.
+      return res.status(401).json({ error: 'Invalid credentials.' });
+    }
+
+    // Do not send the password to the client
+    user.password = undefined;
+
+    return res.status(200).json({ message: 'Login successful!', user });
+    // Create a JWT payload
+    const payload = {
+      id: user._id, // or user.id depending on your DB schema
+      role: user.role,
+    };
+
+    // Sign the token
+    const token = jwt.sign(payload, process.env.JWT_SECRET || 'your_default_secret_key', { expiresIn: '1h' });
+
+    return res.status(200).json({ message: 'Login successful!', user, token });
+  } catch (err) {
+    console.error(`${role} Login error:`, err);
+    return res.status(500).json({ message: 'An error occurred during login.', error: err.message });
+  }
+}
+
+// Exported Controller Functions
+
+// Registration Controllers
+exports.registerAdopter = (req, res) => handleRegistration(req, res, adopterRepository);
+exports.registerVolunteer = (req, res) => handleRegistration(req, res, volunteerRepository);
+exports.registerStaff = (req, res) => handleRegistration(req, res, staffRepository);
+
+// Login Controllers
+exports.loginAdopter = (req, res) => handleLogin(req, res, adopterRepository, 'adopter');
+exports.loginVolunteer = (req, res) => handleLogin(req, res, volunteerRepository, 'volunteer');
+exports.loginStaff = (req, res) => handleLogin(req, res, staffRepository, 'staff');
+
+// Profile Controller (Placeholder)
+exports.getProfile = async (req, res) => {
+  try {
+    const { userType, userId } = req.params;
+    let repository;
+
+    if (userType === 'adopter') repository = adopterRepository;
+    else if (userType === 'volunteer') repository = volunteerRepository;
+    else if (userType === 'staff') repository = staffRepository;
+    else return res.status(400).json({ message: 'Invalid user type.' });
+
+    const user = await repository.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    user.password = undefined; // Ensure password is not sent
+    res.status(200).json(user);
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error('Get profile error:', error);
+    res.status(500).json({ message: 'Failed to retrieve profile.', error: error.message });
+  }
+};

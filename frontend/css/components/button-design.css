@@ -1,0 +1,63 @@
+/* Styling for Pet Profile Tabs */
+.pet-tabs {
+  display: flex;
+  gap: 0.75rem; /* Space between buttons */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pet-tabs li {
+  flex: 0 1 200px; /* Allow buttons to have a max-width but shrink if needed */
+}
+
+/* General Tab Button Style */
+.tab-btn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid #f0f0f0;
+  border-radius: 50px; /* Pill-shaped buttons */
+  background-color: #f0f0f0; /* Light gray background */
+  color: #333; /* Dark gray text */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+/* Hover state for non-active buttons */
+.tab-btn:not(.active):hover {
+  background-color: #e0e0e0; /* Slightly darker gray on hover */
+  border-color: #e0e0e0;
+}
+
+/* Active Tab Button Style */
+.tab-btn.active {
+  background-color: #F39C12; /* Orange color from navbar */
+  color: white;
+  border-color: #F39C12;
+}
+
+.pet-tab.active {
+  background-color: #F39C12 !important; /* Use brand color for active state */
+  color: white !important; /* Ensure text is white on active */
+}
+
+.badge-green {
+  background: #27ae60;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: white;
+  font-size: 12px;
+}
+
+.timeline-line {
+  width: 4px;
+  background: #2e6edb;
+  border-radius: 10px;
+  margin-right: 12px;
+}
+

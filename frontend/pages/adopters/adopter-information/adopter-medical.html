@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Profile - Medical</title>
+
+  <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/base/general.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg adopter-navbar" style="background-color: #F39C12;">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" href="#">🐾 Dashboard</a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adopterNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="adopterNav" data-required-role="adopter">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link text-white" href="../adopter-dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../adopter-pet.html">Browse Pets</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../adopter-message.html">Messages</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../adopter-application.html">My Applications</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../adopter-favorite.html">Favorites</a></li>
+
+        <li class="nav-item mx-3 position-relative">
+          <img id="adopter-profile" src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link d-flex align-items-center text-white" href="#" data-bs-toggle="dropdown">
+            <img src="/frontend/assets/image/photo/BoyIcon.jpg" class="rounded-circle me-2" width="35" height="35">
+            <div class="lh-1">
+              <div class="fw-bold text-white" id="navbarUserName"></div>
+              <div class="text-light small" id="navbarUserRole"></div>
+            </div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end mt-2 shadow">
+            <li class="dropdown-header">
+              <strong id="dropdownUserName"></strong><br>
+              <small class="text-muted" id="dropdownUserRole"></small>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../adopter-profile.html">Profile</a></li>
+            <li><a class="dropdown-item" href="../adopter-setting.html">Settings</a></li>
+            <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-4">
+
+  <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <a href="/frontend/pages/adopters/adopter-pet.html" class="text-secondary text-decoration-none mb-2 d-block">
+                    &larr; Back to All Pets
+                </a>
+                <h2 class="fw-bold" id="petNameHeader"></h2>
+                <p class="text-muted" id="petSubHeader"></p>
+                <div class="d-flex gap-2" id="petTagsHeader">
+                    <!-- Tags will be loaded here -->
+                </div>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0 d-flex gap-3 justify-content-md-end align-items-center">
+                <i class="fas fa-heart favorite-btn" id="favoriteBtn" title="Add to Favorites"></i>
+                <button class="btn adopter-pet-btn" id="applyToAdoptBtn">Apply to Adopt</button>
+            </div>
+        </div>
+    </div>
+
+<nav class="mb-4">
+  <ul class="pet-tabs" id="petProfileNavTabs">
+    <li data-tab-type="overview">
+      <a href="#" class="tab-btn">Overview</a>
+    </li>
+    <li data-tab-type="medical">
+      <a href="#" class="tab-btn">Medical</a>
+    </li>
+  </ul>
+</nav>
+
+
+  <section class="mb-4 p-4 border rounded-4 shadow-sm">
+    <h4 class="fw-bold mb-3">Vaccination Status</h4>
+
+    <div class="border rounded-3 p-3 mb-3 bg-light">
+      <h6 class="fw-bold mb-0">DHHP</h6>
+      <small class="text-muted">Last 1/20/2024 • Next due: 1/20/2025</small>
+      <div class="mt-1 small text-secondary">Dr Johny Sin</div>
+    </div>
+
+    <div class="border rounded-3 p-3 bg-light">
+      <h6 class="fw-bold mb-0">Rabies</h6>
+      <small class="text-muted">Last 1/15/2024 • Next due: 12/15/2025</small>
+      <div class="mt-1 small text-secondary">Dr Johny Sin</div>
+    </div>
+  </section>
+
+  <section class="p-4 border rounded-4 shadow-sm">
+    <h4 class="fw-bold mb-3">Medical History</h4>
+
+    <div class="d-flex mb-4">
+      <div class="timeline-line"></div>
+      <div>
+        <h6 class="fw-bold mb-1">Initial Health Assessment</h6>
+        <small class="text-muted">1/15/2024 • Dr Johny Sin</small>
+        <p class="small mt-1">Healthy dog, some minor dental work needed</p>
+      </div>
+    </div>
+
+    <div class="d-flex">
+      <div class="timeline-line"></div>
+      <div>
+        <h6 class="fw-bold mb-1">DHPP vaccination</h6>
+        <small class="text-muted">1/20/2024 • Dr Johny Sin</small>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="../../../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/frontend/js/auth/auth.js"></script>
+<script type="module" src="/frontend/scripts/pages/adopterViewPet.js"></script>
+</body>
+</html>

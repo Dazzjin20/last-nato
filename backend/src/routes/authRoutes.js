@@ -1,5 +1,5 @@
 const express = require('express');
-const authController = require('../controllers/authController');
+const authController = require('../controller/authController');
 
 const router = express.Router();
 
@@ -8,8 +8,10 @@ router.post('/register/adopter', authController.registerAdopter);
 router.post('/register/volunteer', authController.registerVolunteer);
 router.post('/register/staff', authController.registerStaff);
 
-// Authentication routes
-router.post('/login', authController.login);
+// Login routes
+router.post('/login/adopter', authController.loginAdopter);
+router.post('/login/volunteer', authController.loginVolunteer);
+router.post('/login/staff', authController.loginStaff);
 
 // Profile routes
 router.get('/profile/:userType/:userId', authController.getProfile);

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadPetDetails(petId);
+    setupPetProfileTabs(petId); // Call this here to set up dynamic tabs
 });
 
 async function loadPetDetails(id) {
@@ -26,56 +27,81 @@ async function loadPetDetails(id) {
 
     } catch (err) {
         console.error('Failed to load pet details:', err);
-        document.getElementById('petNameHeader').textContent = 'Error';
-        document.getElementById('petAbout').textContent = `Could not load pet details: ${err.message}`;
+        // Ensure these elements exist before trying to set textContent
+        const petNameHeader = document.getElementById('petNameHeader');
+        if (petNameHeader) petNameHeader.textContent = 'Error';
+        const petAbout = document.getElementById('petAbout');
+        if (petAbout) petAbout.textContent = `Could not load pet details: ${err.message}`;
     }
 }
 
 function populatePetDetails(pet) {
     // Header
-    document.getElementById('petNameHeader').textContent = pet.pet_name;
     document.title = `${pet.pet_name} - Pet Profile`;
-    document.getElementById('petSubHeader').textContent = `${pet.age || 'N/A'} • ${pet.sex || 'N/A'}`;
+    const petNameHeader = document.getElementById('petNameHeader');
+    if (petNameHeader) petNameHeader.textContent = pet.pet_name;
+
+    const petSubHeader = document.getElementById('petSubHeader');
+    if (petSubHeader) petSubHeader.textContent = `${pet.age || 'N/A'} • ${pet.sex || 'N/A'}`;
 
     // Header Tags
     const tagsHeader = document.getElementById('petTagsHeader');
-    tagsHeader.innerHTML = '';
-    if (pet.status) {
-        const statusTag = document.createElement('span');
-        statusTag.className = 'tag';
-        statusTag.textContent = pet.status;
-        tagsHeader.appendChild(statusTag);
-    }
-    if (pet.vaccinated) {
-        const vaccinatedTag = document.createElement('span');
-        vaccinatedTag.className = 'tag';
-        vaccinatedTag.textContent = 'Vaccinated';
-        tagsHeader.appendChild(vaccinatedTag);
+    if (tagsHeader) {
+        tagsHeader.innerHTML = '';
+        if (pet.status) {
+            const statusTag = document.createElement('span');
+            statusTag.className = 'badge-green ms-1';
+            statusTag.textContent = pet.status;
+            tagsHeader.appendChild(statusTag);
+        }
+        if (pet.vaccinated) {
+            const vaccinatedTag = document.createElement('span');
+            vaccinatedTag.className = 'badge-green ms-1';
+            vaccinatedTag.textContent = 'Vaccinated';
+            tagsHeader.appendChild(vaccinatedTag);
+        }
     }
 
     // Images
-    document.getElementById('beforeImage').src = pet.before_image || '/frontend/assets/image/photo/placeholder.jpg';
-    document.getElementById('afterImage').src = pet.after_image || '/frontend/assets/image/photo/placeholder.jpg';
+    const beforeImage = document.getElementById('beforeImage');
+    if (beforeImage) beforeImage.src = pet.before_image || '/frontend/assets/image/photo/placeholder.jpg';
+
+    const afterImage = document.getElementById('afterImage');
+    if (afterImage) afterImage.src = pet.after_image || '/frontend/assets/image/photo/placeholder.jpg';
 
     // Basic Info
-    document.getElementById('petInfoAge').textContent = pet.age || 'N/A';
-    document.getElementById('petInfoWeight').textContent = pet.weight ? `${pet.weight} kg` : 'N/A';
-    document.getElementById('petInfoSex').textContent = pet.sex || 'N/A';
-    document.getElementById('petInfoLocation').textContent = pet.location || 'N/A';
-    document.getElementById('petInfoArrival').textContent = `Arrived ${pet.arrival_date || 'N/A'}`;
+    const petInfoAge = document.getElementById('petInfoAge');
+    if (petInfoAge) petInfoAge.textContent = pet.age || 'N/A';
+
+    const petInfoWeight = document.getElementById('petInfoWeight');
+    if (petInfoWeight) petInfoWeight.textContent = pet.weight ? `${pet.weight} kg` : 'N/A';
+
+    const petInfoSex = document.getElementById('petInfoSex');
+    if (petInfoSex) petInfoSex.textContent = pet.sex || 'N/A';
+
+    const petInfoLocation = document.getElementById('petInfoLocation');
+    if (petInfoLocation) petInfoLocation.textContent = pet.location || 'N/A';
+
+    const petInfoArrival = document.getElementById('petInfoArrival');
+    if (petInfoArrival) petInfoArrival.textContent = `Arrived ${pet.arrival_date || 'N/A'}`;
 
     // Personality & About
     const personalityContainer = document.getElementById('petPersonalityTags');
-    personalityContainer.innerHTML = '';
-    (pet.personality || []).forEach(trait => {
-        const traitTag = document.createElement('span');
-        traitTag.className = 'trait-tag';
-        traitTag.textContent = trait;
-        personalityContainer.appendChild(traitTag);
-    });
+    if (personalityContainer) {
+        personalityContainer.innerHTML = '';
+        (pet.personality || []).forEach(trait => {
+            const traitTag = document.createElement('span');
+            traitTag.className = 'trait-tag';
+            traitTag.textContent = trait;
+            personalityContainer.appendChild(traitTag);
+        });
+    }
 
-    document.getElementById('petAboutTitle').textContent = `About ${pet.pet_name}`;
-    document.getElementById('petAbout').textContent = pet.about_pet || 'No description provided.';
+    const petAboutTitle = document.getElementById('petAboutTitle');
+    if (petAboutTitle) petAboutTitle.textContent = `About ${pet.pet_name}`;
+
+    const petAbout = document.getElementById('petAbout');
+    if (petAbout) petAbout.textContent = pet.about_pet || 'No description provided.';
 }
 
 function attachActionHandlers(pet) {
@@ -113,4 +139,33 @@ function attachActionHandlers(pet) {
             // Future implementation: window.location.href = `/apply.html?petId=${pet._id}`;
         });
     }
+}
+
+function setupPetProfileTabs(petId) {
+    const petProfileNavTabs = document.getElementById('petProfileNavTabs');
+    if (!petProfileNavTabs) return;
+
+    const currentPath = window.location.pathname;
+    const currentFileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+
+    petProfileNavTabs.querySelectorAll('li').forEach(li => {
+        const anchor = li.querySelector('a');
+        const tabType = li.dataset.tabType;
+
+        if (anchor && tabType) {
+            let href = '#';
+            let isActive = false;
+
+            if (tabType === 'overview') {
+                href = `/frontend/pages/adopters/adopter-view-pet.html?id=${petId}`;
+                isActive = currentFileName === 'adopter-view-pet.html';
+            } else if (tabType === 'medical') {
+                href = `/frontend/pages/adopters/adopter-information/adopter-medical.html?id=${petId}`;
+                isActive = currentFileName === 'adopter-medical.html';
+            }
+            anchor.href = href;
+            if (isActive) anchor.classList.add('active');
+            else anchor.classList.remove('active');
+        }
+    });
 }
