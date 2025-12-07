@@ -27,8 +27,10 @@ async function loadDashboardData(adopterId) {
         updateStatCard('approvedCount', stats.approved);
         updateStatCard('adoptedCount', stats.adopted);
 
+        // --- FIX: Make favorites key user-specific ---
         // Favorites are client-side, so we get them from localStorage
-        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const favoritesKey = adopterId ? `favorites_${adopterId}` : 'favorites_guest';
+        const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
         updateStatCard('favoritesCount', favorites.length);
 
         // Load activity feed from the data we just fetched

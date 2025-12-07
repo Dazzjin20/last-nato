@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 // Base User Schema with common fields
+// Nagdagdag ako ng profile_image at bio para sa profile data.
 const baseUserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, lowercase: true },
   password: { type: String, required: true },
@@ -12,7 +13,15 @@ const baseUserSchema = new mongoose.Schema({
     consented: { type: Boolean, default: false },
     consented_at: { type: Date, default: Date.now }
   }],
-  created_at: { type: Date, default: Date.now },
+  profile_image: { type: String, default: null }, // Para sa base64 o URL ng profile image
+  bio: { type: String, default: null }, // Para sa biography ng user
+  address: { type: String, default: null }, // Para sa address ng user
+  role: {
+    type: String,
+    enum: ['adopter', 'volunteer', 'staff'],
+    required: true
+  },
+  created_at: { type: Date, default: Date.now }, // Ito ay awtomatikong ima-manage ng timestamps
   updated_at: { type: Date, default: Date.now }
 });
 
@@ -31,11 +40,6 @@ const adopterSchema = new mongoose.Schema({
   status: {
     type: String,
     'enum': ['active', 'inactive', 'suspended'],
-    default: 'active'
-  },
-  role:{
-    type: String,
-    'enum': ['adopter', 'volunteer','staff'],
     default: 'active'
   }
 });
@@ -60,22 +64,12 @@ const volunteerSchema = new mongoose.Schema({
     type: String,
     'enum': ['pending', 'approved', 'rejected'],
     default: 'pending'
-  },
-  role:{
-    type: String,
-    'enum': ['adopter', 'volunteer','staff'],
-    default: 'active'
   }
 });
 
 // Staff Schema
 const staffSchema = new mongoose.Schema({
   ...baseUserSchema.obj,
-  role: {
-    type: String,
-    'enum': ['admin', 'manager', 'coordinator'], // COMMENT: And finally, for the staff schema.
-    default: 'coordinator'
-  },
   department: String,
   status: {
     type: String,
@@ -83,21 +77,34 @@ const staffSchema = new mongoose.Schema({
     default: 'active'
   },
   role:{
-    type: String,
-    'enum': ['adopter', 'volunteer','staff'],
-    default: 'active'
+    type: String, // Ino-override ang base role para sa mas specific na staff roles
+    enum: ['admin', 'manager', 'coordinator', 'staff'], // Dinagdag ang 'staff' para sa general purpose
+    default: 'staff'
   }
 });
 
-// Add indexes for better performance
+// Add indexes and timestamps for better performance and data management
 adopterSchema.index({ email: 1 });
 volunteerSchema.index({ email: 1 });
 staffSchema.index({ email: 1 });
 
 // Virtual for full name
-baseUserSchema.virtual('full_name').get(function() {
+adopterSchema.virtual('full_name').get(function() {
   return `${this.first_name} ${this.last_name}`;
 });
+
+volunteerSchema.virtual('full_name').get(function() {
+  return `${this.first_name} ${this.last_name}`;
+});
+
+staffSchema.virtual('full_name').get(function() {
+  return `${this.first_name} ${this.last_name}`;
+});
+
+// Enable automatic `created_at` and `updated_at` timestamps
+adopterSchema.set('timestamps', { createdAt: 'created_at', updatedAt: 'updated_at' });
+volunteerSchema.set('timestamps', { createdAt: 'created_at', updatedAt: 'updated_at' });
+staffSchema.set('timestamps', { createdAt: 'created_at', updatedAt: 'updated_at' });
 
 const Adopter = mongoose.model('Adopter', adopterSchema);
 const Volunteer = mongoose.model('Volunteer', volunteerSchema);

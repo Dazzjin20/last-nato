@@ -13,7 +13,10 @@ async function loadFavoritePets() {
 
     grid.innerHTML = '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
-    let favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
+    // --- FIX: Make favorites key user-specific ---
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const favoritesKey = currentUser ? `favorites_${currentUser._id}` : 'favorites_guest';
+    let favoriteIds = JSON.parse(localStorage.getItem(favoritesKey)) || [];
     // Ensure favoriteIds is always an array
     if (!Array.isArray(favoriteIds)) favoriteIds = [];
 

@@ -70,8 +70,8 @@
       </div>
       <div id="profileActionButtons">
         <button class="btn adopter-profile-edit-btn" id="editProfileBtn">Edit Profile</button>
-        <button class="btn btn-secondary d-none" id="cancelEditBtn">Cancel</button>
-        <button class="btn adopter-profile-edit-btn d-none" id="saveProfileBtn">Save Changes</button>
+        <button class="btn btn-secondary d-none" id="cancelBtn">Cancel</button>
+        <button class="btn adopter-profile-edit-btn d-none" id="saveChangesBtn">Save Changes</button>
       </div>
     </div>
   </div>
@@ -84,11 +84,11 @@
         <div class="adopter-profile-section text-center">
           <div class="profile-pic-wrapper">
             <img id="profilePic" src="/frontend/assets/image/photo/BoyIcon.jpg" alt="Profile Picture" class="profile-pic-large">
-            <div class="profile-pic-upload-overlay">
+            <div id="uploadPicBtn" class="profile-pic-upload-overlay" style="cursor: pointer;">
               <i class="fas fa-camera"></i>
               <span>Change</span>
             </div>
-            <input type="file" id="profilePicInput" class="d-none" accept="image/*">
+            <input type="file" id="profileImageInput" class="d-none" accept="image/*">
           </div>
           <div class="mt-3">
             <h4 class="fw-bold" id="profileDisplayName">Keylist Webbo</h4>
@@ -101,18 +101,18 @@
           <h5 class="adopter-profile-section-title">Contact Info</h5>
           <div class="adopter-profile-info-item">
             <label for="userPhone" class="adopter-profile-info-label">Phone number</label>
-            <div class="adopter-profile-info-value" data-view-mode id="viewUserPhone">+6399 8842 845</div>
-            <input type="tel" class="form-control d-none" data-edit-mode id="userPhone" name="phone">
+            <div class="adopter-profile-info-value" id="viewUserPhone">+6399 8842 845</div>
+            <input type="tel" class="form-control d-none" id="editUserPhone" name="phone">
           </div>
           <div class="adopter-profile-info-item">
             <label for="userEmail" class="adopter-profile-info-label">Email Address</label>
-            <div class="adopter-profile-info-value" data-view-mode id="viewUserEmail">Keylivebbo@gmail.com</div>
-            <input type="email" class="form-control d-none" data-edit-mode id="userEmail" name="email">
+            <div class="adopter-profile-info-value" id="viewUserEmail">Keylivebbo@gmail.com</div>
+            <input type="email" class="form-control d-none" id="editUserEmail" name="email" disabled>
           </div>
           <div class="adopter-profile-info-item">
             <label for="userAddress" class="adopter-profile-info-label">Address</label>
-            <div class="adopter-profile-info-value" data-view-mode id="viewUserAddress">123 Asawa ni Marie St.jude Pampanga</div>
-            <textarea class="form-control d-none" data-edit-mode id="userAddress" name="address" rows="3"></textarea>
+            <div class="adopter-profile-info-value" id="viewUserAddress">123 Asawa ni Marie St.jude Pampanga</div>
+            <textarea class="form-control d-none" id="editUserAddress" name="address" rows="3"></textarea>
           </div>
         </div>
 
@@ -127,25 +127,25 @@
             <div class="col-md-6">
               <div class="adopter-profile-info-item">
                 <label for="userFirstName" class="adopter-profile-info-label">First name</label>
-                <div class="adopter-profile-info-value" data-view-mode id="viewUserFirstName">Keylist</div>
-                <input type="text" class="form-control d-none" data-edit-mode id="userFirstName" name="first_name">
+                <div class="adopter-profile-info-value" id="viewUserFirstName">Keylist</div>
+                <input type="text" class="form-control d-none" id="editUserFirstName" name="first_name">
               </div>
             </div>
             <div class="col-md-6">
               <div class="adopter-profile-info-item">
                 <label for="userLastName" class="adopter-profile-info-label">Last name</label>
-                <div class="adopter-profile-info-value" data-view-mode id="viewUserLastName">Webbo</div>
-                <input type="text" class="form-control d-none" data-edit-mode id="userLastName" name="last_name">
+                <div class="adopter-profile-info-value" id="viewUserLastName">Webbo</div>
+                <input type="text" class="form-control d-none" id="editUserLastName" name="last_name">
               </div>
             </div>
           </div>
 
           <div class="adopter-profile-info-item">
             <label for="userBio" class="adopter-profile-info-label">Bio</label>
-            <div class="adopter-profile-info-value" data-view-mode id="viewUserBio">
+            <div class="adopter-profile-info-value" id="viewUserBio">
               Animal lover with a passion for giving rescue pets a second chance at happiness. Currently looking for a furry companion to join my family.
             </div>
-            <textarea class="form-control d-none" data-edit-mode id="userBio" name="bio" rows="4"></textarea>
+            <textarea class="form-control d-none" id="editUserBio" name="bio" rows="4"></textarea>
           </div>
         </div>
 
@@ -154,8 +154,8 @@
           <h5 class="adopter-profile-section-title">Adoption Preferences</h5>
           <div class="adopter-profile-info-item">
             <label for="livingSituation" class="adopter-profile-info-label">Living Situation</label>
-            <div class="adopter-profile-info-value" data-view-mode id="viewLivingSituation">Own House</div>
-            <select class="form-select d-none" data-edit-mode id="livingSituation" name="living_situation">
+            <div class="adopter-profile-info-value" id="viewLivingSituation">Own House</div>
+            <select class="form-select d-none" id="editLivingSituation" name="living_situation">
               <option value="own_house">Own House</option>
               <option value="rent_house">Rent House</option>
               <option value="apartment">Apartment</option>
@@ -170,8 +170,8 @@
           <div class="adopter-profile-info-item">
             <div class="adopter-profile-info-label">Password</div>
             <div class="adopter-profile-info-value">
-              <span data-view-mode>••••••••</span>
-              <button class="btn btn-sm btn-outline-secondary d-none" data-edit-mode id="changePasswordBtn">Change Password</button>
+              <span>••••••••</span>
+              <button class="btn btn-sm btn-outline-secondary d-none" id="changePasswordBtn">Change Password</button>
             </div>
           </div>
         </div>
@@ -180,6 +180,9 @@
     </div>
   </form>
 </div>
+
+<!-- Message Div -->
+<div id="profileMessage" class="alert d-none" style="position: fixed; top: 80px; right: 20px; z-index: 1050;"></div>
 
   <!-- Load Bootstrap JavaScript only once -->
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>

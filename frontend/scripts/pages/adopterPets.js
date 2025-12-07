@@ -8,8 +8,11 @@ import { getPets } from '../utils/staffPetsApi.js';
 function createPetCard(pet) {
     const col = document.createElement('div');
     col.className = 'col-md-6';
-    
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    // --- FIX: Make favorites key user-specific ---
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const favoritesKey = currentUser ? `favorites_${currentUser._id}` : 'favorites_guest';
+    let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
     // Ensure favorites is always an array to prevent .includes() error
     if (!Array.isArray(favorites)) favorites = [];
     const isFavorited = favorites.includes(pet._id);
@@ -667,7 +670,10 @@ function setupActionListeners() {
             target.classList.toggle('fa-regular');
             target.classList.toggle('fa-solid');
 
-            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            // --- FIX: Use user-specific key for saving ---
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const favoritesKey = currentUser ? `favorites_${currentUser._id}` : 'favorites_guest';
+            let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
             if (!Array.isArray(favorites)) favorites = [];
 
             if (target.classList.contains('favorited')) {
@@ -676,7 +682,7 @@ function setupActionListeners() {
                 favorites = favorites.filter(id => id !== petId);
             }
             // Use a Set to guarantee uniqueness before saving
-            localStorage.setItem('favorites', JSON.stringify([...new Set(favorites)]));
+            localStorage.setItem(favoritesKey, JSON.stringify([...new Set(favorites)]));
         }
     });
 }

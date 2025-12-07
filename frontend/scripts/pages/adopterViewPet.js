@@ -110,15 +110,18 @@ function attachActionHandlers(pet) {
 
     // Favorite button functionality
     if (favoriteBtn) {
+        // --- FIX: Make favorites key user-specific ---
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const favoritesKey = currentUser ? `favorites_${currentUser._id}` : 'favorites_guest';
         // Check localStorage if this pet is already favorited
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
         if (favorites.includes(pet._id)) {
             favoriteBtn.classList.add('favorited');
         }
 
         favoriteBtn.addEventListener('click', () => {
             favoriteBtn.classList.toggle('favorited');
-            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
             if (favoriteBtn.classList.contains('favorited')) {
                 // Add to favorites if not already there
                 if (!favorites.includes(pet._id)) {
@@ -128,7 +131,7 @@ function attachActionHandlers(pet) {
                 // Remove from favorites
                 favorites = favorites.filter(id => id !== pet._id);
             }
-            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem(favoritesKey, JSON.stringify(favorites));
         });
     }
 
