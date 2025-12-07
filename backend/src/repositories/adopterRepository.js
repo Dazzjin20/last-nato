@@ -37,6 +37,18 @@ class AdopterRepository {
         }
     }
 
+    async updateById(id, updateData) {
+        try {
+            // Hanapin at i-update ang adopter, at ibalik ang bagong document
+            // Ang { new: true } option ay tinitiyak na ang updated document ang ibabalik
+            const adopter = await Adopter.findByIdAndUpdate(id, { $set: updateData }, { new: true });
+            if (adopter) adopter.password = undefined; // Huwag ibalik ang password
+            return adopter;
+        } catch (error) {
+            throw new Error(`Failed to update adopter by ID: ${error.message}`);
+        }
+    }
+
     buildConsents(consentTypes) {
         const consentMap = {
             terms_agreed: 'Terms of Service and Privacy Policy',

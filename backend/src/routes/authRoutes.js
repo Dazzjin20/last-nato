@@ -1,6 +1,7 @@
 const express = require('express');
 const authController = require('../controller/authController');
 const dashboardController = require('../controller/dashboardController');
+const adopterController = require('../controller/adopterController');
 
 const router = express.Router();
 
@@ -19,5 +20,8 @@ router.get('/profile/:userType/:userId', authController.getProfile);
 
 // Adopter Dashboard Route
 router.get('/dashboard/adopter/:adopterId', dashboardController.getAdopterDashboardStats);
+
+// Adopter Profile Update Route
+router.put('/profile/adopter/:adopterId', adopterController.updateProfile);
 
 module.exports = router;
