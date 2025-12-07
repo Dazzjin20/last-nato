@@ -17,6 +17,7 @@ class PetRepository {
                 vaccinated: petData.vaccinated,
                 personality: petData.personality,
                 about_pet: petData.about_pet,
+                posted_by_staff: petData.posted_by_staff, // Save the staff ID
           
             });
 
@@ -28,7 +29,7 @@ class PetRepository {
 
     async findById(id) {
         try {
-            return await Pet.findById(id);
+            return await Pet.findById(id).populate('posted_by_staff'); // Populate staff details
         } catch (error) {
             throw new Error(`Failed to find pet by ID: ${error.message}`);
         }
@@ -36,7 +37,7 @@ class PetRepository {
 
     async findAll(filter = {}) {
         try {
-            return await Pet.find(filter);
+            return await Pet.find(filter).populate('posted_by_staff'); // Populate staff details
         } catch (error) {
             throw new Error(`Failed to find pets: ${error.message}`);
         }

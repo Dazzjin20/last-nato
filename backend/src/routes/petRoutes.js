@@ -17,4 +17,7 @@ router.put('/:id', (req, res) => petController.update(req, res));
 // DELETE /api/pets/:id
 router.delete('/:id', (req, res) => petController.remove(req, res));
 
+// GET /api/pets/recommendations/:adopterId
+router.get('/recommendations/:adopterId', (req, res) => petController.getRecommendations(req, res));
+
 module.exports = router;

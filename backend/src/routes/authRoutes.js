@@ -1,5 +1,6 @@
 const express = require('express');
 const authController = require('../controller/authController');
+const dashboardController = require('../controller/dashboardController');
 
 const router = express.Router();
 
@@ -15,5 +16,8 @@ router.post('/login/staff', authController.loginStaff);
 
 // Profile routes
 router.get('/profile/:userType/:userId', authController.getProfile);
+
+// Adopter Dashboard Route
+router.get('/dashboard/adopter/:adopterId', dashboardController.getAdopterDashboardStats);
 
 module.exports = router;

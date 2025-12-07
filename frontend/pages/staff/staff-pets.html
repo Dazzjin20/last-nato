@@ -29,8 +29,8 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="staff-pet-assignment.html">Pet Assignment</a></li>
-              <li><a class="dropdown-item" href="#">Task Assignment</a></li>
-              <li><a class="dropdown-item" href="#">Care Tracking</a></li>
+              <li><a class="dropdown-item" href="staff-task-assignment.html">Task Assignment</a></li>
+              <li><a class="dropdown-item" href="staff-care-tracking.html">Care Tracking</a></li>
               <li><a class="dropdown-item" href="#">Volunteers</a></li>
             </ul>
           </li>
@@ -40,12 +40,20 @@
           <li class="nav-item me-lg-3 mt-2 mt-lg-0">
             <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
           </li>
-          <li class="nav-item d-flex align-items-center mt-2 mt-lg-0">
-            <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
-            <div class="text-white small lh-1">
-              <div id="staffNavbarName"></div>
-              <div id="staffNavbarRole"></div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
+            <div class="lh-1">
+              <div class="fw-bold text-white" id="navbarUserName"></div>
+              <div class="text-light small" id="navbarUserRole"></div>
             </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Logout</a></li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -471,6 +479,8 @@
   <!-- JavaScript for staff pet database -->
   <script src="/frontend/js/staff/user-info/user-info.js"> </script>
   <script type="module" src="../../scripts/pages/staffPets.js"></script>
+    <script src="/frontend/js/auth/auth.js"></script>
+  
 
 </body>
 </html>

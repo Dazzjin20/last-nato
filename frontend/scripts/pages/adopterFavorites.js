@@ -13,7 +13,9 @@ async function loadFavoritePets() {
 
     grid.innerHTML = '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
-    const favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
+    let favoriteIds = JSON.parse(localStorage.getItem('favorites')) || [];
+    // Ensure favoriteIds is always an array
+    if (!Array.isArray(favoriteIds)) favoriteIds = [];
 
     if (favoriteIds.length === 0) {
         grid.innerHTML = `

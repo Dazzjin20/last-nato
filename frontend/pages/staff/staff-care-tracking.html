@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Dashboard - Care Tracking</title>
+  <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/frontend/css/base/general.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/frontend/css/utils/staff-care-tracking.css">
+</head>
+<body class="bg-light" data-required-role="staff">
+
+  <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#staffNavbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="staffNavbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium" href="staff-pets.html">Pets</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium" href="staff-messages.html">Messages</a></li>
+         <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Management
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="staff-pet-assignment.html">Pet Assignment</a></li>
+              <li><a class="dropdown-item" href="staff-task-assignment.html">Task Assignment</a></li>
+              <li><a class="dropdown-item" href="staff-care-tracking.html">Care Tracking</a></li>
+              <li><a class="dropdown-item" href="#">Volunteers</a></li>
+            </ul>
+          </li>
+            <li class="nav-item me-lg-3">
+              <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
+            </li>
+          <li class="nav-item me-lg-3 mt-2 mt-lg-0">
+            <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
+            <div class="lh-1">
+              <div class="fw-bold text-white" id="navbarUserName"></div>
+              <div class="text-light small" id="navbarUserRole"></div>
+            </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <main class="container my-5">
+    <!-- Page Header -->
+    <header class="staff-overview-box text-white p-4 mb-4">
+      <h1 class="fw-bold mb-1">Care Tracking Dashboard</h1>
+      <p class="mb-0">Monitor and manage pet care activities and tasks</p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="care-nav-tabs">
+      <button class="care-nav-tab active" id="overviewTab">Overview</button>
+      <button class="care-nav-tab" id="tasksTab">Tasks</button>
+      <button class="care-nav-tab" id="scheduleTab">Schedule</button>
+    </div>
+
+    <!-- ===== OVERVIEW TAB CONTENT (Visible by default) ===== -->
+    <div id="overviewView" class="care-main-content">
+      <!-- Statistics Cards -->
+      <div class="care-stats-container">
+        <div class="care-stat-card stat-urgent">
+          <div class="care-stat-number">3</div>
+          <div class="care-stat-label">Urgent Tasks</div>
+        </div>
+        
+        <div class="care-stat-card stat-pending">
+          <div class="care-stat-number">8</div>
+          <div class="care-stat-label">Pending</div>
+        </div>
+        
+        <div class="care-stat-card stat-progress">
+          <div class="care-stat-number">5</div>
+          <div class="care-stat-label">In Progress</div>
+        </div>
+        
+        <div class="care-stat-card stat-completed">
+          <div class="care-stat-number">24</div>
+          <div class="care-stat-label">Completed Today</div>
+        </div>
+      </div>
+
+      <!-- Recent Care Activities Card -->
+      <section class="recent-care-card">
+        <header class="recent-care-header">
+          <h3>Recent Care Activities</h3>
+          <p>Latest updates on pet care tasks</p>
+        </header>
+        
+        <!-- Activity 1: Sadness -->
+        <article class="care-activity-item">
+          <div class="activity-header">
+            <div class="pet-name-section">
+              <div class="pet-name">Sadness</div>
+              <span class="priority-badge priority-high">High</span>
+            </div>
+          </div>
+          
+          <div class="activity-details">
+            <div class="activity-title">Vaccination</div>
+            <div class="activity-meta">
+              <div class="activity-assigned">
+                <i class="fas fa-user-circle"></i>
+                Assigned to Dasha Taran
+              </div>
+              <div class="activity-time">
+                <i class="far fa-calendar"></i>
+                1/20/2025, 10:00 AM
+              </div>
+            </div>
+          </div>
+          
+          <div class="activity-status-section">
+            <span class="status-badge status-pending">Pending</span>
+            <div class="activity-actions">
+              <button class="action-btn action-btn-view">View Details</button>
+              <button class="action-btn action-btn-update">Update Status</button>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Activity 2: Anger -->
+        <article class="care-activity-item">
+          <div class="activity-header">
+            <div class="pet-name-section">
+              <div class="pet-name">Anger</div>
+              <span class="priority-badge priority-medium">Medium</span>
+            </div>
+          </div>
+          
+          <div class="activity-details">
+            <div class="activity-title">Physical Therapy Session</div>
+            <div class="activity-meta">
+              <div class="activity-assigned">
+                <i class="fas fa-user-circle"></i>
+                Assigned to Kenji Webbo
+              </div>
+              <div class="activity-time">
+                <i class="far fa-calendar"></i>
+                1/19/2025, 12:00 AM
+              </div>
+            </div>
+          </div>
+          
+          <div class="activity-status-section">
+            <span class="status-badge status-in-progress">In Progress</span>
+            <div class="activity-actions">
+              <button class="action-btn action-btn-view">View Details</button>
+              <button class="action-btn action-btn-update">Update Status</button>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Activity 3: Joy -->
+        <article class="care-activity-item">
+          <div class="activity-header">
+            <div class="pet-name-section">
+              <div class="pet-name">Joy</div>
+              <span class="priority-badge priority-low">Low</span>
+            </div>
+          </div>
+          
+          <div class="activity-details">
+            <div class="activity-title">Daily Exercise Routine</div>
+            <div class="activity-meta">
+              <div class="activity-assigned">
+                <i class="fas fa-user-circle"></i>
+                Assigned to Alex Morgan
+              </div>
+              <div class="activity-time">
+                <i class="far fa-calendar"></i>
+                1/21/2025, 2:00 PM
+              </div>
+            </div>
+          </div>
+          
+          <div class="activity-status-section">
+            <span class="status-badge status-completed">Completed</span>
+            <div class="activity-actions">
+              <button class="action-btn action-btn-view">View Details</button>
+              <button class="action-btn action-btn-update">Log Activity</button>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <!-- ===== TASKS TAB CONTENT (Hidden by default) ===== -->
+    <div id="tasksView" class="care-main-content" style="display: none;">
+      <section class="all-care-card">
+        <header class="all-care-header">
+          <h3>All Care</h3>
+        </header>
+        
+        <!-- Pending Tasks Section -->
+        <div class="task-section">
+          <h4 class="task-section-title">Pending</h4>
+          
+          <!-- Task 1: Sadness -->
+          <article class="task-item">
+            <div class="task-header">
+              <div class="pet-name-section">
+                <div class="pet-name">Sadness</div>
+                <span class="priority-badge priority-high">High</span>
+              </div>
+            </div>
+            
+            <div class="task-details">
+              <div class="task-title">Vaccination</div>
+              <div class="task-meta">
+                <div class="task-assigned">
+                  <i class="fas fa-user-circle"></i>
+                  Assigned to Dasha Taran
+                </div>
+                <div class="task-time">
+                  <i class="far fa-calendar"></i>
+                  1/20/2025, 10:00 AM
+                </div>
+              </div>
+            </div>
+            
+            <div class="task-status-section">
+              <span class="status-badge status-pending">Pending</span>
+              <div class="task-actions">
+                <button class="action-btn action-btn-view">View</button>
+                <button class="action-btn action-btn-edit">Edit</button>
+              </div>
+            </div>
+          </article>
+          
+          <!-- Task 2: Anger -->
+          <article class="task-item">
+            <div class="task-header">
+              <div class="pet-name-section">
+                <div class="pet-name">Anger</div>
+                <span class="priority-badge priority-medium">Medium</span>
+              </div>
+            </div>
+            
+            <div class="task-details">
+              <div class="task-title">Physical Therapy Session</div>
+              <div class="task-meta">
+                <div class="task-assigned">
+                  <i class="fas fa-user-circle"></i>
+                  Assigned to Kenji Webbo
+                </div>
+                <div class="task-time">
+                  <i class="far fa-calendar"></i>
+                  1/19/2025, 12:00 AM
+                </div>
+              </div>
+            </div>
+            
+            <div class="task-status-section">
+              <span class="status-badge status-pending">Pending</span>
+              <div class="task-actions">
+                <button class="action-btn action-btn-view">View</button>
+                <button class="action-btn action-btn-edit">Edit</button>
+              </div>
+            </div>
+          </article>
+        </div>
+        
+        <!-- In Progress Tasks Section -->
+        <div class="task-section">
+          <h4 class="task-section-title">In Progress</h4>
+          
+          <!-- Task 3: Joy -->
+          <article class="task-item">
+            <div class="task-header">
+              <div class="pet-name-section">
+                <div class="pet-name">Joy</div>
+                <span class="priority-badge priority-low">Low</span>
+              </div>
+            </div>
+            
+            <div class="task-details">
+              <div class="task-title">Daily Exercise Routine</div>
+              <div class="task-meta">
+                <div class="task-assigned">
+                  <i class="fas fa-user-circle"></i>
+                  Assigned to Alex Morgan
+                </div>
+                <div class="task-time">
+                  <i class="far fa-calendar"></i>
+                  1/21/2025, 2:00 PM
+                </div>
+              </div>
+            </div>
+            
+            <div class="task-status-section">
+              <span class="status-badge status-in-progress">In Progress</span>
+              <div class="task-actions">
+                <button class="action-btn action-btn-view">View</button>
+                <button class="action-btn action-btn-edit">Update</button>
+              </div>
+            </div>
+          </article>
+        </div>
+        
+        <!-- Add Task Button -->
+        <div class="add-task-section">
+          <button class="add-task-btn" id="addTaskBtn">
+            <i class="fas fa-plus-circle"></i> Add Tasks
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== SCHEDULE TAB CONTENT (Hidden by default) ===== -->
+    <div id="scheduleView" class="care-main-content" style="display: none;">
+      <section class="schedule-card">
+        <header class="schedule-header">
+          <h3>Today's Schedule</h3>
+          <p>All care tasks scheduled for today</p>
+        </header>
+        
+        <!-- Calendar Navigation -->
+        <div class="calendar-nav">
+          <button class="calendar-nav-btn" id="prevWeekBtn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="calendar-month-year" id="calendarMonthYear"></div>
+          <button class="calendar-nav-btn" id="nextWeekBtn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        
+        <!-- Week Calendar -->
+        <div class="week-calendar">
+          <h4 class="task-section-title">Upcoming This Week</h4>
+          
+          <div class="week-days" id="weekDaysHeader">
+            <!-- Will be filled by JavaScript -->
+          </div>
+          
+          <div class="week-dates" id="weekDatesGrid">
+            <!-- Will be filled by JavaScript -->
+          </div>
+        </div>
+        
+        <!-- Upcoming Tasks List -->
+        <div class="upcoming-tasks-list" id="upcomingTasksList">
+          <!-- Will be filled by JavaScript based on selected date -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/frontend/js/staff/staff-care-tracking.js/switch-page.js">
+  
+  </script>
+</body>
+</html>

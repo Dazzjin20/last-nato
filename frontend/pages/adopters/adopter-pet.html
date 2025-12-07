@@ -26,9 +26,8 @@
         <li class="nav-item"><a class="nav-link text-white" href="adopter-dashboard.html">Dashboard</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="adopter-pet.html">Browse Pets</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="adopter-message.html">Messages</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="/frontend/pages/adopters/adopter-application.html">My Applications</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="adopter-application.html">My Applications</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="/frontend/pages/adopters/adopter-favorite.html">Favorites</a></li>
-
 
         <!-- Notification -->
         <li class="nav-item mx-3 position-relative">
@@ -39,7 +38,7 @@
         <!-- Profile Dropdown (Clean version, no arrow) -->
         <li class="nav-item dropdown">
           <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2 profile-image" width="35" height="35">
+            <img id="adopter-profile" src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2 profile-image" width="35" height="35">
             <div class="lh-1">
               <div class="fw-bold text-white" id="navbarUserName"></div>
               <div class="text-light small" id="navbarUserRole"></div>
@@ -59,7 +58,8 @@
       </ul>
     </div>
   </div>
-</nav>  
+</nav>
+
 
   <!-- MAIN CONTAINER -->
   <div class="container my-4 adopter-pet-container">
@@ -129,10 +129,28 @@
     </div>
   </div>
 
+<!-- Adoption Application Modal -->
+<div class="modal fade" id="adoptionModal" tabindex="-1" aria-labelledby="adoptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #F39C12; color: white;">
+                <h5 class="modal-title fw-bold" id="adoptionModalLabel">Adoption Application</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center p-5">
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">Loading adoption form...</span>
+                </div>
+                <p>Loading adoption application form...</p>
+                <p class="text-muted small">If this doesn't load, please refresh the page.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
   <!-- SCRIPTS -->
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
    <script src="/frontend/js/auth/auth.js"></script>
    <script type="module" src="/frontend/scripts/pages/adopterPets.js"></script>
-
 </body>
 </html>

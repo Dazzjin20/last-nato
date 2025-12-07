@@ -1,0 +1,615 @@
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --card-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      --border-radius: 12px;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    
+    .staff-overview-box {
+      background: var(--primary-gradient);
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+    }
+    
+    /* Navigation Tabs */
+    .care-nav-tabs {
+      display: flex;
+      gap: 1px;
+      background: #e9ecef;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    
+    .care-nav-tab {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      background: white;
+      border: none;
+      font-weight: 500;
+      color: #666;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    
+    .care-nav-tab.active {
+      background: var(--primary-gradient);
+      color: white;
+    }
+    
+    .care-nav-tab:not(.active):hover {
+      background: #f8f9fa;
+      color: #333;
+    }
+    
+    /* ===== OVERVIEW TAB STYLES ===== */
+    
+    /* Stats Cards for Overview */
+    .care-stats-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .care-stat-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    
+    .care-stat-card:hover {
+      transform: translateY(-3px);
+    }
+    
+    .care-stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    
+    .care-stat-label {
+      color: #666;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    /* Urgent Tasks Styling */
+    .stat-urgent .care-stat-number {
+      color: #e74c3c;
+    }
+    
+    /* Pending Tasks Styling */
+    .stat-pending .care-stat-number {
+      color: #f39c12;
+    }
+    
+    /* In Progress Styling */
+    .stat-progress .care-stat-number {
+      color: #3498db;
+    }
+    
+    /* Completed Styling */
+    .stat-completed .care-stat-number {
+      color: #27ae60;
+    }
+    
+    /* Recent Care Activities for Overview */
+    .recent-care-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      padding: 1.5rem;
+    }
+    
+    .recent-care-header {
+      margin-bottom: 1.5rem;
+    }
+    
+    .recent-care-header h3 {
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .recent-care-header p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+    
+    /* Care Activity Items for Overview */
+    .care-activity-item {
+      padding: 1.25rem;
+      border-radius: 10px;
+      background: #f8f9fa;
+      margin-bottom: 1rem;
+      border-left: 4px solid #667eea;
+      transition: all 0.2s;
+    }
+    
+    .care-activity-item:hover {
+      background: #f1f3f5;
+      transform: translateX(2px);
+    }
+    
+    /* ===== TASKS TAB STYLES ===== */
+    
+    /* All Care Tasks Card */
+    .all-care-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      padding: 1.5rem;
+    }
+    
+    .all-care-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .all-care-header h3 {
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    
+    /* Task Sections */
+    .task-section {
+      margin-bottom: 2rem;
+    }
+    
+    .task-section:last-child {
+      margin-bottom: 0;
+    }
+    
+    .task-section-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+    
+    /* ===== SCHEDULE TAB STYLES ===== */
+    
+    .schedule-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      padding: 1.5rem;
+    }
+    
+    .schedule-header {
+      margin-bottom: 1.5rem;
+    }
+    
+    .schedule-header h3 {
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .schedule-header p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+    
+    /* Calendar Navigation */
+    .calendar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .calendar-month-year {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .calendar-nav-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .calendar-nav-btn {
+      background: #f0f3ff;
+      color: #667eea;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .calendar-nav-btn:hover {
+      background: #e2e8ff;
+    }
+    
+    /* Week Calendar */
+    .week-calendar {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .week-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .week-day {
+      font-weight: 600;
+      color: #333;
+      font-size: 0.9rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e9ecef;
+    }
+    
+    .week-dates {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      text-align: center;
+    }
+    
+    .week-date {
+      padding: 0.75rem 0.5rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .week-date:hover {
+      background: #e9ecef;
+    }
+    
+    .week-date.today {
+      background: var(--primary-gradient);
+      color: white;
+    }
+    
+    .week-date.selected {
+      background: #e2e8ff;
+      border: 2px solid #667eea;
+    }
+    
+    .week-date.other-month {
+      color: #999;
+      opacity: 0.6;
+    }
+    
+    .date-number {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .date-tasks {
+      font-size: 0.75rem;
+      color: #666;
+    }
+    
+    .week-date.today .date-tasks {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* Upcoming Tasks List */
+    .upcoming-tasks-list {
+      margin-top: 1.5rem;
+    }
+    
+    .upcoming-task-item {
+      padding: 1rem;
+      border-radius: 10px;
+      background: #f8f9fa;
+      margin-bottom: 1rem;
+      border-left: 4px solid #667eea;
+      transition: all 0.2s;
+    }
+    
+    .upcoming-task-item:hover {
+      background: #f1f3f5;
+      transform: translateX(2px);
+    }
+    
+    .upcoming-task-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .upcoming-task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+    
+    .upcoming-pet-name {
+      font-weight: 600;
+      color: #333;
+      font-size: 1.1rem;
+    }
+    
+    .upcoming-task-time {
+      background-color: #e9f7ef;
+      color: #27ae60;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .upcoming-task-details {
+      margin-bottom: 0.5rem;
+    }
+    
+    .upcoming-task-title {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+    
+    /* Individual Task/Activity Items (shared between views) */
+    .task-item, .care-activity-item {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #667eea;
+      transition: all 0.2s;
+    }
+    
+    .task-item:hover, .care-activity-item:hover {
+      background: #f1f3f5;
+      transform: translateX(2px);
+    }
+    
+    .task-item:last-child, .care-activity-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    /* Task/Activity Header */
+    .task-header, .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+    
+    .pet-name-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .pet-name {
+      font-weight: 600;
+      color: #333;
+      font-size: 1.1rem;
+    }
+    
+    /* Priority Badge */
+    .priority-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    
+    .priority-high {
+      background-color: #fdedec;
+      color: #e74c3c;
+    }
+    
+    .priority-medium {
+      background-color: #fef5e7;
+      color: #f39c12;
+    }
+    
+    .priority-low {
+      background-color: #e9f7ef;
+      color: #27ae60;
+    }
+    
+    /* Task/Activity Details */
+    .task-details, .activity-details {
+      margin-bottom: 0.75rem;
+    }
+    
+    .task-title, .activity-title {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+    
+    .task-meta, .activity-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .task-assigned, .activity-assigned {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .task-time, .activity-time {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    /* Status Section */
+    .task-status-section, .activity-status-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.75rem;
+      border-top: 1px solid #e9ecef;
+    }
+    
+    .status-badge {
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    
+    .status-pending {
+      background-color: #fef5e7;
+      color: #f39c12;
+    }
+    
+    .status-in-progress {
+      background-color: #e8f4fc;
+      color: #3498db;
+    }
+    
+    .status-completed {
+      background-color: #e9f7ef;
+      color: #27ae60;
+    }
+    
+    /* Quick Actions */
+    .task-actions, .activity-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .action-btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .action-btn-view {
+      background-color: #f0f3ff;
+      color: #667eea;
+      border: 1px solid #e2e8ff;
+    }
+    
+    .action-btn-view:hover {
+      background-color: #e2e8ff;
+    }
+    
+    .action-btn-edit, .action-btn-update {
+      background-color: var(--primary-gradient);
+      color: white;
+    }
+    
+    .action-btn-edit:hover, .action-btn-update:hover {
+      opacity: 0.9;
+    }
+    
+    /* Add Task Button (for Tasks tab) */
+    .add-task-section {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 2px dashed #e9ecef;
+      text-align: center;
+    }
+    
+    .add-task-btn {
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .add-task-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    /* Main Content Area */
+    .care-main-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .care-stats-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .care-stats-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .care-nav-tabs {
+        flex-direction: column;
+      }
+      
+      .week-days, .week-dates {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .task-header, .activity-header, .upcoming-task-header {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
+      .task-status-section, .activity-status-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .task-actions, .activity-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+      
+      .task-meta, .activity-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .week-days, .week-dates {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }

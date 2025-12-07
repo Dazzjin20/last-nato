@@ -362,6 +362,13 @@ function readAddForm() {
   const about = document.getElementById('petDescription').value.trim();
 
   if (!petName) throw new Error('Pet name is required');
+
+  // Get the logged-in staff user's ID
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (!currentUser || currentUser.role !== 'staff') {
+    throw new Error('You must be logged in as a staff member to post a pet.');
+  }
+
   if (!beforeImage) throw new Error('Before image is required');
   if (!petWeight) throw new Error('Pet weight is required');
   if (!arrivalDate) throw new Error('Arrival date is required');
@@ -391,7 +398,8 @@ function readAddForm() {
     status,
     before_image: beforeImageData,
     after_image: afterImageData,
-    personality: personality
+    personality: personality,
+    posted_by_staff: currentUser._id // Add the staff member's ID
   };
 }
 

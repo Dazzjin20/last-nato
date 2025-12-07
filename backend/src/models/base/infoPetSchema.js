@@ -53,7 +53,8 @@ function createInfoPetSchema() {
       ],
       default: []
     },
-    about_pet: { type: String, required: true }
+    about_pet: { type: String, required: true },
+    posted_by_staff: { type: mongoose.Schema.Types.ObjectId, ref: 'Staff' } // New field
   });
 }
 

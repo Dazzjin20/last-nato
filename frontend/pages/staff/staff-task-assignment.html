@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Dashboard</title>
+  <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/frontend/css/base/general.css">
+  <link rel="stylesheet" href="/frontend/css/utils/staff-task-assignment.css">
+
+</head>
+<body class="bg-light" data-required-role="staff">
+
+   <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#staffNavbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="staffNavbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium" href="staff-pets.html">Pets</a></li>
+          <li class="nav-item"><a class="nav-link fw-medium" href="staff-messages.html">Messages</a></li>
+         <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Management
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="staff-pet-assignment.html">Pet Assignment</a></li>
+              <li><a class="dropdown-item" href="staff-task-assignment.html">Task Assignment</a></li>
+              <li><a class="dropdown-item" href="staff-care-tracking.html">Care Tracking</a></li>
+              <li><a class="dropdown-item" href="#">Volunteers</a></li>
+            </ul>
+          </li>
+            <li class="nav-item me-lg-3">
+              <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
+            </li>
+          <li class="nav-item me-lg-3 mt-2 mt-lg-0">
+            <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
+            <div class="lh-1">
+              <div class="fw-bold text-white" id="navbarUserName"></div>
+              <div class="text-light small" id="navbarUserRole"></div>
+            </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="container my-5">
+    <!-- Page Header -->
+    <header class="staff-overview-box text-white p-4 mb-4">
+      <h1 class="fw-bold mb-1">Task Assignment</h1>
+      <p class="mb-0">Manage Task assignments for pets in the shelter</p>
+    </header>
+
+    <!-- Statistics section -->
+    <section class="mb-5">
+      <h2 class="visually-hidden">Task Assignment Statistics</h2>
+      <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+          <article class="staff-stat-card bg-white text-center p-4">
+            <div class="fs-1 text-primary mb-3">👥</div>
+            <h3 class="stats-number mb-2">23</h3>
+            <p class="stats-label mb-0">Active Volunteers</p>
+          </article>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <article class="staff-stat-card bg-white text-center p-4">
+            <div class="fs-1 text-success mb-3">✅</div>
+            <h3 class="stats-number mb-2">42</h3>
+            <p class="stats-label mb-0">Assigned Tasks</p>
+          </article>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <article class="staff-stat-card bg-white text-center p-4">
+            <div class="fs-1 text-warning mb-3">📋</div>
+            <h3 class="stats-number mb-2">15</h3>
+            <p class="stats-label mb-0">Unassigned Tasks</p>
+          </article>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <article class="staff-stat-card bg-white text-center p-4">
+            <div class="fs-1 text-info mb-3">⭐</div>
+            <h3 class="stats-number mb-2">1,245</h3>
+            <p class="stats-label mb-0">Total Points</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Create Task Button -->
+    <div class="d-flex justify-content-end mb-4">
+      <button class="create-task-btn" data-bs-toggle="modal" data-bs-target="#createTaskModal">
+        <i class="fas fa-plus-circle"></i> Create Task
+      </button>
+    </div>
+
+    <!-- Task Assignment Content -->
+    <div class="row g-4">
+      <!-- Manual Tasks Section -->
+      <div class="col-lg-8">
+        <div class="staff-card-container">
+          <h3 class="section-title">Manual Tasks</h3>
+          
+          <!-- Task 1: Volunteer Training -->
+          <div class="task-card">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="fw-bold mb-0">Volunteer Training - New Handler Course</h5>
+              <span class="task-points">50 points</span>
+            </div>
+            <p class="text-muted mb-3">Administer joint supplements and monitor Buddy's comfort</p>
+            
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="d-flex align-items-center mb-2">
+                  <span class="task-due me-3"><i class="fas fa-calendar-day me-1"></i> Due: 1/22/2025</span>
+                  <span class="task-estimated"><i class="fas fa-clock me-1"></i> 3h estimated</span>
+                </div>
+                <div class="task-location">
+                  <i class="fas fa-map-marker-alt me-1"></i> Training Room A
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="d-flex justify-content-md-end align-items-center mt-2 mt-md-0">
+                  <div class="d-flex align-items-center me-3">
+                    <img src="https://ui-avatars.com/api/?name=Kenji+Webbo&background=667eea&color=fff" alt="Kenji Webbo" class="volunteer-avatar me-2">
+                    <span>Kenji Webbo</span>
+                  </div>
+                  <span class="status-badge status-assigned">Assigned</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Task 2: Buddy Medication -->
+          <div class="task-card">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="fw-bold mb-0">Buddy - Medication Administration</h5>
+              <span class="task-points">20 points</span>
+            </div>
+            <p class="text-muted mb-3">Attend mandatory training session for new animal handling techniques</p>
+            
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="d-flex align-items-center mb-2">
+                  <span class="task-due me-3"><i class="fas fa-calendar-day me-1"></i> Due: 1/22/2025</span>
+                  <span class="task-estimated"><i class="fas fa-clock me-1"></i> 5h estimated</span>
+                </div>
+                <div class="task-location">
+                  <i class="fas fa-map-marker-alt me-1"></i> Buddy's Kennel
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="d-flex justify-content-md-end align-items-center mt-2 mt-md-0">
+                  <div class="d-flex align-items-center me-3">
+                    <img src="https://ui-avatars.com/api/?name=Kenji+Webbo&background=667eea&color=fff" alt="Kenji Webbo" class="volunteer-avatar me-2">
+                    <span>Kenji Webbo</span>
+                  </div>
+                  <span class="status-badge status-assigned">Assigned</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Task 3: Unassigned Task -->
+          <div class="task-card task-unassigned">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="fw-bold mb-0">Deep Clean - Cat House Quarantine Area</h5>
+              <span class="task-points">75 points</span>
+            </div>
+            <p class="text-muted mb-3">Attend mandatory training session for new animal handling techniques</p>
+            
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="d-flex align-items-center mb-2">
+                  <span class="task-due me-3"><i class="fas fa-calendar-day me-1"></i> Due: 1/22/2025</span>
+                  <span class="task-estimated"><i class="fas fa-clock me-1"></i> 2h estimated</span>
+                </div>
+                <div class="task-location">
+                  <i class="fas fa-map-marker-alt me-1"></i> Cat House - Heroes Hall
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="d-flex justify-content-md-end align-items-center mt-2 mt-md-0">
+                  <span class="status-badge status-unassigned me-3">Not assigned yet</span>
+                  <button class="assign-volunteer-btn" data-bs-toggle="modal" data-bs-target="#assignVolunteerModal">
+                    Assign Volunteer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quick Actions & Info -->
+      <div class="col-lg-4">
+        <!-- Recent Alerts section -->
+        <section class="staff-card-container mb-4">
+          <h3 class="fw-bold">Recent Alerts</h3>
+          <div class="staff-alerts-container mt-3">
+            <article class="d-flex align-items-center">
+              <span class="staff-alert-label staff-alert-urgent me-3">Urgent</span>
+              <span class="flex-grow-1">Task deadline approaching in 2 hours</span>
+            </article>
+            <article class="d-flex align-items-center">
+              <span class="staff-alert-label staff-alert-medical me-3">Medical</span>
+              <span class="flex-grow-1">Buddy needs medication checkup</span>
+            </article>
+            <article class="d-flex align-items-center">
+              <span class="staff-alert-label staff-alert-update me-3">Update</span>
+              <span class="flex-grow-1">New volunteer application received</span>
+            </article>
+          </div>
+          <button class="btn staff-view-dashboard-btn text-white w-100 mt-4">View All Alerts →</button>
+        </section>
+        
+        <!-- Available Volunteers -->
+        <section class="staff-card-container">
+          <h3 class="fw-bold mb-3">Available Volunteers</h3>
+          <div class="d-flex align-items-center mb-3">
+            <img src="https://ui-avatars.com/api/?name=Alex+Morgan&background=27ae60&color=fff" alt="Alex Morgan" class="volunteer-avatar me-3">
+            <div class="flex-grow-1">
+              <div class="fw-medium">Alex Morgan</div>
+              <div class="text-muted small">Available now</div>
+            </div>
+            <button class="btn btn-sm assign-volunteer-btn quick-assign-btn" data-volunteer="Alex Morgan">Assign</button>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <img src="https://ui-avatars.com/api/?name=Jamie+Smith&background=667eea&color=fff" alt="Jamie Smith" class="volunteer-avatar me-3">
+            <div class="flex-grow-1">
+              <div class="fw-medium">Jamie Smith</div>
+              <div class="text-muted small">Available in 1 hour</div>
+            </div>
+            <button class="btn btn-sm assign-volunteer-btn quick-assign-btn" data-volunteer="Jamie Smith">Assign</button>
+          </div>
+          <div class="d-flex align-items-center">
+            <img src="https://ui-avatars.com/api/?name=Taylor+Brown&background=f39c12&color=fff" alt="Taylor Brown" class="volunteer-avatar me-3">
+            <div class="flex-grow-1">
+              <div class="fw-medium">Taylor Brown</div>
+              <div class="text-muted small">Available tomorrow</div>
+            </div>
+            <button class="btn btn-sm assign-volunteer-btn quick-assign-btn" data-volunteer="Taylor Brown">Assign</button>
+          </div>
+          <button class="btn staff-quick-btn w-100 text-start mt-4">
+            <i class="fas fa-user-plus me-2"></i> View All Volunteers
+          </button>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modals -->
+  <!-- UPDATED Create Task Modal -->
+  <div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header create-task-modal-header">
+          <h5 class="modal-title" id="createTaskModalLabel">Create Manual Task</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="createTaskForm">
+            <!-- Task Title -->
+            <div class="mb-4">
+              <label class="form-label-bold d-block">Task Title</label>
+              <input type="text" class="form-control form-control-custom" id="taskTitle" placeholder="Enter Task Title" required>
+            </div>
+            
+            <!-- Description -->
+            <div class="mb-4">
+              <label class="form-label-bold d-block">Description</label>
+              <textarea class="form-control form-control-custom" id="taskDescription" rows="3" placeholder="Detailed description of the task"></textarea>
+            </div>
+            
+            <!-- Type, Category, Priority Grid -->
+            <div class="mb-4">
+              <label class="form-label-bold d-block mb-3">Task Details</label>
+              <div class="form-group-grid">
+                <!-- Type -->
+                <div>
+                  <label class="form-label-bold d-block mb-2">Type</label>
+                  <div class="task-type-badge active">
+                    Special
+                  </div>
+                </div>
+                
+                <!-- Category -->
+                <div>
+                  <label class="form-label-bold d-block mb-2">Category</label>
+                  <div class="task-type-badge">
+                    Facilities
+                  </div>
+                </div>
+                
+                <!-- Priority -->
+                <div>
+                  <label class="form-label-bold d-block mb-2">Priority</label>
+                  <div class="d-flex gap-2">
+                    <div class="priority-badge priority-low">Low</div>
+                    <div class="priority-badge priority-medium active">Medium</div>
+                    <div class="priority-badge priority-high">High</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Estimated Hours, Points, Due Date -->
+            <div class="mb-4">
+              <div class="form-group-grid">
+                <!-- Estimated Hours -->
+                <div>
+                  <label class="form-label-bold d-block">Estimated Hours</label>
+                  <input type="number" class="form-control form-control-custom" id="taskEstimatedHours" min="0.5" step="0.5" value="1" required>
+                </div>
+                
+                <!-- Points Reward -->
+                <div>
+                  <label class="form-label-bold d-block">Points Reward</label>
+                  <input type="number" class="form-control form-control-custom" id="taskPoints" min="0" value="25" required>
+                </div>
+                
+                <!-- Due Date -->
+                <div>
+                  <label class="form-label-bold d-block">Due Date</label>
+                  <input type="text" class="form-control form-control-custom" id="taskDueDate" placeholder="mm/dd/yyyy" required>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Location -->
+            <div class="mb-4">
+              <label class="form-label-bold d-block">Location *</label>
+              <input type="text" class="form-control form-control-custom" id="taskLocation" placeholder="Enter location" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer p-4">
+          <div class="modal-footer-buttons">
+            <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn-create-task" id="saveTaskBtn">Create Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Assign Volunteer Modal -->
+  <div class="modal fade" id="assignVolunteerModal" tabindex="-1" aria-labelledby="assignVolunteerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="assignVolunteerModalLabel">Assign Volunteer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-3">Assign a volunteer to: <strong>Deep Clean - Cat House Quarantine Area</strong></p>
+          <div class="mb-3">
+            <label for="volunteerSelect" class="form-label">Select Volunteer</label>
+            <select class="form-select" id="volunteerSelect">
+              <option selected>Choose a volunteer...</option>
+              <option value="1">Alex Morgan (Available now)</option>
+              <option value="2">Jamie Smith (Available in 1 hour)</option>
+              <option value="3">Taylor Brown (Available tomorrow)</option>
+              <option value="4">Kenji Webbo (Currently assigned to 2 tasks)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn assign-volunteer-btn" id="assignBtn">Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/frontend/js/staff/staff-task-assignment/form.js"></script>
+</body>
+</html>
