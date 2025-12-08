@@ -1,4 +1,5 @@
 import { getPets } from '../utils/staffPetsApi.js';
+import { initializeAdoptionModal } from './adopterPets.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     loadFavoritePets();
@@ -13,7 +14,7 @@ async function loadFavoritePets() {
 
     grid.innerHTML = '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
-    // --- FIX: Make favorites key user-specific ---
+
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const favoritesKey = currentUser ? `favorites_${currentUser._id}` : 'favorites_guest';
     let favoriteIds = JSON.parse(localStorage.getItem(favoritesKey)) || [];
@@ -59,7 +60,7 @@ async function loadFavoritePets() {
  * @param {object} pet The pet object from the API.
  * @returns {HTMLDivElement} The pet card element.
  */
-function createFavoritePetCard(pet) {
+export function createFavoritePetCard(pet) {
     const col = document.createElement('div');
     col.className = 'col-md-6';
 
@@ -80,7 +81,7 @@ function createFavoritePetCard(pet) {
                 <p class="text-muted small"><i class="fa-regular fa-clock me-1"></i> Added ${pet.arrival_date || 'N/A'}</p>
                 <div class="d-flex justify-content-between">
                     <a href="adopter-view-pet.html?id=${pet._id}" class="btn btn-outline-primary w-50 me-2">View Details</a>
-                    <button class="btn btn-primary w-50">Apply to Adopt</button>
+                    <button class="btn btn-primary w-50" apply-to-adopt-btn>Apply to Adopt</button>
                 </div>
             </div>
         </article>

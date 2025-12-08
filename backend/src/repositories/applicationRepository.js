@@ -95,14 +95,33 @@ class ApplicationRepository{
         }
     }
 
-    async findAll() {
+    async findAll(status) {
         try {
-            return await Application.find({})
+            const query = status ? { status } : {};
+            return await Application.find(query)
                 .populate({ path: 'pet', populate: { path: 'posted_by_staff' } }) // Nested populate for staff
                 .populate('adopter')
                 .sort({ date_submitted: -1 });
         } catch (error) {
             throw new Error(`Failed to find all applications: ${error.message}`);
+        }
+    }
+
+    async updateStatus(applicationId, newStatus) {
+        try {
+            const query = mongoose.Types.ObjectId.isValid(applicationId)
+                ? { _id: applicationId }
+                : { application_id: applicationId };
+
+            const updatedApplication = await Application.findOneAndUpdate(
+                query,
+                { $set: { status: newStatus, last_update: new Date() } },
+                { new: true } // Return the updated document
+            ).populate('adopter').populate('pet');
+
+            return updatedApplication;
+        } catch (error) {
+            throw new Error(`Failed to update application status: ${error.message}`);
         }
     }
 }
