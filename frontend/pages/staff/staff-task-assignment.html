@@ -11,7 +11,7 @@
 </head>
 <body class="bg-light" data-required-role="staff">
 
- <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
+   <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
     <div class="container">
       <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#staffNavbarNav">
@@ -23,7 +23,6 @@
           <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
           <li class="nav-item"><a class="nav-link fw-medium" href="staff-pets.html">Pets</a></li>
           <li class="nav-item"><a class="nav-link fw-medium" href="staff-messages.html">Messages</a></li>
-          <li class="nav-item"><a class="nav-link fw-medium" href="staff-applications.html">Application</a></li>
          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Management
@@ -298,28 +297,32 @@
               <div class="form-group-grid">
                 <!-- Type -->
                 <div>
-                  <label class="form-label-bold d-block mb-2">Type</label>
-                  <div class="task-type-badge active">
-                    Special
-                  </div>
+                  <label for="taskType" class="form-label-bold d-block mb-2">Type</label>
+                  <select id="taskType" class="form-select form-control-custom">
+                    <option value="Special" selected>Special</option>
+                    <option value="Recurring">Recurring</option>
+                    <option value="Urgent">Urgent</option>
+                  </select>
                 </div>
                 
                 <!-- Category -->
                 <div>
-                  <label class="form-label-bold d-block mb-2">Category</label>
-                  <div class="task-type-badge">
-                    Facilities
-                  </div>
+                  <label for="taskCategory" class="form-label-bold d-block mb-2">Category</label>
+                  <select id="taskCategory" class="form-select form-control-custom">
+                    <option value="Facilities" selected>Facilities</option>
+                    <option value="Animal Care">Animal Care</option>
+                    <option value="Administrative">Administrative</option>
+                  </select>
                 </div>
                 
                 <!-- Priority -->
                 <div>
-                  <label class="form-label-bold d-block mb-2">Priority</label>
-                  <div class="d-flex gap-2">
-                    <div class="priority-badge priority-low">Low</div>
-                    <div class="priority-badge priority-medium active">Medium</div>
-                    <div class="priority-badge priority-high">High</div>
-                  </div>
+                  <label for="taskPriority" class="form-label-bold d-block mb-2">Priority</label>
+                  <select id="taskPriority" class="form-select form-control-custom">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                  </select>
                 </div>
               </div>
             </div>

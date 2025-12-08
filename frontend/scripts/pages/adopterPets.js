@@ -1,5 +1,4 @@
 import { getPets } from '../utils/staffPetsApi.js';
-import { createFavoritePetCard } from './adopterFavorites.js';
 
 /**
  * Creates an HTML card for a single pet.
@@ -396,7 +395,7 @@ window.applyToAdopt = (petId, petName) => {
 /**
  * Initialize the adoption modal with form content.
  */
-export function initializeAdoptionModal(petId, petName) {
+function initializeAdoptionModal(petId, petName) {
     const modalElement = document.getElementById('adoptionModal');
     if (!modalElement) return;
     

@@ -1,181 +1,243 @@
-    // Initialize the page
-    document.addEventListener('DOMContentLoaded', function() {
-      // Set current date for due date field
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(tomorrow.getDate() + 1);
+document.addEventListener('DOMContentLoaded', () => {
+  const createTaskForm = document.getElementById('createTaskForm');
+  const saveTaskBtn = document.getElementById('saveTaskBtn');
+  const tasksContainer = document.querySelector('.col-lg-8 .staff-card-container');
+  const availableVolunteersContainer = document.querySelector('.col-lg-4 .staff-card-container:last-of-type');
+  const createTaskModalEl = document.getElementById('createTaskModal');
+  const createTaskModal = new bootstrap.Modal(createTaskModalEl);
+  const assignVolunteerModalEl = document.getElementById('assignVolunteerModal');
+  const assignVolunteerModal = new bootstrap.Modal(assignVolunteerModalEl);
+
+  const API_URL = 'http://localhost:3000/api'; // Backend server URL
+
+  // --- Helper Functions ---
+  const getTomorrowDateString = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const day = String(tomorrow.getDate()).padStart(2, '0');
+    const year = tomorrow.getFullYear();
+    return `${month}/${day}/${year}`;
+  };
+
+  // --- UI Update Functions ---
+  const updateTaskCardUI = (task) => {
+    const taskCard = tasksContainer.querySelector(`.task-card[data-task-id="${task._id}"]`);
+    if (taskCard) {
+      // Re-render the single card and replace the old one
+      const newCardHTML = renderTaskCard(task);
+      const newCardElement = document.createElement('div');
+      newCardElement.innerHTML = newCardHTML.trim();
+      taskCard.replaceWith(newCardElement.firstChild);
+    } else {
+      // If it's a new card, just append it
+      tasksContainer.insertAdjacentHTML('beforeend', renderTaskCard(task));
+    }
+  };
+  // --- UI Rendering ---
+  const renderTaskCard = (task) => {
+    const isAssigned = task.status !== 'Unassigned' && task.assignedTo;
+    const assignedToHTML = isAssigned
+      ? `
+        <div class="d-flex align-items-center me-3">
+            <img src="https://ui-avatars.com/api/?name=${task.assignedTo.name.replace(' ', '+')}&background=667eea&color=fff" alt="${task.assignedTo.name}" class="volunteer-avatar me-2">
+            <span>${task.assignedTo.name}</span>
+        </div>
+        <span class="status-badge status-assigned">Assigned</span>
+      `
+      : `
+        <span class="status-badge status-unassigned me-3">Not assigned yet</span>
+        <button class="assign-volunteer-btn" data-bs-toggle="modal" data-bs-target="#assignVolunteerModal" data-task-id="${task._id}">
+            Assign Volunteer
+        </button>
+      `;
+
+    return `
+      <div class="task-card" data-task-id="${task._id}">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h5 class="fw-bold mb-0">${task.title}</h5>
+          <span class="task-points">${task.points} points</span>
+        </div>
+        <p class="text-muted mb-3">${task.description || ''}</p>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="d-flex align-items-center mb-2">
+              <span class="task-due me-3"><i class="fas fa-calendar-day me-1"></i> Due: ${new Date(task.dueDate).toLocaleDateString()}</span>
+              <span class="task-estimated"><i class="fas fa-clock me-1"></i> ${task.estimatedHours}h estimated</span>
+            </div>
+            <div class="task-location">
+              <i class="fas fa-map-marker-alt me-1"></i> ${task.location}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex justify-content-md-end align-items-center mt-2 mt-md-0">
+              ${assignedToHTML}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
+  // --- API Calls ---
+  const fetchAndDisplayTasks = async () => {
+    try {
+      const response = await fetch(`${API_URL}/tasks`);
+      if (!response.ok) throw new Error('Failed to fetch tasks');
+      const tasks = await response.json();
       
-      // Format date as mm/dd/yyyy
-      const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
-      const day = String(tomorrow.getDate()).padStart(2, '0');
-      const year = tomorrow.getFullYear();
-      const formattedDate = `${month}/${day}/${year}`;
+      // Clear only dynamically loaded tasks
+      tasksContainer.querySelectorAll('.task-card[data-task-id]').forEach(card => card.remove());
       
-      document.getElementById('taskDueDate').value = formattedDate;
-      
-      // Set user info in navbar (using your existing auth logic)
-      document.getElementById('navbarUserName').textContent = 'Kenji Webbo';
-      document.getElementById('navbarUserRole').textContent = 'Staff Manager';
-      
-      // Priority selection
-      const priorityBadges = document.querySelectorAll('.priority-badge');
-      priorityBadges.forEach(badge => {
-        badge.addEventListener('click', function() {
-          priorityBadges.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-        });
+      const allTasksHTML = tasks.map(renderTaskCard).join('');
+      tasksContainer.insertAdjacentHTML('beforeend', allTasksHTML);
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+      tasksContainer.insertAdjacentHTML('beforeend', '<p class="text-danger ms-3">Could not load tasks. Is the backend server running?</p>');
+    }
+  };
+
+  const handleCreateTask = async () => {
+    if (!createTaskForm.checkValidity()) {
+      createTaskForm.reportValidity();
+      return;
+    }
+
+    const taskData = {
+      title: document.getElementById('taskTitle').value,
+      description: document.getElementById('taskDescription').value,
+      type: document.getElementById('taskType').value,
+      category: document.getElementById('taskCategory').value,
+      priority: document.getElementById('taskPriority').value,
+      estimatedHours: document.getElementById('taskEstimatedHours').value,
+      points: document.getElementById('taskPoints').value,
+      dueDate: document.getElementById('taskDueDate').value,
+      location: document.getElementById('taskLocation').value,
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/tasks`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(taskData),
       });
+
+      if (!response.ok) throw new Error(`Server error: ${response.statusText}`);
       
-      // Task type selection
-      const typeBadges = document.querySelectorAll('.task-type-badge');
-      typeBadges.forEach(badge => {
-        badge.addEventListener('click', function() {
-          if (!this.closest('.priority-badge')) { // Don't toggle priority badges
-            typeBadges.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-          }
-        });
-      });
-      
-      // Create Task Button Handler
-      document.getElementById('saveTaskBtn').addEventListener('click', function() {
-        const taskTitle = document.getElementById('taskTitle').value;
-        const taskLocation = document.getElementById('taskLocation').value;
-        
-        if (taskTitle.trim() === '') {
-          alert('Please enter a task title');
-          return;
+      const newTask = await response.json();
+      updateTaskCardUI(newTask);
+
+      createTaskModal.hide();
+    } catch (error) {
+      console.error('Error creating task:', error);
+      alert('Failed to create task. Please check the console for details.');
+    }
+  };
+
+  const fetchAndDisplayAvailableVolunteers = async () => {
+    try {
+        const response = await fetch(`${API_URL}/volunteers/available`);
+        if (!response.ok) throw new Error('Failed to fetch volunteers');
+        const volunteers = await response.json();
+
+        // Clear existing volunteers list
+        availableVolunteersContainer.innerHTML = '<h3 class="fw-bold mb-3">Available Volunteers</h3>';
+
+        if (volunteers.length === 0) {
+            availableVolunteersContainer.innerHTML += '<p class="text-muted">No volunteers currently available.</p>';
+            return;
         }
-        
-        if (taskLocation.trim() === '') {
-          alert('Please enter a location');
-          return;
-        }
-        
-        // Get selected priority
-        const selectedPriority = document.querySelector('.priority-badge.active').textContent;
-        
-        // Get form values
-        const taskData = {
-          title: taskTitle,
-          description: document.getElementById('taskDescription').value,
-          estimatedHours: document.getElementById('taskEstimatedHours').value,
-          points: document.getElementById('taskPoints').value,
-          dueDate: document.getElementById('taskDueDate').value,
-          location: taskLocation,
-          priority: selectedPriority,
-          type: 'Special',
-          category: 'Facilities'
-        };
-        
-        // In a real app, this would save to a backend
-        alert(`Task "${taskTitle}" created successfully!\nPriority: ${selectedPriority}\nPoints: ${taskData.points}\nDue: ${taskData.dueDate}`);
-        
-        // Close the modal
-        const modal = bootstrap.Modal.getInstance(document.getElementById('createTaskModal'));
-        modal.hide();
-        
-        // Reset form
-        document.getElementById('createTaskForm').reset();
-        document.getElementById('taskDueDate').value = formattedDate;
-        document.getElementById('taskEstimatedHours').value = 1;
-        document.getElementById('taskPoints').value = 25;
-        
-        // Reset active states
-        priorityBadges.forEach(badge => {
-          badge.classList.remove('active');
-          if (badge.classList.contains('priority-medium')) {
-            badge.classList.add('active');
-          }
+
+        volunteers.forEach(v => {
+            const volunteerHTML = `
+              <div class="d-flex align-items-center mb-3">
+                <img src="https://ui-avatars.com/api/?name=${v.name.replace(' ', '+')}&background=27ae60&color=fff" alt="${v.name}" class="volunteer-avatar me-3">
+                <div class="flex-grow-1">
+                  <div class="fw-medium">${v.name}</div>
+                  <div class="text-muted small">Available now</div>
+                </div>
+                <button class="btn btn-sm btn-outline-primary quick-assign-btn" data-volunteer-id="${v._id}" data-volunteer-name="${v.name}">Assign</button>
+              </div>`;
+            availableVolunteersContainer.insertAdjacentHTML('beforeend', volunteerHTML);
         });
-        
-        typeBadges.forEach(badge => {
-          badge.classList.remove('active');
-          if (badge.textContent.trim() === 'Special') {
-            badge.classList.add('active');
-          }
-        });
+    } catch (error) {
+        console.error('Error fetching volunteers:', error);
+        availableVolunteersContainer.innerHTML = '<h3 class="fw-bold mb-3">Available Volunteers</h3><p class="text-danger">Could not load volunteers.</p>';
+    }
+  };
+
+  const handleAssignTask = async (taskId, volunteerId) => {
+    try {
+      const response = await fetch(`${API_URL}/tasks/${taskId}/assign`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ volunteerId }),
       });
-      
-      // Assign Volunteer Button Handler
-      document.getElementById('assignBtn').addEventListener('click', function() {
-        const volunteerSelect = document.getElementById('volunteerSelect');
-        const selectedVolunteer = volunteerSelect.options[volunteerSelect.selectedIndex].text;
-        
-        if (volunteerSelect.value === 'Choose a volunteer...') {
-          alert('Please select a volunteer');
-          return;
-        }
-        
-        // Update the task assignment
-        updateTaskAssignment(selectedVolunteer);
-        
-        // Close the modal
-        const modal = bootstrap.Modal.getInstance(document.getElementById('assignVolunteerModal'));
-        modal.hide();
-        
-        // Reset select
-        volunteerSelect.selectedIndex = 0;
-      });
-      
-      // Quick Assign Buttons for available volunteers
-      const quickAssignBtns = document.querySelectorAll('.quick-assign-btn');
-      quickAssignBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const volunteerName = this.getAttribute('data-volunteer');
-          updateTaskAssignment(volunteerName);
-        });
-      });
-      
-      // Function to update task assignment UI
-      function updateTaskAssignment(volunteerInfo) {
-        const unassignedTask = document.querySelector('.task-unassigned');
-        
-        if (unassignedTask) {
-          // Extract volunteer name from the string (remove availability info)
-          const volunteerName = volunteerInfo.split(' (')[0];
-          
-          // Update the UI
-          unassignedTask.classList.remove('task-unassigned');
-          unassignedTask.querySelector('.status-unassigned').textContent = 'Assigned';
-          unassignedTask.querySelector('.status-unassigned').classList.remove('status-unassigned');
-          unassignedTask.querySelector('.status-unassigned').classList.add('status-assigned');
-          
-          // Update the assign button
-          const assignBtn = unassignedTask.querySelector('.assign-volunteer-btn');
-          assignBtn.textContent = 'Reassign';
-          
-          // Add volunteer info
-          const volunteerDiv = document.createElement('div');
-          volunteerDiv.className = 'd-flex align-items-center me-3';
-          volunteerDiv.innerHTML = `
-            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(volunteerName)}&background=667eea&color=fff" 
-                 alt="${volunteerName}" class="volunteer-avatar me-2">
-            <span>${volunteerName}</span>
-          `;
-          
-          // Insert volunteer info before the status badge
-          const taskActions = unassignedTask.querySelector('.col-md-6 .d-flex');
-          taskActions.insertBefore(volunteerDiv, taskActions.querySelector('.status-badge'));
-          
-          // Update statistics
-          updateTaskStats();
-          
-          alert(`Task assigned to ${volunteerName}`);
-        } else {
-          alert('No unassigned tasks available');
-        }
+
+      if (!response.ok) throw new Error('Failed to assign task');
+
+      const updatedTask = await response.json();
+
+      // Update the UI for the specific task card
+      updateTaskCardUI(updatedTask);
+
+      // If the assignment came from the modal, hide it
+      if (assignVolunteerModalEl.classList.contains('show')) {
+        assignVolunteerModal.hide();
       }
+
+    } catch (error) {
+      console.error('Error assigning task:', error);
+      alert('There was an error assigning the task.');
+    }
+  };
+
+  // --- Event Listeners ---
+  saveTaskBtn.addEventListener('click', handleCreateTask);
+
+  createTaskModalEl.addEventListener('hidden.bs.modal', () => {
+    createTaskForm.reset();
+    document.getElementById('taskDueDate').value = getTomorrowDateString();
+  });
+
+  // Event delegation for dynamically created "Assign Volunteer" buttons
+  document.body.addEventListener('click', (e) => {
+    // For buttons on the task cards that open the modal
+    if (e.target.matches('.assign-volunteer-btn[data-bs-target="#assignVolunteerModal"]')) {
+      const taskId = e.target.getAttribute('data-task-id');
+      const taskTitle = e.target.closest('.task-card').querySelector('h5').textContent;
       
-      // Function to update task statistics
-      function updateTaskStats() {
-        const assignedTasksElement = document.querySelectorAll('.staff-stat-card')[1].querySelector('.stats-number');
-        const unassignedTasksElement = document.querySelectorAll('.staff-stat-card')[2].querySelector('.stats-number');
-        
-        let assignedCount = parseInt(assignedTasksElement.textContent);
-        let unassignedCount = parseInt(unassignedTasksElement.textContent);
-        
-        assignedTasksElement.textContent = assignedCount + 1;
-        unassignedTasksElement.textContent = unassignedCount - 1;
+      // Set the task ID and title in the modal for context
+      assignVolunteerModalEl.querySelector('.modal-body strong').textContent = taskTitle;
+      assignVolunteerModalEl.dataset.taskId = taskId;
+    }
+
+    // For the final "Assign" button inside the modal
+    if (e.target.id === 'assignBtn') {
+      const taskId = assignVolunteerModalEl.dataset.taskId;
+      const volunteerId = document.getElementById('volunteerSelect').value;
+      if (taskId && volunteerId) {
+        handleAssignTask(taskId, volunteerId);
+      } else {
+        alert('Please select a volunteer.');
       }
-    });
+    }
+
+    // TODO: Add logic for quick-assign buttons
+  });
+
+  // --- Initial Page Load ---
+  const initializePage = () => {
+    document.getElementById('navbarUserName').textContent = 'Kenji Webbo';
+    document.getElementById('navbarUserRole').textContent = 'Staff Manager';
+    document.getElementById('taskDueDate').value = getTomorrowDateString();
+    
+    // Remove static tasks before loading dynamic ones
+    tasksContainer.querySelectorAll('.task-card').forEach(card => card.remove());
+
+    fetchAndDisplayTasks();
+    fetchAndDisplayAvailableVolunteers();
+  };
+
+  initializePage();
+});

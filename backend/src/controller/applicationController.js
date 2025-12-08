@@ -67,37 +67,11 @@ exports.getApplicationById = async (req, res) => {
  */
 exports.getAllApplications = async (req, res) => {
     try {
-        // Read the status from the query parameters
-        const { status } = req.query;
-        const applications = await applicationRepository.findAll(status);
+        // In the future, you can add filters here, e.g., req.query.status
+        const applications = await applicationRepository.findAll();
         res.status(200).json({ applications });
     } catch (error) {
         console.error('Error fetching all applications:', error);
         res.status(500).json({ message: 'Failed to retrieve all applications.', error: error.message });
-    }
-};
-
-/**
- * Updates the status of a specific application.
- */
-exports.updateApplicationStatus = async (req, res) => {
-    try {
-        const { applicationId } = req.params;
-        const { status } = req.body;
-
-        if (!status) {
-            return res.status(400).json({ message: 'New status is required.' });
-        }
-
-        const updatedApplication = await applicationRepository.updateStatus(applicationId, status);
-
-        if (!updatedApplication) {
-            return res.status(404).json({ message: 'Application not found.' });
-        }
-
-        res.status(200).json({ message: `Application status updated to ${status}`, application: updatedApplication });
-    } catch (error) {
-        console.error('Error updating application status:', error);
-        res.status(500).json({ message: 'Failed to update application status.', error: error.message });
     }
 };

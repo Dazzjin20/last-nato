@@ -1,120 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Staff Dashboard</title>
-  <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/frontend/css/base/general.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Applications - Staff</title>
+    <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/frontend/css/base/general.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body class="bg-light" data-required-role="staff">
-
-  <!-- Header with navigation -->
-  <nav class="navbar navbar-expand-lg staff-navbar-gradient navbar-dark">
-    <div class="container">
-      <a class="navbar-brand fw-bold fs-4" href="#">🐾 Staff Dashboard</a>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#staffNavbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="staffNavbarNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="staff-dashboard.html">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link fw-medium" href="staff-pets.html">Pets</a></li>
-          <li class="nav-item"><a class="nav-link fw-medium" href="staff-messages.html">Messages</a></li>
-          <li class="nav-item"><a class="nav-link fw-medium" href="staff-applications.html">Application</a></li>
-         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Management
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="staff-pet-assignment.html">Pet Assignment</a></li>
-              <li><a class="dropdown-item" href="staff-task-assignment.html">Task Assignment</a></li>
-              <li><a class="dropdown-item" href="staff-care-tracking.html">Care Tracking</a></li>
-              <li><a class="dropdown-item" href="#">Volunteers</a></li>
-            </ul>
-          </li>
-            <li class="nav-item me-lg-3">
-              <i class="fa-regular fa-bell text-white" style="font-size:1.1rem"></i>
-            </li>
-          <li class="nav-item me-lg-3 mt-2 mt-lg-0">
-            <img src="/frontend/assets/fonts/icon/bell.png" alt="bell" width="22" />
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="staff-profile-img me-2" />
-            <div class="lh-1">
-              <div class="fw-bold text-white" id="navbarUserName"></div>
-              <div class="text-light small" id="navbarUserRole"></div>
+<body class="bg-light">
+    <!-- Staff Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="staff-dashboard.html">🐾 Staff Dashboard</a>
+            <div class="ms-auto">
+                <a href="staff-pets.html" class="nav-link d-inline">Manage Pets</a>
+                <a href="staff-applications.html" class="nav-link d-inline fw-bold text-primary">Manage Applications</a>
             </div>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="profileDropdown">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item text-danger" href="/frontend/pages/login-form.html">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main content -->
-  <main class="container my-5">
-    <div class="staff-overview-box text-white p-4 mb-4">
-      <h1 class="fw-bold mb-1">Adoption Applications</h1>
-      <p class="mb-0">Review and manage all adoption applications.</p>
-    </div>
-
-    <div class="card shadow-sm">
-      <div class="card-header bg-white p-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <h5 class="mb-0 fw-bold">All Applications</h5>
-          <div class="btn-group" role="group" aria-label="Filter applications by status">
-            <button type="button" class="btn btn-outline-primary active" data-status-filter="Pending">Pending</button>
-            <button type="button" class="btn btn-outline-primary" data-status-filter="Approved">Approved</button>
-            <button type="button" class="btn btn-outline-primary" data-status-filter="Interview Scheduled">Interview</button>
-            <button type="button" class="btn btn-outline-primary" data-status-filter="Rejected">Rejected</button>
-            <button type="button" class="btn btn-outline-primary" data-status-filter="Adopted">Adopted</button>
-          </div>
         </div>
-      </div>
-      <div class="card-body p-0">
-        <div class="table-responsive">
-          <table class="table table-hover mb-0">
-            <thead class="table-light">
-              <tr>
-                <th scope="col">Application ID</th>
-                <th scope="col">Pet Name</th>
-                <th scope="col">Applicant</th>
-                <th scope="col">Date Submitted</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="applications-table-body">
-              <!-- Application rows will be dynamically inserted here -->
-              <tr>
-                <td colspan="6" class="text-center p-4">
-                  <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fw-bold">All Adoption Applications</h1>
+            <div>
+                <!-- Filter Buttons -->
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary active" data-status-filter="Pending">Pending</button>
+                    <button type="button" class="btn btn-outline-primary" data-status-filter="Interview Scheduled">Interview</button>
+                    <button type="button" class="btn btn-outline-primary" data-status-filter="Approved">Approved</button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </main>
 
+        <!-- Applications Table -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Application ID</th>
+                                <th>Pet Name</th>
+                                <th>Adopter Name</th>
+                                <th>Date Submitted</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applications-table-body">
+                            <!-- Rows will be injected here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
 
-  <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="../../scripts/app.js"></script>
-  <script src="/frontend/js/auth/auth.js"></script>
-  <script type="module" src="../../scripts/pages/staffApplications.js"></script> 
-
+    <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/frontend/scripts/pages/staffApplications.js"></script>
 </body>
 </html>
