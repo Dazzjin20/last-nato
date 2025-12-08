@@ -297,28 +297,32 @@
               <div class="form-group-grid">
                 <!-- Type -->
                 <div>
-                  <label class="form-label-bold d-block mb-2">Type</label>
-                  <div class="task-type-badge active">
-                    Special
-                  </div>
+                  <label for="taskType" class="form-label-bold d-block mb-2">Type</label>
+                  <select id="taskType" class="form-select form-control-custom">
+                    <option value="Special" selected>Special</option>
+                    <option value="Recurring">Recurring</option>
+                    <option value="Urgent">Urgent</option>
+                  </select>
                 </div>
                 
                 <!-- Category -->
                 <div>
-                  <label class="form-label-bold d-block mb-2">Category</label>
-                  <div class="task-type-badge">
-                    Facilities
-                  </div>
+                  <label for="taskCategory" class="form-label-bold d-block mb-2">Category</label>
+                  <select id="taskCategory" class="form-select form-control-custom">
+                    <option value="Facilities" selected>Facilities</option>
+                    <option value="Animal Care">Animal Care</option>
+                    <option value="Administrative">Administrative</option>
+                  </select>
                 </div>
                 
                 <!-- Priority -->
                 <div>
-                  <label class="form-label-bold d-block mb-2">Priority</label>
-                  <div class="d-flex gap-2">
-                    <div class="priority-badge priority-low">Low</div>
-                    <div class="priority-badge priority-medium active">Medium</div>
-                    <div class="priority-badge priority-high">High</div>
-                  </div>
+                  <label for="taskPriority" class="form-label-bold d-block mb-2">Priority</label>
+                  <select id="taskPriority" class="form-select form-control-custom">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                  </select>
                 </div>
               </div>
             </div>
