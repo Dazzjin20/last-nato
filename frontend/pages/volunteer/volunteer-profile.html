@@ -6,7 +6,8 @@
   <title>Volunteer Profile</title>
   <link rel="stylesheet" href="/frontend/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/frontend/css/base/general.css" />
-<link rel="stylesheet" href="/frontend/css/utils/volunteer-prof.css">
+  <link rel="stylesheet" href="/frontend/css/utils/volunteer-prof.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body class="bg-light">
@@ -37,13 +38,13 @@
             <a class="nav-link d-flex align-items-center text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img id="navbarProfilePic" src="/frontend/assets/image/photo/BoyIcon.jpg" alt="profile" class="rounded-circle me-2" width="35" height="35">
               <div class="lh-1">
-                <div class="fw-bold text-white" id="navbarUserName">Daks Pangilinan</div>
+                <div class="fw-bold text-white" id="navbarUserName"></div>
                 <div class="text-light small" id="navbarUserRole">Volunteer</div>
               </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="profileDropdown">
               <li class="dropdown-header">
-                <strong id="dropdownUserName">Daks Pangilinan</strong><br>
+                <strong id="dropdownUserName"></strong><br>
                 <small class="text-muted" id="dropdownUserRole">Volunteer</small>
               </li>
               <li><hr class="dropdown-divider"></li>
@@ -81,59 +82,34 @@
           <!-- Profile Picture Section -->
           <div class="volunteer-profile-section text-center">
             <div class="profile-pic-wrapper">
+              <!-- KEEP THE PROFILE PHOTO, REMOVE UPLOAD OVERLAY -->
               <img id="profilePic" src="/frontend/assets/image/photo/BoyIcon.jpg" alt="Profile Picture" class="profile-pic-large">
-              <div id="" class="profile-pic-upload-overlay d-none" style="cursor: pointer;">
-              </div>
-              <input type="file" id="profileImageInput" class="d-none" accept="image/*">
+              <!-- REMOVE THIS: <div id="" class="profile-pic-upload-overlay d-none" style="cursor: pointer;"></div> -->
+              <!-- REMOVE THIS: <input type="file" id="profileImageInput" class="d-none" accept="image/*"> -->
             </div>
             <div class="mt-3">
-              <h4 class="fw-bold" id="profileDisplayName">Daks Pangilinan</h4>
-              <div class="volunteer-stat-item mb-2">
-                <span class="volunteer-stat-number" id="statHours">156</span>
-                <span class="volunteer-stat-label">Hours</span>
-              </div>
-              <p class="text-muted" id="memberSince">Member since Sept 1 2025</p>
+              <h4 class="fw-bold" id="profileDisplayName"></h4>
+              <p class="text-muted" id="memberSince"></p>
             </div>
           </div>
 
-          <!-- Stats Section -->
+          <!-- Contact Info Section -->
           <div class="volunteer-profile-section">
-            <h5 class="volunteer-profile-section-title">Volunteer Stats</h5>
-            <div class="volunteer-stats-section">
-              <div class="volunteer-stat-item">
-                <span class="volunteer-stat-number" id="statTasks">87</span>
-                <span class="volunteer-stat-label">Tasks</span>
-              </div>
-              <div class="volunteer-stat-item">
-                <span class="volunteer-stat-number" id="statPets">23</span>
-                <span class="volunteer-stat-label">Pets Helped</span>
-              </div>
+            <h5 class="volunteer-profile-section-title">Contact Info</h5>
+            <div class="volunteer-profile-info-item">
+              <label for="userPhone" class="volunteer-profile-info-label">Phone number</label>
+              <div class="volunteer-profile-info-value" id="viewUserPhone"></div>
+              <input type="tel" class="form-control d-none" id="editUserPhone" name="phone">
             </div>
-          </div>
-
-          <!-- Password Section - Hidden by default, shows in edit mode -->
-          <div class="volunteer-profile-section volunteer-password-section" id="passwordSection">
-            <h5 class="volunteer-profile-section-title">Password</h5>
-            <div class="volunteer-password-input-group">
-              <input type="password" class="volunteer-password-input" id="currentPassword" placeholder="Current Password">
-              <button type="button" class="volunteer-toggle-password" data-target="currentPassword">
-                <i class="fas fa-eye"></i>
-              </button>
+            <div class="volunteer-profile-info-item">
+              <label for="userEmail" class="volunteer-profile-info-label">Email Address</label>
+              <div class="volunteer-profile-info-value" id="viewUserEmail"></div>
+              <input type="email" class="form-control d-none" id="editUserEmail" name="email" disabled>
             </div>
-            <div class="volunteer-password-input-group">
-              <input type="password" class="volunteer-password-input" id="newPassword" placeholder="New Password">
-              <button type="button" class="volunteer-toggle-password" data-target="newPassword">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-            <div class="volunteer-password-input-group">
-              <input type="password" class="volunteer-password-input" id="confirmPassword" placeholder="Confirm New Password">
-              <button type="button" class="volunteer-toggle-password" data-target="confirmPassword">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-            <div class="volunteer-password-hint">
-              Password must be at least 8 characters long
+            <div class="volunteer-profile-info-item">
+              <label for="userAddress" class="volunteer-profile-info-label">Address</label>
+              <div class="volunteer-profile-info-value" id="viewUserAddress"></div>
+              <textarea class="form-control d-none" id="editUserAddress" name="address" rows="3"></textarea>
             </div>
           </div>
 
@@ -141,50 +117,30 @@
 
         <!-- Right Column -->
         <div class="col-md-8">
-          <!-- Information Section -->
+          <!-- General Information Section -->
           <div class="volunteer-profile-section">
-            <h5 class="volunteer-profile-section-title">Information</h5>
+            <h5 class="volunteer-profile-section-title">General Information</h5>
             <div class="row">
               <div class="col-md-6">
                 <div class="volunteer-profile-info-item">
-                  <label class="volunteer-profile-info-label">First name</label>
-                  <div class="volunteer-profile-info-value" id="viewFirstName">Daks</div>
-                  <input type="text" class="form-control d-none" id="editFirstName" name="first_name">
+                  <label for="userFirstName" class="volunteer-profile-info-label">First name</label>
+                  <div class="volunteer-profile-info-value" id="viewUserFirstName"></div>
+                  <input type="text" class="form-control d-none" id="editUserFirstName" name="first_name">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="volunteer-profile-info-item">
-                  <label class="volunteer-profile-info-label">Last name</label>
-                  <div class="volunteer-profile-info-value" id="viewLastName">Pangilinan</div>
-                  <input type="text" class="form-control d-none" id="editLastName" name="last_name">
+                  <label for="userLastName" class="volunteer-profile-info-label">Last name</label>
+                  <div class="volunteer-profile-info-value" id="viewUserLastName"></div>
+                  <input type="text" class="form-control d-none" id="editUserLastName" name="last_name">
                 </div>
               </div>
             </div>
 
             <div class="volunteer-profile-info-item">
-              <label class="volunteer-profile-info-label">Email Address</label>
-              <div class="volunteer-profile-info-value" id="viewEmail">Daksewan09e@gmail.com</div>
-              <input type="email" class="form-control d-none" id="editEmail" name="email" disabled>
-            </div>
-
-            <div class="volunteer-profile-info-item">
-              <label class="volunteer-profile-info-label">Phone number</label>
-              <div class="volunteer-profile-info-value" id="viewPhone">+6399 8842 845</div>
-              <input type="tel" class="form-control d-none" id="editPhone" name="phone">
-            </div>
-
-            <div class="volunteer-profile-info-item">
-              <label class="volunteer-profile-info-label">Address</label>
-              <div class="volunteer-profile-info-value" id="viewAddress">123 Asawa ni Marie St jude Pampanga</div>
-              <textarea class="form-control d-none" id="editAddress" name="address" rows="3"></textarea>
-            </div>
-
-            <div class="volunteer-profile-info-item">
-              <label class="volunteer-profile-info-label">Bio</label>
-              <div class="volunteer-profile-info-value" id="viewBio">
-                Dedicated volunteer with experience in animal care and rehabilitation. Passionate about helping shelter animals find their forever homes.
-              </div>
-              <textarea class="form-control d-none" id="editBio" name="bio" rows="4"></textarea>
+              <label for="userBio" class="volunteer-profile-info-label">Bio</label>
+              <div class="volunteer-profile-info-value" id="viewUserBio"></div>
+              <textarea class="form-control d-none" id="editUserBio" name="bio" rows="4"></textarea>
             </div>
           </div>
 
@@ -192,14 +148,9 @@
           <div class="volunteer-profile-section">
             <h5 class="volunteer-profile-section-title">Skills & Expertise</h5>
             <div class="volunteer-profile-info-item">
-              <label class="volunteer-profile-info-label">Skills</label>
-              <div class="volunteer-tags-container" id="viewSkills">
-                <div class="volunteer-tag">Dog Walking</div>
-                <div class="volunteer-tag">Cat Socialization</div>
-                <div class="volunteer-tag">Administrative Support</div>
-                <div class="volunteer-tag">Event Planning</div>
-              </div>
-              <textarea class="volunteer-tags-input d-none" id="editSkills" placeholder="Enter skills separated by commas (e.g., Dog Walking, Cat Socialization)"></textarea>
+              <label for="userSkills" class="volunteer-profile-info-label">Skills</label>
+              <div class="volunteer-profile-info-value" id="viewUserSkills"></div>
+              <input type="text" class="form-control d-none" id="editUserSkills" name="skills" placeholder="Enter skills separated by commas">
             </div>
           </div>
 
@@ -207,13 +158,9 @@
           <div class="volunteer-profile-section">
             <h5 class="volunteer-profile-section-title">Availability</h5>
             <div class="volunteer-profile-info-item">
-              <label class="volunteer-profile-info-label">Available Times</label>
-              <div class="volunteer-tags-container" id="viewAvailability">
-                <div class="volunteer-tag">Weekends</div>
-                <div class="volunteer-tag">Evening Shifts</div>
-                <div class="volunteer-tag">Emergency Response</div>
-              </div>
-              <textarea class="volunteer-tags-input d-none" id="editAvailability" placeholder="Enter availability separated by commas (e.g., Weekends, Evening Shifts)"></textarea>
+              <label for="userAvailability" class="volunteer-profile-info-label">Available Times</label>
+              <div class="volunteer-profile-info-value" id="viewUserAvailability"></div>
+              <input type="text" class="form-control d-none" id="editUserAvailability" name="availability" placeholder="Enter availability separated by commas">
             </div>
           </div>
 
@@ -228,9 +175,6 @@
   <!-- Load Bootstrap JavaScript only once -->
   <script src="/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
-  
-  <script src="/frontend/scripts/pages/volunteer-prof.js">
-  
-  </script>
+  <script src="/frontend/scripts/pages/volunteer-prof.js"></script>
 </body>
 </html>
